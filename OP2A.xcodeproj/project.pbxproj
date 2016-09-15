@@ -7,7 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		59265FED1D8AC0AE006298DC /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59265FEC1D8AC0AE006298DC /* main.cpp */; };
+		592660421D8ACB3D006298DC /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59265FEC1D8AC0AE006298DC /* main.cpp */; };
+		592660641D8ACC18006298DC /* assert_mk.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 592660441D8ACC18006298DC /* assert_mk.cpp */; };
+		592660651D8ACC18006298DC /* codelocation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 592660461D8ACC18006298DC /* codelocation.cpp */; };
+		592660661D8ACC18006298DC /* error_check.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5926604A1D8ACC18006298DC /* error_check.cpp */; };
+		592660671D8ACC18006298DC /* error_codes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5926604C1D8ACC18006298DC /* error_codes.cpp */; };
+		592660681D8ACC18006298DC /* error_exception.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5926604E1D8ACC18006298DC /* error_exception.cpp */; };
+		592660691D8ACC18006298DC /* fileHandle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 592660511D8ACC18006298DC /* fileHandle.cpp */; };
+		5926606A1D8ACC18006298DC /* MultiVector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 592660541D8ACC18006298DC /* MultiVector.cpp */; };
+		5926606B1D8ACC18006298DC /* processorinfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 592660581D8ACC18006298DC /* processorinfo.cpp */; };
+		5926606C1D8ACC18006298DC /* readdatafromstring.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5926605A1D8ACC18006298DC /* readdatafromstring.cpp */; };
+		5926606D1D8ACC18006298DC /* StringOps.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5926605C1D8ACC18006298DC /* StringOps.cpp */; };
+		5926606E1D8ACC18006298DC /* timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5926605E1D8ACC18006298DC /* timer.cpp */; };
+		5926606F1D8ACC18006298DC /* VectorCompare.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 592660601D8ACC18006298DC /* VectorCompare.cpp */; };
+		592660701D8ACC18006298DC /* version.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 592660621D8ACC18006298DC /* version.cpp */; };
+		5926607A1D8ACCA4006298DC /* cal_area.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 592660721D8ACCA4006298DC /* cal_area.cpp */; };
+		5926607B1D8ACCA4006298DC /* linear_algebra.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 592660741D8ACCA4006298DC /* linear_algebra.cpp */; };
+		5926607C1D8ACCA4006298DC /* matrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 592660761D8ACCA4006298DC /* matrix.cpp */; };
+		5926607D1D8ACCA4006298DC /* random_number_fns.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 592660781D8ACCA4006298DC /* random_number_fns.cpp */; };
+		592660871D8ACD0F006298DC /* basicInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 592660801D8ACD0F006298DC /* basicInfo.cpp */; };
+		592660881D8ACD0F006298DC /* index.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 592660841D8ACD0F006298DC /* index.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +44,53 @@
 /* Begin PBXFileReference section */
 		59265FE91D8AC0AE006298DC /* OP2A */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = OP2A; sourceTree = BUILT_PRODUCTS_DIR; };
 		59265FEC1D8AC0AE006298DC /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		592660441D8ACC18006298DC /* assert_mk.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = assert_mk.cpp; path = COMM/assert_mk.cpp; sourceTree = "<group>"; };
+		592660451D8ACC18006298DC /* assert_mk.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = assert_mk.hpp; path = COMM/assert_mk.hpp; sourceTree = "<group>"; };
+		592660461D8ACC18006298DC /* codelocation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = codelocation.cpp; path = COMM/codelocation.cpp; sourceTree = "<group>"; };
+		592660471D8ACC18006298DC /* codelocation.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = codelocation.hpp; path = COMM/codelocation.hpp; sourceTree = "<group>"; };
+		592660481D8ACC18006298DC /* common.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = common.hpp; path = COMM/common.hpp; sourceTree = "<group>"; };
+		592660491D8ACC18006298DC /* commonAPI.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = commonAPI.hpp; path = COMM/commonAPI.hpp; sourceTree = "<group>"; };
+		5926604A1D8ACC18006298DC /* error_check.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = error_check.cpp; path = COMM/error_check.cpp; sourceTree = "<group>"; };
+		5926604B1D8ACC18006298DC /* error_check.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = error_check.hpp; path = COMM/error_check.hpp; sourceTree = "<group>"; };
+		5926604C1D8ACC18006298DC /* error_codes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = error_codes.cpp; path = COMM/error_codes.cpp; sourceTree = "<group>"; };
+		5926604D1D8ACC18006298DC /* error_codes.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = error_codes.hpp; path = COMM/error_codes.hpp; sourceTree = "<group>"; };
+		5926604E1D8ACC18006298DC /* error_exception.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = error_exception.cpp; path = COMM/error_exception.cpp; sourceTree = "<group>"; };
+		5926604F1D8ACC18006298DC /* error_exception.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = error_exception.hpp; path = COMM/error_exception.hpp; sourceTree = "<group>"; };
+		592660501D8ACC18006298DC /* exportAPI.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = exportAPI.hpp; path = COMM/exportAPI.hpp; sourceTree = "<group>"; };
+		592660511D8ACC18006298DC /* fileHandle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = fileHandle.cpp; path = COMM/fileHandle.cpp; sourceTree = "<group>"; };
+		592660521D8ACC18006298DC /* fileHandle.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = fileHandle.hpp; path = COMM/fileHandle.hpp; sourceTree = "<group>"; };
+		592660531D8ACC18006298DC /* map1D.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = map1D.hpp; path = COMM/map1D.hpp; sourceTree = "<group>"; };
+		592660541D8ACC18006298DC /* MultiVector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MultiVector.cpp; path = COMM/MultiVector.cpp; sourceTree = "<group>"; };
+		592660551D8ACC18006298DC /* MultiVector.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = MultiVector.hpp; path = COMM/MultiVector.hpp; sourceTree = "<group>"; };
+		592660561D8ACC18006298DC /* noncopyable.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = noncopyable.hpp; path = COMM/noncopyable.hpp; sourceTree = "<group>"; };
+		592660571D8ACC18006298DC /* noninstantiable.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = noninstantiable.hpp; path = COMM/noninstantiable.hpp; sourceTree = "<group>"; };
+		592660581D8ACC18006298DC /* processorinfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = processorinfo.cpp; path = COMM/processorinfo.cpp; sourceTree = "<group>"; };
+		592660591D8ACC18006298DC /* processorinfo.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = processorinfo.hpp; path = COMM/processorinfo.hpp; sourceTree = "<group>"; };
+		5926605A1D8ACC18006298DC /* readdatafromstring.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = readdatafromstring.cpp; path = COMM/readdatafromstring.cpp; sourceTree = "<group>"; };
+		5926605B1D8ACC18006298DC /* readdatafromstring.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = readdatafromstring.hpp; path = COMM/readdatafromstring.hpp; sourceTree = "<group>"; };
+		5926605C1D8ACC18006298DC /* StringOps.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = StringOps.cpp; path = COMM/StringOps.cpp; sourceTree = "<group>"; };
+		5926605D1D8ACC18006298DC /* StringOps.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = StringOps.hpp; path = COMM/StringOps.hpp; sourceTree = "<group>"; };
+		5926605E1D8ACC18006298DC /* timer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = timer.cpp; path = COMM/timer.cpp; sourceTree = "<group>"; };
+		5926605F1D8ACC18006298DC /* timer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = timer.hpp; path = COMM/timer.hpp; sourceTree = "<group>"; };
+		592660601D8ACC18006298DC /* VectorCompare.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VectorCompare.cpp; path = COMM/VectorCompare.cpp; sourceTree = "<group>"; };
+		592660611D8ACC18006298DC /* VectorCompare.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = VectorCompare.hpp; path = COMM/VectorCompare.hpp; sourceTree = "<group>"; };
+		592660621D8ACC18006298DC /* version.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = version.cpp; path = COMM/version.cpp; sourceTree = "<group>"; };
+		592660631D8ACC18006298DC /* version.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = version.hpp; path = COMM/version.hpp; sourceTree = "<group>"; };
+		592660721D8ACCA4006298DC /* cal_area.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = cal_area.cpp; path = MATH_MK/cal_area.cpp; sourceTree = "<group>"; };
+		592660731D8ACCA4006298DC /* cal_area.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = cal_area.hpp; path = MATH_MK/cal_area.hpp; sourceTree = "<group>"; };
+		592660741D8ACCA4006298DC /* linear_algebra.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = linear_algebra.cpp; path = MATH_MK/linear_algebra.cpp; sourceTree = "<group>"; };
+		592660751D8ACCA4006298DC /* linear_algebra.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = linear_algebra.hpp; path = MATH_MK/linear_algebra.hpp; sourceTree = "<group>"; };
+		592660761D8ACCA4006298DC /* matrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = matrix.cpp; path = MATH_MK/matrix.cpp; sourceTree = "<group>"; };
+		592660771D8ACCA4006298DC /* matrix.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = matrix.hpp; path = MATH_MK/matrix.hpp; sourceTree = "<group>"; };
+		592660781D8ACCA4006298DC /* random_number_fns.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = random_number_fns.cpp; path = MATH_MK/random_number_fns.cpp; sourceTree = "<group>"; };
+		592660791D8ACCA4006298DC /* random_number_fns.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = random_number_fns.hpp; path = MATH_MK/random_number_fns.hpp; sourceTree = "<group>"; };
+		592660801D8ACD0F006298DC /* basicInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = basicInfo.cpp; path = GRID/basicInfo.cpp; sourceTree = "<group>"; };
+		592660811D8ACD0F006298DC /* basicInfo.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = basicInfo.hpp; path = GRID/basicInfo.hpp; sourceTree = "<group>"; };
+		592660821D8ACD0F006298DC /* element.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = element.hpp; path = GRID/element.hpp; sourceTree = "<group>"; };
+		592660831D8ACD0F006298DC /* face.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = face.hpp; path = GRID/face.hpp; sourceTree = "<group>"; };
+		592660841D8ACD0F006298DC /* index.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = index.cpp; path = GRID/index.cpp; sourceTree = "<group>"; };
+		592660851D8ACD0F006298DC /* index.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = index.hpp; path = GRID/index.hpp; sourceTree = "<group>"; };
+		592660861D8ACD0F006298DC /* stencilinfo.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = stencilinfo.hpp; path = GRID/stencilinfo.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,7 +107,7 @@
 		59265FE01D8AC0AE006298DC = {
 			isa = PBXGroup;
 			children = (
-				59265FEB1D8AC0AE006298DC /* OP2A */,
+				59265FEB1D8AC0AE006298DC /* Source */,
 				59265FEA1D8AC0AE006298DC /* Products */,
 			);
 			sourceTree = "<group>";
@@ -54,12 +120,83 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		59265FEB1D8AC0AE006298DC /* OP2A */ = {
+		59265FEB1D8AC0AE006298DC /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				5926607E1D8ACCE3006298DC /* GRID */,
+				592660711D8ACC2B006298DC /* MATH_MK */,
+				592660431D8ACBBE006298DC /* COMM */,
 				59265FEC1D8AC0AE006298DC /* main.cpp */,
 			);
-			path = OP2A;
+			path = Source;
+			sourceTree = "<group>";
+		};
+		592660431D8ACBBE006298DC /* COMM */ = {
+			isa = PBXGroup;
+			children = (
+				592660441D8ACC18006298DC /* assert_mk.cpp */,
+				592660451D8ACC18006298DC /* assert_mk.hpp */,
+				592660461D8ACC18006298DC /* codelocation.cpp */,
+				592660471D8ACC18006298DC /* codelocation.hpp */,
+				592660481D8ACC18006298DC /* common.hpp */,
+				592660491D8ACC18006298DC /* commonAPI.hpp */,
+				5926604A1D8ACC18006298DC /* error_check.cpp */,
+				5926604B1D8ACC18006298DC /* error_check.hpp */,
+				5926604C1D8ACC18006298DC /* error_codes.cpp */,
+				5926604D1D8ACC18006298DC /* error_codes.hpp */,
+				5926604E1D8ACC18006298DC /* error_exception.cpp */,
+				5926604F1D8ACC18006298DC /* error_exception.hpp */,
+				592660501D8ACC18006298DC /* exportAPI.hpp */,
+				592660511D8ACC18006298DC /* fileHandle.cpp */,
+				592660521D8ACC18006298DC /* fileHandle.hpp */,
+				592660531D8ACC18006298DC /* map1D.hpp */,
+				592660541D8ACC18006298DC /* MultiVector.cpp */,
+				592660551D8ACC18006298DC /* MultiVector.hpp */,
+				592660561D8ACC18006298DC /* noncopyable.hpp */,
+				592660571D8ACC18006298DC /* noninstantiable.hpp */,
+				592660581D8ACC18006298DC /* processorinfo.cpp */,
+				592660591D8ACC18006298DC /* processorinfo.hpp */,
+				5926605A1D8ACC18006298DC /* readdatafromstring.cpp */,
+				5926605B1D8ACC18006298DC /* readdatafromstring.hpp */,
+				5926605C1D8ACC18006298DC /* StringOps.cpp */,
+				5926605D1D8ACC18006298DC /* StringOps.hpp */,
+				5926605E1D8ACC18006298DC /* timer.cpp */,
+				5926605F1D8ACC18006298DC /* timer.hpp */,
+				592660601D8ACC18006298DC /* VectorCompare.cpp */,
+				592660611D8ACC18006298DC /* VectorCompare.hpp */,
+				592660621D8ACC18006298DC /* version.cpp */,
+				592660631D8ACC18006298DC /* version.hpp */,
+			);
+			name = COMM;
+			sourceTree = "<group>";
+		};
+		592660711D8ACC2B006298DC /* MATH_MK */ = {
+			isa = PBXGroup;
+			children = (
+				592660721D8ACCA4006298DC /* cal_area.cpp */,
+				592660731D8ACCA4006298DC /* cal_area.hpp */,
+				592660741D8ACCA4006298DC /* linear_algebra.cpp */,
+				592660751D8ACCA4006298DC /* linear_algebra.hpp */,
+				592660761D8ACCA4006298DC /* matrix.cpp */,
+				592660771D8ACCA4006298DC /* matrix.hpp */,
+				592660781D8ACCA4006298DC /* random_number_fns.cpp */,
+				592660791D8ACCA4006298DC /* random_number_fns.hpp */,
+			);
+			name = MATH_MK;
+			sourceTree = "<group>";
+		};
+		5926607E1D8ACCE3006298DC /* GRID */ = {
+			isa = PBXGroup;
+			children = (
+				592660801D8ACD0F006298DC /* basicInfo.cpp */,
+				592660811D8ACD0F006298DC /* basicInfo.hpp */,
+				592660821D8ACD0F006298DC /* element.hpp */,
+				592660831D8ACD0F006298DC /* face.hpp */,
+				592660841D8ACD0F006298DC /* index.cpp */,
+				592660851D8ACD0F006298DC /* index.hpp */,
+				592660861D8ACD0F006298DC /* stencilinfo.hpp */,
+			);
+			name = GRID;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -118,7 +255,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				59265FED1D8AC0AE006298DC /* main.cpp in Sources */,
+				5926606F1D8ACC18006298DC /* VectorCompare.cpp in Sources */,
+				592660421D8ACB3D006298DC /* main.cpp in Sources */,
+				592660701D8ACC18006298DC /* version.cpp in Sources */,
+				592660651D8ACC18006298DC /* codelocation.cpp in Sources */,
+				5926606B1D8ACC18006298DC /* processorinfo.cpp in Sources */,
+				592660671D8ACC18006298DC /* error_codes.cpp in Sources */,
+				592660641D8ACC18006298DC /* assert_mk.cpp in Sources */,
+				592660681D8ACC18006298DC /* error_exception.cpp in Sources */,
+				592660691D8ACC18006298DC /* fileHandle.cpp in Sources */,
+				5926606A1D8ACC18006298DC /* MultiVector.cpp in Sources */,
+				5926607C1D8ACCA4006298DC /* matrix.cpp in Sources */,
+				5926606D1D8ACC18006298DC /* StringOps.cpp in Sources */,
+				5926607B1D8ACCA4006298DC /* linear_algebra.cpp in Sources */,
+				5926606C1D8ACC18006298DC /* readdatafromstring.cpp in Sources */,
+				592660881D8ACD0F006298DC /* index.cpp in Sources */,
+				592660661D8ACC18006298DC /* error_check.cpp in Sources */,
+				5926607D1D8ACCA4006298DC /* random_number_fns.cpp in Sources */,
+				5926606E1D8ACC18006298DC /* timer.cpp in Sources */,
+				592660871D8ACD0F006298DC /* basicInfo.cpp in Sources */,
+				5926607A1D8ACCA4006298DC /* cal_area.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,6 +365,25 @@
 		59265FF11D8AC0AE006298DC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				GCC_VERSION = com.intel.compilers.icc.latest;
+				HEADER_SEARCH_PATHS = /opt/intel/compilers_and_libraries_2017.0.102/mac/mkl/include;
+				ICC_MKL = threaded;
+				ICC_OTHER_CPLUSPLUSFLAGS = "$(ICC_OTHER_CFLAGS) $(OTHER_CPLUSPLUSFLAGS) -openmp";
+				ICC_RT_CHECK_UNINIT = YES;
+				ICC_RT_LIBRARY = static;
+				ICC_WARNLEVEL = remarks;
+				LD_RUNPATH_SEARCH_PATHS = "/opt/intel/compilers_and_libraries_2017.0.102/mac/mkl/lib /opt/intel/compilers_and_libraries_2017.0.102/mac/compiler/lib";
+				LIBRARY_SEARCH_PATHS = /opt/intel/compilers_and_libraries_2017.0.102/mac/mkl/lib;
+				OTHER_LDFLAGS = (
+					"-lmkl_intel_lp64",
+					"-lmkl_core",
+					"-lmkl_intel_thread",
+					"-lpthread",
+					"-lm",
+					"-ldl",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -216,6 +391,25 @@
 		59265FF21D8AC0AE006298DC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				GCC_VERSION = com.intel.compilers.icc.latest;
+				HEADER_SEARCH_PATHS = /opt/intel/compilers_and_libraries_2017.0.102/mac/mkl/include;
+				ICC_MKL = threaded;
+				ICC_OTHER_CPLUSPLUSFLAGS = "$(ICC_OTHER_CFLAGS) $(OTHER_CPLUSPLUSFLAGS) -openmp";
+				ICC_RT_CHECK_UNINIT = YES;
+				ICC_RT_LIBRARY = static;
+				ICC_WARNLEVEL = remarks;
+				LD_RUNPATH_SEARCH_PATHS = "/opt/intel/compilers_and_libraries_2017.0.102/mac/mkl/lib /opt/intel/compilers_and_libraries_2017.0.102/mac/compiler/lib";
+				LIBRARY_SEARCH_PATHS = /opt/intel/compilers_and_libraries_2017.0.102/mac/mkl/lib;
+				OTHER_LDFLAGS = (
+					"-lmkl_intel_lp64",
+					"-lmkl_core",
+					"-lmkl_intel_thread",
+					"-lpthread",
+					"-lm",
+					"-ldl",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -239,6 +433,7 @@
 				59265FF21D8AC0AE006298DC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
