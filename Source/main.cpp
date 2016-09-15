@@ -17,8 +17,6 @@
 int main(int argc, const char * argv[]) {
     double res = 10.0;
     
-    
-    matrix test;
     ElementBasic<double, double, double> note_test;
     
     // insert code here...
