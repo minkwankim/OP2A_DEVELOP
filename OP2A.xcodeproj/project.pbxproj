@@ -27,6 +27,8 @@
 		5926607D1D8ACCA4006298DC /* random_number_fns.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 592660781D8ACCA4006298DC /* random_number_fns.cpp */; };
 		592660871D8ACD0F006298DC /* basicInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 592660801D8ACD0F006298DC /* basicInfo.cpp */; };
 		592660881D8ACD0F006298DC /* index.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 592660841D8ACD0F006298DC /* index.cpp */; };
+		593FA3401DD212D800321A6A /* species.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 593FA33E1DD212D800321A6A /* species.cpp */; };
+		593FA3801DD31D5E00321A6A /* geometry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 593FA37E1DD31D5D00321A6A /* geometry.cpp */; };
 		594FF1401D8FDA38009A6ABB /* object.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 594FF13A1D8FDA38009A6ABB /* object.cpp */; };
 		594FF1411D8FDA38009A6ABB /* particle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 594FF13E1D8FDA38009A6ABB /* particle.cpp */; };
 		594FF1461D8FDA80009A6ABB /* celldatabase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 594FF1421D8FDA80009A6ABB /* celldatabase.cpp */; };
@@ -92,10 +94,13 @@
 		592660801D8ACD0F006298DC /* basicInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = basicInfo.cpp; path = GRID/basicInfo.cpp; sourceTree = "<group>"; };
 		592660811D8ACD0F006298DC /* basicInfo.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = basicInfo.hpp; path = GRID/basicInfo.hpp; sourceTree = "<group>"; };
 		592660821D8ACD0F006298DC /* element.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = element.hpp; path = GRID/element.hpp; sourceTree = "<group>"; };
-		592660831D8ACD0F006298DC /* face.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = face.hpp; path = GRID/face.hpp; sourceTree = "<group>"; };
 		592660841D8ACD0F006298DC /* index.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = index.cpp; path = GRID/index.cpp; sourceTree = "<group>"; };
 		592660851D8ACD0F006298DC /* index.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = index.hpp; path = GRID/index.hpp; sourceTree = "<group>"; };
 		592660861D8ACD0F006298DC /* stencilinfo.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = stencilinfo.hpp; path = GRID/stencilinfo.hpp; sourceTree = "<group>"; };
+		593FA33E1DD212D800321A6A /* species.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = species.cpp; sourceTree = "<group>"; };
+		593FA33F1DD212D800321A6A /* species.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = species.hpp; sourceTree = "<group>"; };
+		593FA37E1DD31D5D00321A6A /* geometry.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = geometry.cpp; path = GRID/geometry.cpp; sourceTree = "<group>"; };
+		593FA37F1DD31D5E00321A6A /* geometry.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = geometry.hpp; path = GRID/geometry.hpp; sourceTree = "<group>"; };
 		594FF1391D8FDA38009A6ABB /* dataMaxDefinition.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = dataMaxDefinition.hpp; sourceTree = "<group>"; };
 		594FF13A1D8FDA38009A6ABB /* object.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = object.cpp; sourceTree = "<group>"; };
 		594FF13B1D8FDA38009A6ABB /* object.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = object.hpp; sourceTree = "<group>"; };
@@ -140,6 +145,7 @@
 		59265FEB1D8AC0AE006298DC /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				593FA3411DD212E000321A6A /* CHEM */,
 				594FF1491D8FDB38009A6ABB /* CFD */,
 				594FF1481D8FDA96009A6ABB /* PHYS */,
 				594FF1381D8FD9F2009A6ABB /* DATA */,
@@ -211,12 +217,22 @@
 				592660801D8ACD0F006298DC /* basicInfo.cpp */,
 				592660811D8ACD0F006298DC /* basicInfo.hpp */,
 				592660821D8ACD0F006298DC /* element.hpp */,
-				592660831D8ACD0F006298DC /* face.hpp */,
 				592660841D8ACD0F006298DC /* index.cpp */,
 				592660851D8ACD0F006298DC /* index.hpp */,
 				592660861D8ACD0F006298DC /* stencilinfo.hpp */,
+				593FA37E1DD31D5D00321A6A /* geometry.cpp */,
+				593FA37F1DD31D5E00321A6A /* geometry.hpp */,
 			);
 			name = GRID;
+			sourceTree = "<group>";
+		};
+		593FA3411DD212E000321A6A /* CHEM */ = {
+			isa = PBXGroup;
+			children = (
+				593FA33E1DD212D800321A6A /* species.cpp */,
+				593FA33F1DD212D800321A6A /* species.hpp */,
+			);
+			path = CHEM;
 			sourceTree = "<group>";
 		};
 		594FF1381D8FD9F2009A6ABB /* DATA */ = {
@@ -310,6 +326,7 @@
 			files = (
 				5926606F1D8ACC18006298DC /* VectorCompare.cpp in Sources */,
 				592660421D8ACB3D006298DC /* main.cpp in Sources */,
+				593FA3801DD31D5E00321A6A /* geometry.cpp in Sources */,
 				592660701D8ACC18006298DC /* version.cpp in Sources */,
 				592660651D8ACC18006298DC /* codelocation.cpp in Sources */,
 				5926606B1D8ACC18006298DC /* processorinfo.cpp in Sources */,
@@ -324,6 +341,7 @@
 				5926606D1D8ACC18006298DC /* StringOps.cpp in Sources */,
 				5926607B1D8ACCA4006298DC /* linear_algebra.cpp in Sources */,
 				5926606C1D8ACC18006298DC /* readdatafromstring.cpp in Sources */,
+				593FA3401DD212D800321A6A /* species.cpp in Sources */,
 				592660881D8ACD0F006298DC /* index.cpp in Sources */,
 				594FF1461D8FDA80009A6ABB /* celldatabase.cpp in Sources */,
 				592660661D8ACC18006298DC /* error_check.cpp in Sources */,
@@ -342,7 +360,7 @@
 		59265FEE1D8AC0AE006298DC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -376,9 +394,30 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/include,
+					/opt/intel/compilers_and_libraries_2017.0.102/mac/mkl/include,
+					/opt/intel/compilers_and_libraries_2017.0.102/mac/compiler/include,
+				);
+				ICC_MKL = threaded;
+				ICC_OTHER_CFLAGS = "$(OTHER_CFLAGS)";
+				ICC_OTHER_CPLUSPLUSFLAGS = "$(ICC_OTHER_CFLAGS) $(OTHER_CPLUSPLUSFLAGS) -openmp";
+				ICC_WARNLEVEL = remarks;
+				LD_RUNPATH_SEARCH_PATHS = "/opt/intel/compilers_and_libraries_2017.0.102/mac/mkl/lib /opt/intel/compilers_and_libraries_2017.0.102/mac/compiler/lib";
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib,
+					/opt/intel/compilers_and_libraries_2017.0.102/mac/mkl/lib,
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-lmkl_intle_lp64",
+					"-lmkl_core",
+					"-lmkl_intel_thread",
+					"-lpthread",
+					"-ldl",
+				);
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -386,7 +425,7 @@
 		59265FEF1D8AC0AE006298DC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -414,8 +453,29 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/include,
+					/opt/intel/compilers_and_libraries_2017.0.102/mac/mkl/include,
+					/opt/intel/compilers_and_libraries_2017.0.102/mac/compiler/include,
+				);
+				ICC_MKL = threaded;
+				ICC_OTHER_CFLAGS = "$(OTHER_CFLAGS)";
+				ICC_OTHER_CPLUSPLUSFLAGS = "$(ICC_OTHER_CFLAGS) $(OTHER_CPLUSPLUSFLAGS) -openmp";
+				ICC_WARNLEVEL = remarks;
+				LD_RUNPATH_SEARCH_PATHS = "/opt/intel/compilers_and_libraries_2017.0.102/mac/mkl/lib /opt/intel/compilers_and_libraries_2017.0.102/mac/compiler/lib";
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib,
+					/opt/intel/compilers_and_libraries_2017.0.102/mac/mkl/lib,
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = (
+					"-lmkl_intle_lp64",
+					"-lmkl_core",
+					"-lmkl_intel_thread",
+					"-lpthread",
+					"-ldl",
+				);
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -426,21 +486,30 @@
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				GCC_VERSION = com.intel.compilers.icc.latest;
-				HEADER_SEARCH_PATHS = /opt/intel/compilers_and_libraries_2017.0.102/mac/mkl/include;
+				HEADER_SEARCH_PATHS = (
+					/opt/intel/compilers_and_libraries_2017.0.102/mac/mkl/include,
+					/opt/intel/compilers_and_libraries_2017.0.102/mac/compiler/include,
+					/usr/local/include,
+				);
 				ICC_MKL = threaded;
 				ICC_OTHER_CPLUSPLUSFLAGS = "$(ICC_OTHER_CFLAGS) $(OTHER_CPLUSPLUSFLAGS) -openmp";
 				ICC_RT_CHECK_UNINIT = YES;
 				ICC_RT_LIBRARY = static;
 				ICC_WARNLEVEL = remarks;
-				LD_RUNPATH_SEARCH_PATHS = "/opt/intel/compilers_and_libraries_2017.0.102/mac/mkl/lib /opt/intel/compilers_and_libraries_2017.0.102/mac/compiler/lib";
-				LIBRARY_SEARCH_PATHS = /opt/intel/compilers_and_libraries_2017.0.102/mac/mkl/lib;
+				LD_RUNPATH_SEARCH_PATHS = "/opt/intel/compilers_and_libraries_2017.0.102/mac/mkl/lib /opt/intel/compilers_and_libraries_2017.0.102/mac/compiler/lib /usr/local/lib";
+				LIBRARY_SEARCH_PATHS = (
+					/opt/intel/compilers_and_libraries_2017.0.102/mac/mkl/lib,
+					/opt/intel/compilers_and_libraries_2017.0.102/mac/compiler/lib,
+					/usr/local/lib,
+				);
 				OTHER_LDFLAGS = (
 					"-lmkl_intel_lp64",
 					"-lmkl_core",
 					"-lmkl_intel_thread",
 					"-lpthread",
-					"-lm",
 					"-ldl",
+					"-lmpi",
+					"-lmpicxx",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -452,21 +521,30 @@
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				GCC_VERSION = com.intel.compilers.icc.latest;
-				HEADER_SEARCH_PATHS = /opt/intel/compilers_and_libraries_2017.0.102/mac/mkl/include;
+				HEADER_SEARCH_PATHS = (
+					/opt/intel/compilers_and_libraries_2017.0.102/mac/mkl/include,
+					/opt/intel/compilers_and_libraries_2017.0.102/mac/compiler/include,
+					/usr/local/include,
+				);
 				ICC_MKL = threaded;
 				ICC_OTHER_CPLUSPLUSFLAGS = "$(ICC_OTHER_CFLAGS) $(OTHER_CPLUSPLUSFLAGS) -openmp";
 				ICC_RT_CHECK_UNINIT = YES;
 				ICC_RT_LIBRARY = static;
 				ICC_WARNLEVEL = remarks;
-				LD_RUNPATH_SEARCH_PATHS = "/opt/intel/compilers_and_libraries_2017.0.102/mac/mkl/lib /opt/intel/compilers_and_libraries_2017.0.102/mac/compiler/lib";
-				LIBRARY_SEARCH_PATHS = /opt/intel/compilers_and_libraries_2017.0.102/mac/mkl/lib;
+				LD_RUNPATH_SEARCH_PATHS = "/opt/intel/compilers_and_libraries_2017.0.102/mac/mkl/lib /opt/intel/compilers_and_libraries_2017.0.102/mac/compiler/lib /usr/local/lib";
+				LIBRARY_SEARCH_PATHS = (
+					/opt/intel/compilers_and_libraries_2017.0.102/mac/mkl/lib,
+					/opt/intel/compilers_and_libraries_2017.0.102/mac/compiler/lib,
+					/usr/local/lib,
+				);
 				OTHER_LDFLAGS = (
 					"-lmkl_intel_lp64",
 					"-lmkl_core",
 					"-lmkl_intel_thread",
 					"-lpthread",
-					"-lm",
 					"-ldl",
+					"-lmpi",
+					"-lmpicxx",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

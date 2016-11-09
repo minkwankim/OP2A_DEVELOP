@@ -13,10 +13,17 @@
 
 
 
-void preProcessingPart1Version();
+void preProcessingPart1Version(int argc, char *argv[], double& t0);
 
 
 
 
 
 #endif /* OP2ACFD_hpp */
+
+
+
+
+
+
+

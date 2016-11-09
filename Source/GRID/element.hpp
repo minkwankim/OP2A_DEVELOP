@@ -100,6 +100,34 @@ public:
 
 
 
+template <class GEO, class CONN, class DATA>
+class GridElement
+{
+public:
+    GEO* geometry;
+    CONN* connectivity;
+    DATA* data;
+    
+public:
+    GridElement()
+    {
+        geometry = NULL;
+        connectivity = NULL;
+        data = NULL;
+    }
+    
+    ~GridElement()
+    {
+        geometry = NULL;
+        connectivity = NULL;
+        data = NULL;
+    }
+};
+
+
+
+
+
 
 
 

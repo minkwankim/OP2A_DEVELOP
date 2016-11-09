@@ -26,8 +26,8 @@
 // PART 1. Setting Version information
 // [Please DO NOT CHANGE]
 
-//#include "mpi.h"
-//#include "omp.h"
+#include <mpi.h>
+#include <omp.h>
 
 
 void preProcessingPart1Version(int argc, char *argv[], double& t0)
@@ -40,17 +40,19 @@ void preProcessingPart1Version(int argc, char *argv[], double& t0)
     ver.info();
     
     
-    //int num_threads;
-    //int max_threads;
-    //int micid;
+    int num_threads;
+    int max_threads;
+    int micid;
     
     
     // Initiate MPI
-    //MPI_Init(&argc, &argv);
-    //MPI_Comm_rank(MPI_COMM_WORLD, &proc_info.taskID);
+    char *name;
+    int *resultlen;
+    MPI_Init(&argc, &argv);
+    MPI_Comm_rank(MPI_COMM_WORLD, &micid);
     //MPI_Comm_size(MPI_COMM_WORLD, &proc_info.num_CPU);
     
-    //max_threads = omp_get_max_threads();
+    //int max_threads = omp_get_max_threads();
     //if (proc_info.num_CPU == 1) proc_info.num_threads = max_threads;
     //else						proc_info.num_threads = THREAD_PER_CPU;
 }
