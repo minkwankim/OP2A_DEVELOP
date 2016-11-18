@@ -10,7 +10,7 @@
  *
  * Detailed description
  */
-#include "../COMM/error_codes.hpp"
+#include "error_codes.hpp"
 
 #include <string>
 #include <sstream>

@@ -17,8 +17,10 @@
 // 1. Class: Common for Geometry classes
 class GeometryCommon {
 public:
-    int  id;    // ID number (-: means allocated to other CPU/GPU, +: allocated in current CPU/GPU, 0: Not allocated yet)
-    int  bc;    // Boundary condition index
+    int  id;        // ID number (-: means allocated to other CPU/GPU, +: allocated in current CPU/GPU, 0: Not allocated yet)
+    int  bcType;    // Boundary condition Type
+    int  bcIndex;   // Boundary condition index
+    
     int  treat; // Flag for treatment (0: Include, 1: neet to refine, -1: need to remove)
     
     double S;    // Area/Volume (0 for point)
@@ -52,6 +54,8 @@ class GeometryFace : public GeometryCommon{
     
 public:
     matrix n;               // Normal/Tangent vectors ( 0: normal vector, 1: tangential vector, 2: tangential vector)
+    double distanceToWall;  // Distance to Wall;
+    double nDotWall;        // n(vector) Dot Wall vector
     
 public:
     GeometryFace();

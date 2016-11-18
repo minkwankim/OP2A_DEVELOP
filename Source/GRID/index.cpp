@@ -11,7 +11,7 @@
 
 // Constructor and Destructor
 grid_index::grid_index()
-    : i(0), j(0), k(0), lvl(0), pos(MAX_REFINE_LVL, 0)
+    : i(0), j(0), k(0), lvl(0), pos(MAX_REFINE_LVL, 0), hasChildren(false)
 {
     
 };

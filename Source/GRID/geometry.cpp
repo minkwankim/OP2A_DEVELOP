@@ -14,7 +14,7 @@
 // 1. Class: Common for Geometry classes
 //     1.1 Constructor and Destructor
 GeometryCommon::GeometryCommon()
-:id(0), bc(0), treat(0), S(0.0), X(3)
+:id(0), bcType(0), bcIndex(0), treat(0), S(0.0), X(3)
 {
     
 };
@@ -41,7 +41,7 @@ GeometryNode::~GeometryNode()
 
 // 3. Class: for Face
 GeometryFace::GeometryFace()
-:n(3,3)
+:n(3,3), distanceToWall(0.0), nDotWall(0.0)
 {
     
 };

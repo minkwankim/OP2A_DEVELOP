@@ -10,119 +10,195 @@
 #define element_hpp
 
 #include <stdio.h>
-#include "basicinfo.hpp"
+#include "geometry.hpp"
+#include "connection.hpp"
+
 #include "index.hpp"
 #include "stencilinfo.hpp"
 
-
-template <class D, class S1, class S2>
-class ElementBasic : public GridBasicInfo, grid_index, stencil_info<S1, S2>
-{
-    
-    // Constructor and Destructor
-public:
-    ElementBasic()
-    :data(NULL)
-    {
-        
-    };
-    
-    
-    ~ElementBasic()
-    {
-        data = NULL;
-    };
-    
-public:
-    D* data;
-};
-
-
-template <class D, class S1, class S2, class E1>
-class ElementAdvance1 : public ElementBasic<D, S1, S2>
-{
-public:
-    ElementAdvance1()
-    :num_subelements(0)
-    {
-        subelements.reserve(4);
-    };
-    
-    ElementAdvance1(unsigned int num)
-    :num_subelements(num), subelements(num)
-    {
-
-    };
-    
-     
-    ~ElementAdvance1()
-    {
-        
-    };
-    
-    
-public:
-    std::vector<E1> subelements;
-    unsigned int num_subelements;
-    
-};
-
-
-
-template <class D, class S1, class S2, class E1, class E2>
-class ElementAdvance2 : public ElementAdvance1<D, S1, S2, E1>
-{
-public:
-    ElementAdvance2()
-    :num_subelements(0), num_subelements2(0)
-    {
-        subelements.reserve(4);
-        subelements2.reserve(4);
-    };
-    
-    ElementAdvance2(unsigned int num1, unsigned int num2)
-    :num_subelements(num1), subelements(num1), num_subelements2(num2), subelements2(num2)
-    {
-        
-    };
-    
-    
-    ~ElementAdvance2()
-    {
-        
-    };
-    
-    
-public:
-    std::vector<E2> subelements2;
-    unsigned int num_subelements2;
-};
-
+#define MAX_NUMBER_CHILDER_PER_FACE 4
+#define MAX_NUMBER_CHILDER_PER_CELL 8
 
 
 template <class GEO, class CONN, class DATA>
 class GridElement
 {
 public:
-    GEO* geometry;
-    CONN* connectivity;
-    DATA* data;
+    GEO geometry;
+    CONN connectivity;
+    DATA data;
     
 public:
     GridElement()
     {
-        geometry = NULL;
-        connectivity = NULL;
-        data = NULL;
+    
     }
     
     ~GridElement()
     {
-        geometry = NULL;
-        connectivity = NULL;
-        data = NULL;
+    
     }
 };
+
+
+
+// NODE types
+template <class DATA>
+class NodeNormal : public GridElement<GeometryNode, ConnectionNode, DATA>
+{
+public:
+    NodeNormal() { };
+    ~NodeNormal() { };
+};
+
+template <class DATA>
+class NodeCart : public NodeNormal<DATA>
+{
+public:
+    grid_index index;
+
+public:
+    NodeCart() { };
+    ~NodeCart() { };
+};
+
+
+
+// FACE Types
+//  A. Normal grid
+template <class DATA>
+class FaceNormal : public GridElement<GeometryFace, ConnectionFace, DATA>
+{
+public:
+    FaceNormal() { };
+    ~FaceNormal() { };
+};
+
+// B. Cartesian grid
+template <class DATA>
+class FaceCart : public FaceNormal<DATA>
+{
+public:
+    grid_index index;
+    FaceCart* parent;
+    std::vector<FaceCart*> children;
+    
+public:
+    FaceCart()
+    : parent(NULL)
+    {
+        children.reserve(MAX_NUMBER_CHILDER_PER_FACE);
+    };
+    
+    ~FaceCart()
+    {
+        
+    };
+};
+
+
+
+// CELL Types
+// A. Normal Grid
+template <class DATA>
+class CellNormal : public GridElement<GeometryCell, ConnectionCell, DATA>
+{
+public:
+    CellNormal() { };
+    ~CellNormal() { };
+};
+
+template <class DATA>
+class CellPIC : public GridElement<GeometryCellPIC, ConnectionCell, DATA>
+{
+public:
+    CellPIC() { };
+    ~CellPIC() { };
+};
+
+template <class DATA>
+class CellHybrid : public GridElement<GeometryCellHybrid, ConnectionCell, DATA>
+{
+public:
+    CellHybrid() { };
+    ~CellHybrid() { };
+};
+
+// B. Cartesian Grid
+template <class DATA>
+class CellCart : public CellNormal<DATA>
+{
+public:
+    grid_index index;
+    CellCart* parent;
+    std::vector<CellCart*> children;
+    
+public:
+    CellCart()
+    : parent(NULL)
+    {
+        children.reserve(MAX_NUMBER_CHILDER_PER_CELL);
+    };
+    
+    ~CellCart()
+    {
+        
+    };
+};
+
+template <class DATA>
+class CellCartPIC : public CellPIC<DATA>
+{
+public:
+    grid_index index;
+    CellCartPIC* parent;
+    std::vector<CellCartPIC*> children;
+    
+public:
+    CellCartPIC()
+    : parent(NULL)
+    {
+        children.reserve(MAX_NUMBER_CHILDER_PER_CELL);
+    };
+    
+    ~CellCartPIC()
+    {
+        
+    };
+};
+
+template <class DATA>
+class CellCartHybrid : public CellHybrid<DATA>
+{
+public:
+    grid_index index;
+    CellCartHybrid* parent;
+    std::vector<CellCartHybrid*> children;
+    
+public:
+    CellCartHybrid()
+    : parent(NULL)
+    {
+        children.reserve(MAX_NUMBER_CHILDER_PER_CELL);
+    };
+    
+    ~CellCartHybrid()
+    {
+        
+    };
+};
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

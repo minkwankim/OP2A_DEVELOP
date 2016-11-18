@@ -1372,6 +1372,27 @@ double norm(matrix&a, const int flag)
 
 
 
+matrix vectorStartEnd(const matrix& s, const matrix& e)
+{
+    int m = s.sizeRow();
+    int n = s.sizeCol();
+    
+    if (m != e.sizeRow())
+        Common::ExceptionError(FromHere(), "A and B must be same size", Common::ErrorCodes::MismatchDimension());
+    
+    if (n != e.sizeCol())
+        Common::ExceptionError(FromHere(), "A and B must be same size", Common::ErrorCodes::MismatchDimension());
+    
+    matrix res(m, n);
+    for (int i = 0; i < m; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            res(i,j) = e.element(i,j) - s.element(i,j);
+        }
+    }
+    return (res);
+}
 
 
 

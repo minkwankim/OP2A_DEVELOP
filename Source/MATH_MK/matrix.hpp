@@ -147,5 +147,10 @@ void absMatrix(matrix& a, matrix& res);
 double norm(matrix&a, const int flag);
 int   matrix_type(const matrix&a);
 
+matrix vectorStartEnd(const matrix& s, const matrix& e);
+
+
+
+
 
 #endif /* matrix_h */

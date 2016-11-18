@@ -15,6 +15,9 @@
 
 #define MAX_REFINE_LVL  5
 
+
+
+
 class grid_index {
 public:
     grid_index();
@@ -29,9 +32,20 @@ public:
     unsigned int lvl;
     std::vector<unsigned int> pos;
     
+    bool hasChildren;
+    
     void refine(unsigned int position);
 
 };
+
+
+
+
+
+
+
+
+
 
 
 
