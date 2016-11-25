@@ -95,14 +95,6 @@ public:
 	static bool endsWith (const std::string& in, const std::string& str);
 
 
-	// Converts to std::string
-	template <class T>
-	static std::string to_str (T v)
-	{
-		std::ostringstream oss;
-		oss << v;
-		return oss.str();
-	}
 
 	// Converts from std::string
 	template <class T>
@@ -121,8 +113,19 @@ public:
 		return v;
 	}
 
+    // Converts to std::string
+    template <class T>
+    static std::string to_str (const T& value)
+    {
+        std::stringstream ss;		//create a stringstream
+        ss << value;           //add number to the stream
+        return ss.str();		//return a string with the contents of the stream
+    }
+
 
 	static std::string convertYesNo (const int i);
+    
+
 
 
 	static std::string makeVAR_Sub(const std::string& var, const std::string& sub)

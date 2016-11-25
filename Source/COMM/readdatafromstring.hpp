@@ -25,12 +25,15 @@ public:
 	static void remove_space_front(std::string& line);
 	static void remove_space_end(std::string& line);
 	static void remove_comments(std::string& line);
+    static void remove_comments(std::string& line, const std::string& comment_s);
 
-	static std::string read_string(std::string& line, std::string read_format);
+
+	static std::string read_string(const std::string& data, std::string read_format);
 
 	template<class T>
-	static T read_numeric(std::string& line, std::string read_format)
+	static T read_numeric(const std::string& data, std::string read_format)
 	{
+        std::string line = data;
 		long num;
 		T result;
 

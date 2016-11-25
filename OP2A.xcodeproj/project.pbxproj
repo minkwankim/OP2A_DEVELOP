@@ -33,6 +33,13 @@
 		593FA38D1DD361BC00321A6A /* preprocessingGridSU2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 593FA38C1DD361BC00321A6A /* preprocessingGridSU2.cpp */; };
 		593FA3901DD3630400321A6A /* preprocessingGridFluent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 593FA38E1DD3630400321A6A /* preprocessingGridFluent.cpp */; };
 		593FA3961DD490C400321A6A /* grid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 593FA3951DD490C400321A6A /* grid.cpp */; };
+		593FA3A01DE2F8BC00321A6A /* problemSetup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 593FA39E1DE2F8BC00321A6A /* problemSetup.cpp */; };
+		593FA3A41DE4723E00321A6A /* flowdatabase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 593FA3A21DE4723E00321A6A /* flowdatabase.cpp */; };
+		593FA3A71DE5BEB900321A6A /* wallMaterial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 593FA3A51DE5BEB900321A6A /* wallMaterial.cpp */; };
+		593FA3AD1DE6F6E700321A6A /* electronicState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 593FA3AB1DE6F6E700321A6A /* electronicState.cpp */; };
+		593FA3B01DE6F96A00321A6A /* speciesDatabase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 593FA3AE1DE6F96A00321A6A /* speciesDatabase.cpp */; };
+		593FA3B31DE71F5600321A6A /* kev.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 593FA3B11DE71F5600321A6A /* kev.cpp */; };
+		593FA3B61DE7240000321A6A /* LeRc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 593FA3B41DE7240000321A6A /* LeRc.cpp */; };
 		594FF1401D8FDA38009A6ABB /* object.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 594FF13A1D8FDA38009A6ABB /* object.cpp */; };
 		594FF1411D8FDA38009A6ABB /* particle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 594FF13E1D8FDA38009A6ABB /* particle.cpp */; };
 		594FF1461D8FDA80009A6ABB /* celldatabase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 594FF1421D8FDA80009A6ABB /* celldatabase.cpp */; };
@@ -111,6 +118,21 @@
 		593FA38E1DD3630400321A6A /* preprocessingGridFluent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = preprocessingGridFluent.cpp; path = GRID/preprocessingGridFluent.cpp; sourceTree = "<group>"; };
 		593FA3911DD3649300321A6A /* preprocessingGrid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = preprocessingGrid.cpp; path = GRID/preprocessingGrid.cpp; sourceTree = "<group>"; };
 		593FA3951DD490C400321A6A /* grid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = grid.cpp; path = GRID/grid.cpp; sourceTree = "<group>"; };
+		593FA39E1DE2F8BC00321A6A /* problemSetup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = problemSetup.cpp; sourceTree = "<group>"; };
+		593FA39F1DE2F8BC00321A6A /* problemSetup.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = problemSetup.hpp; sourceTree = "<group>"; };
+		593FA3A11DE308DF00321A6A /* problemDef.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = problemDef.hpp; sourceTree = "<group>"; };
+		593FA3A21DE4723E00321A6A /* flowdatabase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = flowdatabase.cpp; sourceTree = "<group>"; };
+		593FA3A31DE4723E00321A6A /* flowdatabase.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = flowdatabase.hpp; sourceTree = "<group>"; };
+		593FA3A51DE5BEB900321A6A /* wallMaterial.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = wallMaterial.cpp; sourceTree = "<group>"; };
+		593FA3A61DE5BEB900321A6A /* wallMaterial.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = wallMaterial.hpp; sourceTree = "<group>"; };
+		593FA3AB1DE6F6E700321A6A /* electronicState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = electronicState.cpp; sourceTree = "<group>"; };
+		593FA3AC1DE6F6E700321A6A /* electronicState.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = electronicState.hpp; sourceTree = "<group>"; };
+		593FA3AE1DE6F96A00321A6A /* speciesDatabase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = speciesDatabase.cpp; sourceTree = "<group>"; };
+		593FA3AF1DE6F96A00321A6A /* speciesDatabase.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = speciesDatabase.hpp; sourceTree = "<group>"; };
+		593FA3B11DE71F5600321A6A /* kev.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = kev.cpp; sourceTree = "<group>"; };
+		593FA3B21DE71F5600321A6A /* kev.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = kev.hpp; sourceTree = "<group>"; };
+		593FA3B41DE7240000321A6A /* LeRc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LeRc.cpp; sourceTree = "<group>"; };
+		593FA3B51DE7240000321A6A /* LeRc.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = LeRc.hpp; sourceTree = "<group>"; };
 		594FF1391D8FDA38009A6ABB /* dataMaxDefinition.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = dataMaxDefinition.hpp; sourceTree = "<group>"; };
 		594FF13A1D8FDA38009A6ABB /* object.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = object.cpp; sourceTree = "<group>"; };
 		594FF13B1D8FDA38009A6ABB /* object.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = object.hpp; sourceTree = "<group>"; };
@@ -248,6 +270,14 @@
 			children = (
 				593FA33E1DD212D800321A6A /* species.cpp */,
 				593FA33F1DD212D800321A6A /* species.hpp */,
+				593FA3AB1DE6F6E700321A6A /* electronicState.cpp */,
+				593FA3AC1DE6F6E700321A6A /* electronicState.hpp */,
+				593FA3AE1DE6F96A00321A6A /* speciesDatabase.cpp */,
+				593FA3AF1DE6F96A00321A6A /* speciesDatabase.hpp */,
+				593FA3B11DE71F5600321A6A /* kev.cpp */,
+				593FA3B21DE71F5600321A6A /* kev.hpp */,
+				593FA3B41DE7240000321A6A /* LeRc.cpp */,
+				593FA3B51DE7240000321A6A /* LeRc.hpp */,
 			);
 			path = CHEM;
 			sourceTree = "<group>";
@@ -269,6 +299,13 @@
 				594FF1391D8FDA38009A6ABB /* dataMaxDefinition.hpp */,
 				594FF13A1D8FDA38009A6ABB /* object.cpp */,
 				594FF13B1D8FDA38009A6ABB /* object.hpp */,
+				593FA39E1DE2F8BC00321A6A /* problemSetup.cpp */,
+				593FA39F1DE2F8BC00321A6A /* problemSetup.hpp */,
+				593FA3A11DE308DF00321A6A /* problemDef.hpp */,
+				593FA3A21DE4723E00321A6A /* flowdatabase.cpp */,
+				593FA3A31DE4723E00321A6A /* flowdatabase.hpp */,
+				593FA3A51DE5BEB900321A6A /* wallMaterial.cpp */,
+				593FA3A61DE5BEB900321A6A /* wallMaterial.hpp */,
 			);
 			path = DATA;
 			sourceTree = "<group>";
@@ -351,19 +388,26 @@
 				5926606F1D8ACC18006298DC /* VectorCompare.cpp in Sources */,
 				592660421D8ACB3D006298DC /* main.cpp in Sources */,
 				593FA3801DD31D5E00321A6A /* geometry.cpp in Sources */,
+				593FA3A01DE2F8BC00321A6A /* problemSetup.cpp in Sources */,
+				593FA3A41DE4723E00321A6A /* flowdatabase.cpp in Sources */,
 				592660701D8ACC18006298DC /* version.cpp in Sources */,
+				593FA3AD1DE6F6E700321A6A /* electronicState.cpp in Sources */,
+				593FA3A71DE5BEB900321A6A /* wallMaterial.cpp in Sources */,
 				592660651D8ACC18006298DC /* codelocation.cpp in Sources */,
 				5926606B1D8ACC18006298DC /* processorinfo.cpp in Sources */,
 				592660671D8ACC18006298DC /* error_codes.cpp in Sources */,
+				593FA3B61DE7240000321A6A /* LeRc.cpp in Sources */,
 				592660641D8ACC18006298DC /* assert_mk.cpp in Sources */,
 				594FF1401D8FDA38009A6ABB /* object.cpp in Sources */,
 				592660681D8ACC18006298DC /* error_exception.cpp in Sources */,
 				593FA3961DD490C400321A6A /* grid.cpp in Sources */,
 				592660691D8ACC18006298DC /* fileHandle.cpp in Sources */,
 				5926606A1D8ACC18006298DC /* MultiVector.cpp in Sources */,
+				593FA3B01DE6F96A00321A6A /* speciesDatabase.cpp in Sources */,
 				593FA38D1DD361BC00321A6A /* preprocessingGridSU2.cpp in Sources */,
 				594FF1411D8FDA38009A6ABB /* particle.cpp in Sources */,
 				5926607C1D8ACCA4006298DC /* matrix.cpp in Sources */,
+				593FA3B31DE71F5600321A6A /* kev.cpp in Sources */,
 				5926606D1D8ACC18006298DC /* StringOps.cpp in Sources */,
 				5926607B1D8ACCA4006298DC /* linear_algebra.cpp in Sources */,
 				5926606C1D8ACC18006298DC /* readdatafromstring.cpp in Sources */,

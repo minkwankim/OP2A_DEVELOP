@@ -9,6 +9,10 @@
 #include <iostream>
 #include <mkl.h>
 
+#include "./CHEM/speciesDataBase.hpp"
+#include "./DATA/problemSetup.hpp"
+#include "./DATA/wallMaterial.hpp"
+
 #include "./MATH_MK/matrix.hpp"
 #include "./GRID/grid.hpp"
 #include "./CFD/OP2ACFD.hpp"
@@ -20,17 +24,35 @@
 int main(int argc, char **argv) {
     double res = 10.0;
     
-    GridBasicInfo gridinfo;
-    GridData<NodeNormal<double>, FaceNormal<double>, CellNormal<double> > gridtemp;
-    readGridFromFile("/Users/mkk1u16/Desktop/Code_Development/OP2A/grid2.op2", gridinfo, gridtemp);
-    processingGrid(gridinfo, gridtemp);
+    
+    // TEST SECTION
+    ProbBasicInfo probbasic;
+    probbasic.read("/Users/mkk1u16/Desktop/Code_Development/OP2A/problem.pro");
+    
+    ProbICBC    probIC;
+    probIC.read("/Users/mkk1u16/Desktop/Code_Development/OP2A/problem.pro");
     
     
-    writeGridTecplot("/Users/mkk1u16/Desktop/Code_Development/OP2A/grid2", gridinfo, gridtemp);
+    
+    speciesDataBase testSpecies;
+    testSpecies.read("/Users/mkk1u16/Desktop/Code_Development/OP2A/dat/species.dat");
+    
+    
+    //wallMaterialDataBase testwallmat;
+    //testwallmat.read("/Users/mkk1u16/Desktop/Code_Development/OP2A/dat/wall_material.dat");
+    //testwallmat.add("/Users/mkk1u16/Desktop/Code_Development/OP2A/dat/wall_material.dat");
+    //wallMaterial testmat;
+    //testmat = testwallmat.find("Quartz wall");
+
+    //GridBasicInfo gridinfo;
+    //GridData<NodeNormal<double>, FaceNormal<double>, CellNormal<double> > gridtemp;
+    //readGridFromFile("/Users/mkk1u16/Desktop/Code_Development/OP2A/grid2.op2", gridinfo, gridtemp);
+    //processingGrid(gridinfo, gridtemp);
+    //writeGridTecplot("/Users/mkk1u16/Desktop/Code_Development/OP2A/grid2", gridinfo, gridtemp);
 
     
-    //Node node = gridData.node(1);
-    //readGrid("test.op2", grid);
+    
+    
     
     
     // insert code here...

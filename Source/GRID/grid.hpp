@@ -187,6 +187,33 @@ public:
 
 
 template <class N, class F, class C>
+class Grid
+{
+public:
+    GridBasicInfo       info;
+    GridMPI             mpi;
+    GridData<N, F, C>   data;
+    
+    Grid()
+    {
+        
+    };
+    
+    ~Grid()
+    {
+        
+    };
+};
+
+
+
+
+
+
+
+
+
+template <class N, class F, class C>
 N& GridData<N, F, C>::Node(int id)
 {
     op_assert(id > 0);

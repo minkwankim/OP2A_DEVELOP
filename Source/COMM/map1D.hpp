@@ -18,7 +18,8 @@
 
 #include "assert_mk.hpp"
 #include "StringOps.hpp"
-
+#include "error_codes.hpp"
+#include "error_exception.hpp"
 
 
 #define DEFAULT_SIZE_MAP1D	5
@@ -397,7 +398,7 @@ private:
 	{
 		std::string msg = "CFMap: KEY not found: ";
 		msg += Common::StringOps::to_str(aKey);
-		throw Common::ExceptionError(FromHere(), msg, Common::ErrorCodes::NoSuchValue());
+        throw Common::ExceptionError(FromHere(), msg, Common::ErrorCodes::NoSuchValue());
 	}
 
 	void keyNotFound(const VALUE& aValue)

@@ -68,9 +68,39 @@ void read_data_from_string::remove_comments(std::string& line)
 	}
 }
 
-
-std::string read_data_from_string::read_string(std::string& line, std::string read_format)
+    
+    
+void read_data_from_string::remove_comments(std::string& line, const std::string& comment_s)
 {
+    int i;
+    long size1, size2;
+    long index_s, index_size;
+    size1 = line.size();
+    size2 = comment_s.size();
+    
+    
+    index_s = -1;
+    index_size = 0;
+    for (i = 0; i <= size1-1; i++)
+    {
+        if (line.compare(i, size2, comment_s) == 0)
+        {
+            index_s = i;
+        }
+    }
+        
+    if (index_s != -1)
+    {
+        index_size = size1 - index_s;
+        line.erase(index_s, index_size);
+    }
+}
+
+
+
+std::string read_data_from_string::read_string(const std::string& data, std::string read_format)
+{
+    std::string line = data;
 	long num;
 	std::string result;
 
