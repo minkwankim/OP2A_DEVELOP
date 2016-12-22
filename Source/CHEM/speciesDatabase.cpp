@@ -57,12 +57,17 @@ void speciesDataBase::read(const std::string& filename)
                 Common::read_data_from_string::remove_comments(line, "%");
                 
                 read_mode = -1;
-                if (line.compare(0, 5, "NAME:") == 0)     read_mode = 0;
-                if (line.compare(0, 6, "BASIC:") == 0)    read_mode = 1;
-                if (line.compare(0, 6, "NONEQ:") == 0)    read_mode = 2;
-                if (line.compare(0, 6, "ELECT:") == 0)    read_mode = 3;
-                if (line.compare(0, 5, "K_EV:") == 0)     read_mode = 4;
+                if (line.compare(0, 5, "NAME:") == 0)         read_mode = 0;
+                if (line.compare(0, 6, "BASIC:") == 0)        read_mode = 1;
+                if (line.compare(0, 6, "NONEQ:") == 0)        read_mode = 2;
+                if (line.compare(0, 6, "ELECT:") == 0)        read_mode = 3;
+                if (line.compare(0, 5, "K_EV:") == 0)         read_mode = 4;
+                if (line.compare(0, 5, "LERC:") == 0)         read_mode = 5;
+                if (line.compare(0, 9, "BLOTTNER:") == 0)     read_mode = 6;
+                if (line.compare(0, 11, "SUTHERLAND:") == 0)  read_mode = 7;
+                if (line.compare(0, 9, "LJ_POTEN:") == 0)     read_mode = 8;
 
+  
 
     
                 
@@ -114,6 +119,40 @@ void speciesDataBase::read(const std::string& filename)
                         }
                         break;
                         
+                    case 5:
+                        num = Common::read_data_from_string::read_numeric<int>(line, "LERC:");
+                        speciesTemp.basic.lerc.lvl = num;
+                        
+                        if (num > 0)
+                        {
+                            lineTemp.resize(num);
+                            
+                            for (int i = 0; i < num; i++)
+                            {
+                                getline(prob_file, lineTemp[i]);
+                                Common::read_data_from_string::remove_comments(lineTemp[i], "%");
+                            }
+                            speciesTemp.basic.lerc.read(lineTemp);
+                        }
+                        break;
+                        
+                    case 6:
+                        line.erase(0, 9);
+                        Common::read_data_from_string::remove_space_front(line);
+                        speciesTemp.trans.read(line, 0);
+                        break;
+                        
+                    case 7:
+                        line.erase(0, 11);
+                        Common::read_data_from_string::remove_space_front(line);
+                        speciesTemp.trans.read(line, 1);
+                        break;
+                        
+                    case 8:
+                        line.erase(0, 9);
+                        Common::read_data_from_string::remove_space_front(line);
+                        speciesTemp.trans.read(line, 2);
+                        break;
                         
                 }
             }
@@ -129,3 +168,18 @@ void speciesDataBase::read(const std::string& filename)
 
     prob_file.close();
 }
+
+
+
+species speciesDataBase::find(std::string name)
+{
+    int n = datamap.find(name);
+    return (data[n]);
+}
+
+
+
+
+
+
+

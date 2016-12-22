@@ -45,6 +45,10 @@
 #define PROB_SETUP_INI_END              "#COND NUM[END]"
 #define PROB_SETUP_INLET                "Inlet Condition"
 #define PROB_SETUP_WALL                 "Wall Condition"
+#define PROB_SETUP_WALL_MAT             "Wall Material"
+
+#define PROB_SETUP_NTHREAD              "THREAD PER NODE:"
+
 
 
 

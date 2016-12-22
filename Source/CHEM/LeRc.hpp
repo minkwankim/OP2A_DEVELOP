@@ -21,23 +21,34 @@ public:
     std::vector<double> hf;
     std::vector<double> T1;
     std::vector<double> Tu;
-    std::vector<double> A0;
-    std::vector<double> A1;
-    std::vector<double> A2;
-    std::vector<double> A3;
-    std::vector<double> A4;
-    std::vector<double> A5;
-    std::vector<double> A6;
-    std::vector<double> A7;
-    std::vector<double> A8;
-    std::vector<double> A9;
+    std::vector<double> a1;
+    std::vector<double> a2;
+    std::vector<double> a3;
+    std::vector<double> a4;
+    std::vector<double> a5;
+    std::vector<double> a6;
+    std::vector<double> a7;
+    std::vector<double> a8;
+    std::vector<double> b1;
+    std::vector<double> b2;
     
 public:
     LeRc();
     ~LeRc();
     
     void read(const int num, const std::vector<std::string>& line);
-    void read(const std::vector<std::string>& line);    
+    void read(const std::vector<std::string>& line);
+    
+    double Cp_over_R(const double T);
+    double Cv_over_R(const double T);
+    double h0_over_RT(const double T);
+    double e_over_RT(const double T);
+    double s_over_R(const double T);
+    
+    int findRange(const double T);
+    
+    
+    
 };
 
 

@@ -9,8 +9,11 @@
 #include "species.hpp"
 
 
+
+
+// 1. Basic DATA
 speciesBasic::speciesBasic()
-: M(0), h0(0), D(0), I(0), q(0), type(0)
+: M(0), m(0), h0(0), D(0), I(0), q(0), type(0), R(0), m_completed(false)
 {
     
 }
@@ -23,6 +26,15 @@ speciesBasic::~speciesBasic()
 void speciesBasic::read(const std::string &line)
 {
     sscanf(line.c_str(), "%lf %lf %lf %lf %lf %d", &M, &h0, &D, &I, &q, &type);
+    
+    m = M *AMU_SI;
+    R = Ru_SI / M;
+    
+    Cv[0] = 1.5*R;
+    if (type == 1) Cv[1] = R;
+    else           Cv[0] = 0.0;
+    
+    m_completed = true;
 }
 
 
@@ -64,10 +76,51 @@ void speciesNoneq::read(const std::vector<std::string>& line, int mode)
 }
 
 
+// 3. Transport DATA
+speciesTrans::speciesTrans()
+{
+    
+}
+
+speciesTrans::~speciesTrans()
+{
+    
+}
+
+void speciesTrans::read(const std::string& line, int mode)
+{
+    switch (mode)
+    {
+        case 0: // Blottner
+            sscanf(line.c_str(), "%lf %lf %lf", &blottner.A, &blottner.B, &blottner.C);
+            break;
+            
+        case 1: // Sutherland
+            sscanf(line.c_str(), "%lf %lf %lf %lf %lf %lf", &sutherland.S, &sutherland.T_ref, &sutherland.mu_0, &sutherland.S_kappa, &sutherland.T0_kappa, &sutherland.kappa_0);
+            break;
+            
+        case 2: // Kinetic theory model for viscosity
+            sscanf(line.c_str(), "%lf %lf", &kinetic.sigma, &kinetic.Teps);
+            break;
+    }
+}
 
 
-
-
+double speciesTrans::kappa_Eucken(const double mus, const double Cvs, int mode)
+{
+    double kappa;
+    
+    if (mode == 0)
+    {
+        kappa = 2.5 * mus * Cvs;
+    }
+    else
+    {
+        kappa = mus * Cvs;
+    }
+    
+    return(kappa);
+}
 
 
 

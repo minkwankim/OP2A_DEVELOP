@@ -40,10 +40,12 @@
 		593FA3B01DE6F96A00321A6A /* speciesDatabase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 593FA3AE1DE6F96A00321A6A /* speciesDatabase.cpp */; };
 		593FA3B31DE71F5600321A6A /* kev.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 593FA3B11DE71F5600321A6A /* kev.cpp */; };
 		593FA3B61DE7240000321A6A /* LeRc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 593FA3B41DE7240000321A6A /* LeRc.cpp */; };
+		593FA3BB1DEC86EB00321A6A /* Blottner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 593FA3B91DEC86EB00321A6A /* Blottner.cpp */; };
+		593FA3BE1DEC890600321A6A /* Sutherland.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 593FA3BC1DEC890600321A6A /* Sutherland.cpp */; };
+		593FA3C11DEDD87F00321A6A /* viscosity_kinetic_theory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 593FA3BF1DEDD87F00321A6A /* viscosity_kinetic_theory.cpp */; };
+		593FA3C71DF02E4200321A6A /* dataCFD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 593FA3C51DF02E4200321A6A /* dataCFD.cpp */; };
 		594FF1401D8FDA38009A6ABB /* object.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 594FF13A1D8FDA38009A6ABB /* object.cpp */; };
 		594FF1411D8FDA38009A6ABB /* particle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 594FF13E1D8FDA38009A6ABB /* particle.cpp */; };
-		594FF1461D8FDA80009A6ABB /* celldatabase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 594FF1421D8FDA80009A6ABB /* celldatabase.cpp */; };
-		594FF1471D8FDA80009A6ABB /* cellDataCFD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 594FF1441D8FDA80009A6ABB /* cellDataCFD.cpp */; };
 		594FF14B1D8FDBBF009A6ABB /* preprocessingCFD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 594FF14A1D8FDBBF009A6ABB /* preprocessingCFD.cpp */; };
 /* End PBXBuildFile section */
 
@@ -133,6 +135,15 @@
 		593FA3B21DE71F5600321A6A /* kev.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = kev.hpp; sourceTree = "<group>"; };
 		593FA3B41DE7240000321A6A /* LeRc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LeRc.cpp; sourceTree = "<group>"; };
 		593FA3B51DE7240000321A6A /* LeRc.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = LeRc.hpp; sourceTree = "<group>"; };
+		593FA3B71DEC3FCB00321A6A /* chemConstants.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = chemConstants.hpp; sourceTree = "<group>"; };
+		593FA3B91DEC86EB00321A6A /* Blottner.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Blottner.cpp; sourceTree = "<group>"; };
+		593FA3BA1DEC86EB00321A6A /* Blottner.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Blottner.hpp; sourceTree = "<group>"; };
+		593FA3BC1DEC890600321A6A /* Sutherland.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Sutherland.cpp; sourceTree = "<group>"; };
+		593FA3BD1DEC890600321A6A /* Sutherland.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Sutherland.hpp; sourceTree = "<group>"; };
+		593FA3BF1DEDD87F00321A6A /* viscosity_kinetic_theory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = viscosity_kinetic_theory.cpp; sourceTree = "<group>"; };
+		593FA3C01DEDD87F00321A6A /* viscosity_kinetic_theory.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = viscosity_kinetic_theory.hpp; sourceTree = "<group>"; };
+		593FA3C51DF02E4200321A6A /* dataCFD.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dataCFD.cpp; sourceTree = "<group>"; };
+		593FA3C61DF02E4200321A6A /* dataCFD.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = dataCFD.hpp; sourceTree = "<group>"; };
 		594FF1391D8FDA38009A6ABB /* dataMaxDefinition.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = dataMaxDefinition.hpp; sourceTree = "<group>"; };
 		594FF13A1D8FDA38009A6ABB /* object.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = object.cpp; sourceTree = "<group>"; };
 		594FF13B1D8FDA38009A6ABB /* object.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = object.hpp; sourceTree = "<group>"; };
@@ -140,10 +151,6 @@
 		594FF13D1D8FDA38009A6ABB /* OP2ACFDversionInfo.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = OP2ACFDversionInfo.hpp; sourceTree = "<group>"; };
 		594FF13E1D8FDA38009A6ABB /* particle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = particle.cpp; sourceTree = "<group>"; };
 		594FF13F1D8FDA38009A6ABB /* particle.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = particle.hpp; sourceTree = "<group>"; };
-		594FF1421D8FDA80009A6ABB /* celldatabase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = celldatabase.cpp; sourceTree = "<group>"; };
-		594FF1431D8FDA80009A6ABB /* celldatabase.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = celldatabase.hpp; sourceTree = "<group>"; };
-		594FF1441D8FDA80009A6ABB /* cellDataCFD.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cellDataCFD.cpp; sourceTree = "<group>"; };
-		594FF1451D8FDA80009A6ABB /* cellDataCFD.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cellDataCFD.hpp; sourceTree = "<group>"; };
 		594FF14A1D8FDBBF009A6ABB /* preprocessingCFD.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = preprocessingCFD.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -278,6 +285,13 @@
 				593FA3B21DE71F5600321A6A /* kev.hpp */,
 				593FA3B41DE7240000321A6A /* LeRc.cpp */,
 				593FA3B51DE7240000321A6A /* LeRc.hpp */,
+				593FA3B71DEC3FCB00321A6A /* chemConstants.hpp */,
+				593FA3B91DEC86EB00321A6A /* Blottner.cpp */,
+				593FA3BA1DEC86EB00321A6A /* Blottner.hpp */,
+				593FA3BC1DEC890600321A6A /* Sutherland.cpp */,
+				593FA3BD1DEC890600321A6A /* Sutherland.hpp */,
+				593FA3BF1DEDD87F00321A6A /* viscosity_kinetic_theory.cpp */,
+				593FA3C01DEDD87F00321A6A /* viscosity_kinetic_theory.hpp */,
 			);
 			path = CHEM;
 			sourceTree = "<group>";
@@ -292,10 +306,6 @@
 		594FF1381D8FD9F2009A6ABB /* DATA */ = {
 			isa = PBXGroup;
 			children = (
-				594FF1421D8FDA80009A6ABB /* celldatabase.cpp */,
-				594FF1431D8FDA80009A6ABB /* celldatabase.hpp */,
-				594FF1441D8FDA80009A6ABB /* cellDataCFD.cpp */,
-				594FF1451D8FDA80009A6ABB /* cellDataCFD.hpp */,
 				594FF1391D8FDA38009A6ABB /* dataMaxDefinition.hpp */,
 				594FF13A1D8FDA38009A6ABB /* object.cpp */,
 				594FF13B1D8FDA38009A6ABB /* object.hpp */,
@@ -306,6 +316,8 @@
 				593FA3A31DE4723E00321A6A /* flowdatabase.hpp */,
 				593FA3A51DE5BEB900321A6A /* wallMaterial.cpp */,
 				593FA3A61DE5BEB900321A6A /* wallMaterial.hpp */,
+				593FA3C51DF02E4200321A6A /* dataCFD.cpp */,
+				593FA3C61DF02E4200321A6A /* dataCFD.hpp */,
 			);
 			path = DATA;
 			sourceTree = "<group>";
@@ -406,23 +418,25 @@
 				593FA3B01DE6F96A00321A6A /* speciesDatabase.cpp in Sources */,
 				593FA38D1DD361BC00321A6A /* preprocessingGridSU2.cpp in Sources */,
 				594FF1411D8FDA38009A6ABB /* particle.cpp in Sources */,
+				593FA3C71DF02E4200321A6A /* dataCFD.cpp in Sources */,
 				5926607C1D8ACCA4006298DC /* matrix.cpp in Sources */,
 				593FA3B31DE71F5600321A6A /* kev.cpp in Sources */,
+				593FA3BB1DEC86EB00321A6A /* Blottner.cpp in Sources */,
 				5926606D1D8ACC18006298DC /* StringOps.cpp in Sources */,
 				5926607B1D8ACCA4006298DC /* linear_algebra.cpp in Sources */,
 				5926606C1D8ACC18006298DC /* readdatafromstring.cpp in Sources */,
 				593FA3401DD212D800321A6A /* species.cpp in Sources */,
 				592660881D8ACD0F006298DC /* index.cpp in Sources */,
 				593FA3831DD32DFE00321A6A /* connection.cpp in Sources */,
-				594FF1461D8FDA80009A6ABB /* celldatabase.cpp in Sources */,
 				593FA38B1DD35CEC00321A6A /* gridUtil.cpp in Sources */,
 				592660661D8ACC18006298DC /* error_check.cpp in Sources */,
+				593FA3BE1DEC890600321A6A /* Sutherland.cpp in Sources */,
 				593FA3901DD3630400321A6A /* preprocessingGridFluent.cpp in Sources */,
 				5926607D1D8ACCA4006298DC /* random_number_fns.cpp in Sources */,
 				5926606E1D8ACC18006298DC /* timer.cpp in Sources */,
 				594FF14B1D8FDBBF009A6ABB /* preprocessingCFD.cpp in Sources */,
 				5926607A1D8ACCA4006298DC /* cal_area.cpp in Sources */,
-				594FF1471D8FDA80009A6ABB /* cellDataCFD.cpp in Sources */,
+				593FA3C11DEDD87F00321A6A /* viscosity_kinetic_theory.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

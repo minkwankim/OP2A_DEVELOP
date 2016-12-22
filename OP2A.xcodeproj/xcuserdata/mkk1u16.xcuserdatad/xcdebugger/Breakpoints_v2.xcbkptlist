@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/main.cpp"
-            timestampString = "501678175.301395"
+            timestampString = "502209199.841872"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
+            startingLineNumber = "135"
+            endingLineNumber = "135"
             landmarkName = "main(int argc, char **argv)"
             landmarkType = "7">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/main.cpp"
-            timestampString = "501678175.301395"
+            timestampString = "502209199.841872"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "61"
-            endingLineNumber = "61"
+            startingLineNumber = "134"
+            endingLineNumber = "134"
             landmarkName = "main(int argc, char **argv)"
             landmarkType = "7">
          </BreakpointContent>
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/main.cpp"
-            timestampString = "501678175.301395"
+            timestampString = "502209199.841872"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
+            startingLineNumber = "132"
+            endingLineNumber = "132"
             landmarkName = "main(int argc, char **argv)"
             landmarkType = "7">
          </BreakpointContent>
@@ -120,27 +120,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Source/main.cpp"
-            timestampString = "501678175.301395"
+            timestampString = "502209199.841872"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
-            landmarkName = "main(int argc, char **argv)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Source/main.cpp"
-            timestampString = "501678175.301395"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
             landmarkName = "main(int argc, char **argv)"
             landmarkType = "7">
          </BreakpointContent>

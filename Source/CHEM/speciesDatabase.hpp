@@ -36,18 +36,24 @@
 
 class speciesDataBase
 {
-protected:
+//protected:
+    
+public:
     Common::Map1D<std::string, int> datamap;
     std::vector<species> data;
 
 public:
+    
+    
+    
 public:
     speciesDataBase();
     ~speciesDataBase();
     
     void read(const std::string& filename);
-    void add(const std::string& filename);
-
+    //void add(const std::string& filename);
+    
+    species find(std::string name);
 };
 
 

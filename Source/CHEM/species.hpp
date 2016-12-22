@@ -27,21 +27,34 @@
 #include "../COMM/StringOps.hpp"
 #include "../COMM/VectorCompare.hpp"
 
+#include "chemConstants.hpp"
 #include "electronicState.hpp"
 #include "kev.hpp"
+#include "LeRc.hpp"
+#include "Blottner.hpp"
+#include "Sutherland.hpp"
+#include "viscosity_kinetic_theory.hpp"
 
 
 
 
-
+// 1. Basic DATA
 class speciesBasic {
 public:
-    double M;
-    double h0;
-    double D;
-    double I;
-    double q;
-    int    type;
+    double M;       // MW (AMU)
+    double m;       // mass in kg
+    double h0;      // Enthalpy of formation [J/kg]
+    double D;       // Dissociation energy [J/kg]
+    double I;       // Ionisation energy [j/kg]
+    double q;       // Species charge
+    double R;       // Gas constant
+    int    type;    // Type of species [0: atom, -1: electron, 1: molecule]
+    double Cv[2];   // Cv[0]: Cv_tra, Cv[1] = Cv_rot;
+    
+    LeRc lerc;      // Normalized enthalpy and entrophy data
+    
+protected:
+    bool m_completed;
     
 public:
     speciesBasic();
@@ -49,6 +62,9 @@ public:
     
     void read(const std::string& line);
 };
+
+
+// 2. Nonequilibrium DATA
 class speciesNoneq
 {
 public:
@@ -74,12 +90,36 @@ public:
 };
 
 
+// 3. Transport DATA
+class speciesTrans
+{
+public:
+    Blottner blottner;
+    Sutherland sutherland;
+    GeneralisedKineticTheory kinetic;
+    
+public:
+    speciesTrans();
+    ~speciesTrans();
+    
+    void read(const std::string& line, int mode);
+
+    double kappa_Eucken(const double mus, const double Cvs, int mode);
+    
+};
+
+
+
+
+
+
 
 class species {
 public:
     std::string name;
     speciesBasic basic;
     speciesNoneq noneq;
+    speciesTrans trans;
     
     
 public:
