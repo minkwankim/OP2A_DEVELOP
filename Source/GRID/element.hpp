@@ -12,7 +12,6 @@
 #include <stdio.h>
 #include "geometry.hpp"
 #include "connection.hpp"
-
 #include "index.hpp"
 #include "stencilinfo.hpp"
 
@@ -20,6 +19,97 @@
 #define MAX_NUMBER_CHILDER_PER_CELL 8
 
 
+////////////////////////////////////////////////
+// 1. Grid  Element class for geo with data
+////////////////////////////////////////////////
+template <class GEO, class DATA>
+class Elem_ver1
+{
+    // Part A: Data Section
+public:
+    GEO*  geom;
+    DATA* data;
+    
+    // Part B: Constructoir / Destructor Section
+public:
+    Elem_ver1();
+    Elem_ver1(GEO* i_geom, DATA* i_data);
+    
+    ~Elem_ver1();
+    
+public:
+    // Part C: Functions
+    void assign_ptr(GEO* i_geom, DATA* i_data);
+    void assign(GEO& i_geom, DATA& i_data);
+};
+
+//      Part B: Constructoir / Destructor Section
+template <class GEO, class DATA>
+Elem_ver1<GEO, DATA>::Elem_ver1()
+{
+    geom = NULL;
+    data = NULL;
+}
+
+template <class GEO, class DATA>
+Elem_ver1<GEO, DATA>::~Elem_ver1()
+{
+    geom = NULL;
+    data = NULL;
+}
+
+template <class GEO, class DATA>
+Elem_ver1<GEO, DATA>::Elem_ver1(GEO* i_geom, DATA* i_data)
+{
+    geom = i_geom;
+    data = i_data;
+}
+
+//      Part C: Functions
+template <class GEO, class DATA>
+void Elem_ver1<GEO, DATA>::assign_ptr(GEO* i_geom, DATA* i_data)
+{
+    geom = i_geom;
+    data = i_data;
+}
+
+template <class GEO, class DATA>
+void Elem_ver1<GEO, DATA>::assign(GEO& i_geom, DATA& i_data)
+{
+    geom = new GEO;
+    data = new DATA;
+    
+    memcpy(geom, &i_geom, sizeof(GEO));
+    memcpy(data, &i_data, sizeof(DATA));
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 template <class GEO, class CONN, class DATA>
 class GridElement
 {
@@ -31,37 +121,55 @@ public:
 public:
     GridElement()
     {
-    
+        
     }
     
     ~GridElement()
     {
-    
+        
     }
 };
 
 
 
-// NODE types
+
+// 1. Base for Grid Elements (ANY)
+class GridElementBase{
+public:
+    virtual ~GridElementBase() {};
+};
+
+
+// 2. Class for NODE types (Ancestor: GridElementBase)
+//   2.1 Normal type
 template <class DATA>
-class NodeNormal : public GridElement<GeometryNode, ConnectionNode, DATA>
+class NodeNormal : public GridElementBase
 {
+    // Part A: Data Section
+public:
+    GeometryNode    geometry;
+    ConnectionNode  connectivity;
+    DATA            data;
+    
+    // Part B: Constructoir / Destructor Section
 public:
     NodeNormal() { };
     ~NodeNormal() { };
 };
 
+//   2.1.1 Cartesin grid type
 template <class DATA>
 class NodeCart : public NodeNormal<DATA>
 {
+    // Part A: Data Section
 public:
     grid_index index;
 
+    // Part B: Constructoir / Destructor Section
 public:
     NodeCart() { };
     ~NodeCart() { };
 };
-
 
 
 // FACE Types
@@ -188,15 +296,7 @@ public:
     };
 };
 
-
-
-
-
-
-
-
-
-
+*/
 
 
 

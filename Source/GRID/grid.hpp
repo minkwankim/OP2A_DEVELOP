@@ -17,7 +17,6 @@
 #include <iomanip>
 #include <string>
 #include <stdio.h>
-#include "element.hpp"
 
 #include "../COMM/assert_mk.hpp"
 #include "../COMM/readdatafromstring.hpp"
@@ -25,63 +24,108 @@
 #include "../COMM/error_exception.hpp"
 #include "../COMM/StringOps.hpp"
 #include "../COMM/VectorCompare.hpp"
+
 #include "../MATH_MK/matrix.hpp"
 #include "../MATH_MK/cal_area.hpp"
 #include "../MATH_MK/linear_algebra.hpp"
 
-#define GRID_AXISMEMTRIC_Y      1.0e-5
-#define GRID_MAX_REFINEMENT_LVL 5
-#define GRID_MAX_NUM_PATH       1000
-#define GRID_MAX_NUM_LINES      2000
-#define GRID_MAX_NUM_CPU        2000
-#define GRID_GHOST_RESERVE_FOR_MPI GRID_MAX_NUM_CPU
-#define MIN_PARTICLE_PER_CELL 20
+#include "element.hpp"
+#include "node.hpp"
+#include "face.hpp"
+#include "cell.hpp"
+#include "grid_def.hpp"
+
+
+///////////////////////
+// Classes for Grid
+///////////////////////
+// 1. Class for BASIC INFO
+class GridBasicInfo{
+    // Part A: Data Section
+public:
+    double gridFactor;
+    int isAxisymmeric;
+    int DIM;
+    int NNM;
+    int NFM;
+    int NCM;
+    int NGM;
+    
+protected:
+    bool m_completed;
+   
+    // Part B: Constructoir / Destructor Section
+public:
+    GridBasicInfo();
+    ~GridBasicInfo();
+    
+    // Part C: Functions
+public:
+    bool isCompleted();
+    void setComplete();
+    void needToUpdate();
+    void read(const std::string& mesh_file_name);
+};
+
+
+// 2. Class for MPI Data
+class GridMPI
+{
+    // Part A: Data Section
+public:
+    int numLines;                                       // Number of lines
+    std::vector< std::vector<int> > lines;
+    std::vector< std::vector<int> > sendGhostIndex;
+    std::vector< std::vector<int> > receiveGhostIndex;
+    int *sendGhost;
+    int *receiveGhost;
+    std::vector<int> cellProcessorIDs;                  // Processor IDs of each cells
+    
+    // Part B: Constructoir / Destructor Section
+public:
+    GridMPI();
+    ~GridMPI();
+    
+};
 
 
 
-// VTK Format Identifier
-#define	LINE	 3
-#define	TRI3	 5
-#define	QUAD4	 9
-#define	TETRA4   10
-#define	HEXA8	 12
-#define PRISM6	 13
-#define PYRAMID5 14
-
-#define BC_INTERIOR 	0
-#define BC_WALL			10
-#define BC_INLET		20
-#define BC_OUTLET		30
-#define BC_FREESTREAM	40
-#define BC_SYMMETRY	    50
-#define BC_AXIS			60
-#define BC_ANODE		70
-#define BC_CATHODE		80
-#define BC_DIELECTRIC	90
-#define BC_MAX_DETAIL_SUBCOND 10
-
-#define GRID_NOR	0
-#define GRID_TAN1	1
-#define GRID_TAN2	2
-#define GRID_X 0
-#define GRID_Y 1
-#define GRID_Z 2
-
-#define BC_WEST    0
-#define BC_SOUTH   1
-#define BC_EAST    2
-#define BC_NORTH   3
-#define BC_TOP     4
-#define BC_BOTTOM  5
-
-#define PARTICLE_OLD 0
-#define PARTICLE_NEW 1
-
-#define INDEX_ADD_CPU    10
-#define INDEX_ADD_GHOST  100
+// 3. Base class for Grid-class (Ancestor)
+class GridGeo{
+    // [Part A]: Data section
+public:
+    
+    // DATA for Grid Geom
+    std::vector<NodeBase>   nodes;
+    std::vector<FaceBase>   faces;
+    std::vector<CellBase>   cells;
+    std::vector<CellBase>   ghost;
+    
+    std::vector<int>        whereisNodes;
+    std::vector<int>        whereisFaces;
+    std::vector<int>        whereisCells;
+    std::vector<int>        whereisGhost;
+    
+    // [Part B]: Constructor / Destructor section
+public:
+    GridGeo();
+    GridGeo(GridBasicInfo& gridInfo);
+    ~GridGeo();
+    
+    // [Part C]: Functions
+public:
+    NodeBase& Node(int id);
+    FaceBase& Face(int id);
+    CellBase& Cell(int id);
+    
+    void readGrid(const std::string& mesh_file_name, GridBasicInfo& gridInfo);
+};
 
 
+
+//////////////////////
 // Grid Utilities
+//////////////////////
 int faceTypeNumNode(int facetype);
 int cellTypeNumNode(int celltype);
 int cellTypeNumFace(int celltype);
@@ -97,54 +141,16 @@ void precessingGridSU2(const std::string& mesh_file_name_SU2, std::string& out_f
 void precessingGridFLUENT(const std::string& mesh_file_name_Fluent);
 void precessingGridFLUENT(const std::string& mesh_file_name_Fluent, std::string& out_file_name);
 
+void readGridFromFile(const std::string& mesh_file_name, GridBasicInfo& gridinfo, GridGeo& gridgeo);
+void processingGrid(GridBasicInfo& gridinfo, GridGeo& gridgeo);
+void writeGridGeoTecplot(const  std::string& title, GridBasicInfo& gridinfo, GridGeo& griddata);
 
 
 
-// Class for BASIC INFO
-class GridBasicInfo{
-public:
-    double gridFactor;
-    int isAxisymmeric;
-    int DIM;
-    int NNM;
-    int NFM;
-    int NCM;
-    int NGM;
-    
-protected:
-    bool m_completed;
-    
-public:
-    GridBasicInfo();
-    ~GridBasicInfo();
-    
-    bool isCompleted();
-    void setComplete();
-    void needToUpdate();
-    
-    void read(const std::string& mesh_file_name);
-};
 
 
-// Class for MPI Data
-class GridMPI
-{
-public:
-    int numLines;                                       // Number of lines
-    std::vector< std::vector<int> > lines;
-    std::vector< std::vector<int> > sendGhostIndex;
-    std::vector< std::vector<int> > receiveGhostIndex;
-    int *sendGhost;
-    int *receiveGhost;
-    std::vector<int> cellProcessorIDs;                  // Processor IDs of each cells
-    
-public:
-    GridMPI();
-    ~GridMPI();
-    
-};
 
-// class for Geometry and Datastrorage
+// 3. class for Geometry and Datastrorage
 template <class N, class F, class C>
 class GridData
 {
@@ -186,24 +192,61 @@ public:
 
 
 
-template <class N, class F, class C>
-class Grid
-{
+
+
+/*
+// ========================
+// Definition of Grid-class
+// ========================
+// Base class for Grid-class (Ancestor)
+class GridBase{
+    // [Part A]: Data section
 public:
     GridBasicInfo       info;
     GridMPI             mpi;
+    
+    // [Part B]: Constructor / Destructor section
+public:
+    virtual ~GridBase() {}
+    
+    // [Part C]: Functions
+public:
+    virtual void readGrid(const std::string& mesh_file_name) = 0;
+    virtual void writeGridGeo(const std::string& title)      = 0;
+};
+
+
+template <class N, class F, class C>
+class Grid : public GridBase
+{
+public:
     GridData<N, F, C>   data;
     
-    Grid()
-    {
-        
-    };
+    Grid()  {};
+    ~Grid() {};
     
-    ~Grid()
-    {
-        
-    };
+    void readGrid(const std::string& mesh_file_name);
+    void writeGridGeo(const std::string& title);
 };
+
+
+// Functions
+//  4.1 readGrid
+template <class N, class F, class C>
+void Grid<N, F, C>::readGrid(const std::string& mesh_file_name)
+{
+    info.read(mesh_file_name);
+    data.readGrid(mesh_file_name, info);
+    processingGrid(info, data);
+}
+
+// 4.2 writeGridTecplot
+template <class N, class F, class C>
+void Grid<N, F, C>::writeGridGeo(const  std::string& title)
+{
+    writeGridGeoTecplot(title, info, data);
+}
+
 
 
 
@@ -569,14 +612,16 @@ void GridData<N, F, C>::readGrid(const std::string& mesh_file_name, GridBasicInf
 
 
 
-
-
+// Grid Functions
+// 1. Read grid
 template <class N, class F, class C>
 void readGridFromFile(const std::string& mesh_file_name, GridBasicInfo& gridinfo, GridData<N, F, C>& griddata)
 {
     griddata.readGrid(mesh_file_name, gridinfo);
 }
 
+
+// 2. Processing grid
 template <class N, class F, class C>
 void processingGrid(GridBasicInfo& gridinfo, GridData<N, F, C>& griddata)
 {
@@ -1187,8 +1232,10 @@ void processingGrid(GridBasicInfo& gridinfo, GridData<N, F, C>& griddata)
 }
 
 
+// 3. Write Data
+// 3.1 Tecplot Format
 template <class N, class F, class C>
-void writeGridTecplot(const  std::string& title, GridBasicInfo& gridinfo, GridData<N, F, C >& griddata)
+void writeGridGeoTecplot(const  std::string& title, GridBasicInfo& gridinfo, GridData<N, F, C >& griddata)
 {
     int maxNodeID = griddata.whereisNodes.size()-1;
     int maxCellID = griddata.whereisCells.size()-1;
@@ -1328,7 +1375,7 @@ void writeGridTecplot(const  std::string& title, GridBasicInfo& gridinfo, GridDa
     grid_tecplot.close();
 }
 
-
+*/
 
 
 

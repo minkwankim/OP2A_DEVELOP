@@ -11,15 +11,18 @@
 
 
 #include "./COMM/version.hpp"
+#include "./COMM/error_codes.hpp"
 
 #include "./DATA/problemSetup.hpp"
-#include "./CHEM/speciesDataBase.hpp"
 #include "./DATA/wallMaterial.hpp"
+#include "./DATA/dataCFD.hpp"
+#include "./CHEM/speciesDataBase.hpp"
 
 #include "./MATH_MK/matrix.hpp"
 #include "./GRID/grid.hpp"
-#include "./CFD/OP2ACFD.hpp"
-#include "./COMM/error_codes.hpp"
+
+
+//#include "./CFD/OP2ACFD.hpp"
 
 
 
@@ -35,6 +38,8 @@
 #define PROBSETUPFILE   "/Users/mkk1u16/Desktop/Code_Development/OP2A/problem.pro"
 #define SPECIESDATABASE "/Users/mkk1u16/Desktop/Code_Development/OP2A/dat/species.dat"
 #define WALLMATERIAL    "/Users/mkk1u16/Desktop/Code_Development/OP2A/dat/wall_material.dat"
+
+
 
 
 
@@ -68,65 +73,63 @@ int main(int argc, char **argv) {
     problem.computation.initialize(argc, argv);
     
     
-    // 3. Read Wall material and Species Database
+    // 3. Read and Assign Wall material and Species Database
+    //    A. Read Database[Please DO NOT CHANGE THIS SECTION]
     wallMaterialDataBase    wall_material_database;
     speciesDataBase         species_database;
     
     wall_material_database.read(problem.inputoutput.filename_wallmaterial);
     species_database.read(problem.inputoutput.filename_speciesdatabase);
     
+    //    B. Assign wall material and species data for the problem
+    //       a. Wall material properties
     problem.boundaryconditions.wallMat.resize(problem.boundaryconditions.wallMatName.size());
     for (int s = 0; s < problem.boundaryconditions.wallMatName.size(); s++) problem.boundaryconditions.wallMat[s] = wall_material_database.find(problem.boundaryconditions.wallMatName[s]);
     
+    //       b. Species properties
     std::vector<species>    speciesdata(problem.physicalmodel.NS);
     for (int s = 0; s < problem.physicalmodel.NS; s++)  speciesdata[s] = species_database.find(problem.physicalmodel.speciesList[s]);
 
     
-    // 4. Error check and show the simulation setting
+    // 4. Error check and show the simulation setting [Please DO NOT CHANGE THIS SECTION]
     problem.errorcheck_and_shows();
     
     
     // 5. Read / Generate mesh
     //  - NOTE: Cartesian mesh generation module need to b completed
+    // A. Read from the prepared mesh file
+    std::string        gridfilename = "/Users/mkk1u16/Desktop/Code_Development/OP2A/grid2.op2";
+    std::string        outfilename  = "/Users/mkk1u16/Desktop/Code_Development/OP2A/grid2";
     
+    GridBasicInfo gridinfo;
+    GridMPI       gridmpi;
+    GridGeo       gridgeo;
+    readGridFromFile(gridfilename, gridinfo, gridgeo);
+    processingGrid(gridinfo, gridgeo);
+    writeGridGeoTecplot(outfilename, gridinfo, gridgeo);
     
 
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     // TEST SECTION
-    double res;
-    ProbBasicInfo probbasic;
-    probbasic.read("/Users/mkk1u16/Desktop/Code_Development/OP2A/problem.pro");
+    NodeBase test_node1;
+    NodeBase test_node2;
     
-    ProbICBC    probIC;
-    probIC.read("/Users/mkk1u16/Desktop/Code_Development/OP2A/problem.pro");
+    test_node1.geometry.id = 1;
+    test_node2.geometry.id = 1;
+    
+    double   test_node1_data = 0.0;
+    double   test_node2_data = 10.0;
+    
+   
+    //Node_ver1<NodeBase, double>  test_node1_fullset;
+    //Node_ver1<NodeBase, double>  test_node2_fullset;
+    //test_node1_fullset.assign(test_node1, test_node1_data);
+    //test_node2_fullset.assign(test_node1, test_node1_data);
+    //test_node2_fullset.geom->geometry.id = 2;
     
     
     
-    speciesDataBase testSpecies;
-    testSpecies.read("/Users/mkk1u16/Desktop/Code_Development/OP2A/dat/species.dat");
-    res = testSpecies.data[1].trans.sutherland.kappa_s(300);
     
-    
-    ProbCOMP testProbcomp;
-    testProbcomp.setting(1, 10);
-    testProbcomp.initialize(argc, argv);
-    
-    //wallMaterialDataBase testwallmat;
-    //testwallmat.read("/Users/mkk1u16/Desktop/Code_Development/OP2A/dat/wall_material.dat");
-    //testwallmat.add("/Users/mkk1u16/Desktop/Code_Development/OP2A/dat/wall_material.dat");
-    //wallMaterial testmat;
-    //testmat = testwallmat.find("Quartz wall");
-
     //GridBasicInfo gridinfo;
     //GridData<NodeNormal<double>, FaceNormal<double>, CellNormal<double> > gridtemp;
     //readGridFromFile("/Users/mkk1u16/Desktop/Code_Development/OP2A/grid2.op2", gridinfo, gridtemp);
@@ -134,6 +137,8 @@ int main(int argc, char **argv) {
     //writeGridTecplot("/Users/mkk1u16/Desktop/Code_Development/OP2A/grid2", gridinfo, gridtemp);
     
     // insert code here...
+    double res;
+    res = 1.0;
     std::cout << "Hello, World!  " << res << "\n";
     return 0;
    

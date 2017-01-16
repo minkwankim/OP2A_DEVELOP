@@ -21,10 +21,10 @@ public:
     int  bcType;    // Boundary condition Type
     int  bcIndex;   // Boundary condition index
     
-    int  treat; // Flag for treatment (0: Include, 1: neet to refine, -1: need to remove)
+    int  treat;     // Flag for treatment (0: Include, 1: neet to refine, -1: need to remove)
     
-    double S;    // Area/Volume (0 for point)
-    matrix X; // Location vector, X
+    double S;       // Area/Volume (0 for point)
+    matrix X;       // Location vector, X
     
     
 public:
