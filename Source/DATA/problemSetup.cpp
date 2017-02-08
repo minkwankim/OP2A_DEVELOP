@@ -21,12 +21,13 @@
 #include "../COMM/error_codes.hpp"
 #include "../COMM/error_exception.hpp"
 #include "../COMM/StringOps.hpp"
+#include "../COMM/MultiVector.hpp"
 #include "../COMM/VectorCompare.hpp"
 #include "../COMM/timer.hpp"
 
 
 ProbBasicInfo::ProbBasicInfo()
-: axisymmetric(0), gridfactor(1.0)
+: axisymmetric(0), gridfactor(1.0), cartesian_grid(0)
 {
     
 };
@@ -71,6 +72,10 @@ void ProbBasicInfo::read(const std::string& filename)
         tempDouble = -1;
         tempDouble = Common::read_data_from_string::read_numeric<double>(line, "Grid Factor:");
         if (tempDouble != -1) gridfactor = tempDouble;
+        
+        tempInt = -1;
+        tempInt = Common::read_data_from_string::read_numeric<int>(line, "Use Cartesian Grid:");
+        if (tempInt != -1) cartesian_grid = tempInt;
     }
     
     problem_file.close();
@@ -419,12 +424,114 @@ void ProbNumericalMethod::errorcheck_and_shows()
 
 
 
-
+/*
+//////////////////////////////////
 // 3. Physical Modelling Session
+//////////////////////////////////
+variableMappingCFD::variableMappingCFD()
+: m_NS(-1), m_ND(-1), m_NE(-1), m_mapped(false), m_start_index(3, -1), m_T(5, 0)
+{
+
+}
+
+variableMappingCFD::variableMappingCFD(int NS, int ND, int NE)
+:rho_s(NS), Ts(NE), m_NS(NS), m_ND(ND), m_NE(NE), m_mapped(false), m_start_index(3, -1),  m_T(5, 0)
+{
+    for (int m = 0; m < NE; m++) Ts[m].reserve(5 - m);
+}
+
+variableMappingCFD::~variableMappingCFD()
+{
+    
+}
+
+
+void variableMappingCFD::completeMapping(int NS, int ND, int NE, int Tr, int Tv, int Tel, int Te)
+{
+    m_NS = NS;
+    m_ND = ND;
+    m_NE = NE;
+    
+    m_start_index[0] = 0;       // Species
+    m_start_index[1] = NS;      // Momentum
+    m_start_index[2] = NS + ND; // Energy
+    
+    int Tt = 0;
+    rho_s.resize(NS);
+    Ts.resize(NE);
+    
+    Ts[Tt].push_back(TRA);
+    Ts[Tr].push_back(ROT);
+    Ts[Tv].push_back(VIB);
+    Ts[Tel].push_back(ELC);
+    if (Te != -1) Ts[Te].push_back(ELE);
+    
+    m_T[TRA]  = 0;
+    m_T[ROT]  = Tr;
+    m_T[VIB]  = Tv;
+    m_T[ELC]  = Tel;
+    
+    if (Te != -1) m_T[ELE]  = Te;
+    else          m_T[ELE]  = 0;
+    
+    m_mapped = true;
+}
+
+void variableMappingCFD::completeMappingElectron(int ND)
+{
+    m_NS = 1;
+    m_ND = ND;
+    m_NE = 1;
+    
+    m_start_index[0] = 0;       // Species
+    m_start_index[1] = 1;      // Momentum
+    m_start_index[2] = 1 + ND; // Energy
+    
+    int Tt = 0;
+    rho_s.resize(1);
+    Ts.resize(1);
+    Ts[0].push_back(ELE);
+
+    m_T[TRA]   = 0;
+    m_T[ROT]   = 0;
+    m_T[VIB]   = 0;
+    m_T[ELC]   = 0;
+    m_T[ELE]  = 0;
+    
+    m_mapped = true;
+}
+
+unsigned int variableMappingCFD::Q(int s, int type)
+{
+    return (m_start_index[type] + s);
+}
+
+unsigned int variableMappingCFD::T(int type)
+{
+    return(m_T[type] + m_start_index[2]);
+}
+
+unsigned int variableMappingCFD::NS()
+{
+    return (m_NS);
+};
+
+unsigned int variableMappingCFD::ND()
+{
+    return (m_ND);
+};
+
+unsigned int variableMappingCFD::NE()
+{
+    return (m_NE);
+};
+
+//      [Part B]: Constructor / Destructor
 ProbPhysicalModel::ProbPhysicalModel()
-: NS(0), NE(0), NR(0), tempModel(0),
+: NS(3,0), NE(3,0), NR(3,0), fluidModel(-1), NS_tot(0),
   mixingRule(0), viscosityModel(0), diffusivityModel(0), conductivityModel(0), Le(1.0),
-  fluidModel(1)
+  NER(0), NEV(0), NEE(0), NEEL(0), electron_global_ID(-1),
+  E_Trot(0), E_Tvib(0), E_Tele(0), E_Te(0)
 {
     
 }
@@ -434,6 +541,7 @@ ProbPhysicalModel::~ProbPhysicalModel()
     
 }
 
+//      [Part C]: Functions
 void ProbPhysicalModel::read(const std::string& filename)
 {
     // 1. Open file to read
@@ -455,11 +563,23 @@ void ProbPhysicalModel::read(const std::string& filename)
     {
         getline(problem_file, line);
         Common::read_data_from_string::remove_comments(line, "%");
-        
+ 
         
         tempInt = -1;
-        tempInt = Common::read_data_from_string::read_numeric<int>(line, PROB_SETUP_TEMP);
-        if (tempInt != -1) tempModel = tempInt;
+        tempInt = Common::read_data_from_string::read_numeric<int>(line, "Rotational Energy Nonequilibrium:");
+        if (tempInt != -1) NER = tempInt;
+        
+        tempInt = -1;
+        tempInt = Common::read_data_from_string::read_numeric<int>(line, "Vibrational Energy Nonequilibrium:");
+        if (tempInt != -1) NEV = tempInt;
+        
+        tempInt = -1;
+        tempInt = Common::read_data_from_string::read_numeric<int>(line, "Electronic Energy Nonequilibrium:");
+        if (tempInt != -1) NEEL = tempInt;
+        
+        tempInt = -1;
+        tempInt = Common::read_data_from_string::read_numeric<int>(line, "Electron Energy Nonequilibrium:");
+        if (tempInt != -1) NEE = tempInt;
         
         tempInt = -1;
         tempInt = Common::read_data_from_string::read_numeric<int>(line, PROB_SETUP_FLU);
@@ -487,7 +607,7 @@ void ProbPhysicalModel::read(const std::string& filename)
         
         tempInt = -1;
         tempInt = Common::read_data_from_string::read_numeric<int>(line, "Species Number:");
-        if (tempInt != -1) NS = tempInt;
+        if (tempInt != -1) NS_tot = tempInt;
         
         if (line == "Species List:")
         {
@@ -499,25 +619,6 @@ void ProbPhysicalModel::read(const std::string& filename)
     }
     problem_file.close();
 
-    
-    switch (fluidModel)
-    {
-        case 1:
-            NE = tempModel;
-            break;
-            
-        case 2:
-            if (tempModel >= 3) NE = tempModel -1;
-            else                NE = tempModel;
-            break;
-            
-        case 3:
-            if (tempModel >= 3) NE = tempModel -1;
-            else                NE = tempModel;
-            break;
-    }
-    
-    
     speciesList = Common::StringOps::getWords(tempSpeciesList);
 }
 
@@ -526,41 +627,57 @@ void ProbPhysicalModel::errorcheck_and_shows()
 {
     std::string currentmodule = "[Physical Models]";
     
+    //if (tempModel < 0 || tempModel > 7)                   Common::ExceptionError(FromHere(), currentmodule + ": Wrong value for the temperature model.", Common::ErrorCodes::Negative());
+    if (NER != 0 && NER != 1)                                    Common::ExceptionError(FromHere(), currentmodule + ": Wrong value for Rotational temperature model. It allows only [0(NO) / 1(YES)]", Common::ErrorCodes::Negative());
+    if (NEV != 0 && NEV != 1)                                    Common::ExceptionError(FromHere(), currentmodule + ": Wrong value for Vibrational temperature model. It allows only [0(NO) / 1(YES)]", Common::ErrorCodes::Negative());
+    if (NEEL != 0 && NEEL != 1 && NEEL != 2 && NEEL != 3)        Common::ExceptionError(FromHere(), currentmodule + ": Wrong value for Electronic temperature model. It allows only [0(T) / 1(Trot) / 2 (Tvib) / 3(Tele)]", Common::ErrorCodes::Negative());
+    if (NEE != 0 && NEE != 1 && NEE != 2 && NEE != 3 && NEE !=4) Common::ExceptionError(FromHere(), currentmodule + ": Wrong value for Electronic temperature model. It allows only [0(T) / 1(Trot) / 2 (Tvib) / 3(Tele) / 4(Te)]", Common::ErrorCodes::Negative());
+
     
-    if (tempModel <= 0 || tempModel > 4)                  Common::ExceptionError(FromHere(), currentmodule + ": Wrong value for the temperature model.", Common::ErrorCodes::Negative());
     if (fluidModel <= 0 || fluidModel > 3)                Common::ExceptionError(FromHere(), currentmodule + ": Wrong value for the fluid model.", Common::ErrorCodes::Negative());
     if (mixingRule < 0 || mixingRule > 1)                 Common::ExceptionError(FromHere(), currentmodule + ": Wrong value for the mixing rule.", Common::ErrorCodes::Negative());
     if (viscosityModel < 0 || viscosityModel > 4)         Common::ExceptionError(FromHere(), currentmodule + ": Wrong value for viscosity model.", Common::ErrorCodes::Negative());
     if (conductivityModel < 0 || conductivityModel > 4)   Common::ExceptionError(FromHere(), currentmodule + ": Wrong value for thermal conductivity model.", Common::ErrorCodes::Negative());
     if (Le < 0 || Le > 1.0e10)                            Common::ExceptionError(FromHere(), currentmodule + ": Wrong value for Lewis number.", Common::ErrorCodes::Negative());
 
-    if (NS != speciesList.size())                         Common::ExceptionError(FromHere(), currentmodule + ": Species list does not match.", Common::ErrorCodes::Negative());
+    if ( (NS_tot) != speciesList.size())       Common::ExceptionError(FromHere(), currentmodule + ": Species list does not match.", Common::ErrorCodes::Negative());
     
+    
+    int temp_NE;
+    if (fluidModel == 3)     temp_NE = NE[0] + NE[2];
+    else if(fluidModel == 2) temp_NE = NE[0] + NE[1];
+    else                     temp_NE = NE[0];
     
     
     std::cout << "[PHYSICAL MODELS]" << std::endl;
     std::cout << "===================================" << std::endl;
-    std::cout << "TEMPERATURE MODEL: ";
-    switch (tempModel)
-    {
-        case 1:
-            std::cout << "ONE-TEMPERATURE MODEL";
-            break;
-            
-        case 2:
-            std::cout << "PARK'S TWO-TEMPERATURE MODEL";
-            break;
-            
-        case 3:
-            std::cout << "THREE TEMPERATURE MODEL: T_TR, T_VE, T_E";
-            break;
-            
-        case 4:
-            std::cout << "FULL TEMPERATURE MODEL: T_TRA, T_ROT, T_VEE, T_E";
-            break;
-    }
-    std::cout << std::endl;
+    std::cout << "TEMPERATURE MODEL: Total " << temp_NE << " Temperature modes" << std::endl;
+    
+    
+    std::vector<std::string> str_temp (temp_NE);
+    str_temp[0] = "T";
+    
+    if (E_Trot == 0) str_temp[0]       += " = Trot";
+    else             str_temp[E_Trot]   = "Trot";
+    
+    if (E_Tvib == 0) str_temp[0]       += " = Tvib";
+    else             str_temp[E_Tvib]   = "Tvib";
 
+    if (E_Tele != 3) str_temp[E_Tele]  += " = Tele";
+    else             str_temp[E_Tele]   = "Tele";
+    
+    if (fluidModel == 1)
+    {
+        if (E_Te != 4)   str_temp[0]       += " = Te";
+        else             str_temp[E_Te]   = "Te";
+    }
+    else
+    {
+        str_temp[temp_NE-1]   = "Te";
+    }
+    
+    for (int m = 0; m < temp_NE; m++)   std::cout << "                   " << str_temp[m] << std::endl;
+    
     
     std::cout << "FLUID MODEL: ";
     switch (fluidModel)
@@ -577,6 +694,7 @@ void ProbPhysicalModel::errorcheck_and_shows()
             std::cout << "THREE FLUID (NEUTRALS / IONS / ELECGRONS)";
             break;
     }
+    std::cout << std::endl;
     
     std::cout << "MIXING RULE: ";
     switch (fluidModel)
@@ -636,11 +754,281 @@ void ProbPhysicalModel::errorcheck_and_shows()
     std::cout << std::endl;
     
     std::cout << "LEWIS NUMBER, Le: " << Le << std::endl;
-    std::cout << "NUMBER OF SPECIES:" << NS << std::endl;
+    std::cout << "NUMBER OF SPECIES:" << NS_tot << std::endl;
     std::cout << "SPECIES LIST:" << std::endl;
-    for (int s = 0; s < NS; s++) std::cout << "     - " << speciesList[s] << std::endl;
+    for (int s = 0; s < NS_tot; s++) std::cout << "     - " << speciesList[s] << std::endl;
     std::cout << std::endl;
 }
+
+
+void ProbPhysicalModel::speciesMapping(std::vector<species>& speciesdata, int ND)
+{
+    
+    // Species Type Mapping
+    int num_atom  = 0;
+    int num_mole  = 0;
+    int num_elec  = 0;
+    
+    for (int s = 0; s < NS_tot; s++)
+    {
+        switch(speciesdata[s].basic.type)
+        {
+            case 0: // Atomic Species
+                if (atomic_species_global_ID.size() < (num_atom+1)) atomic_species_global_ID.resize(num_atom+1);
+                atomic_species_global_ID[num_atom] = s;
+                num_atom++;
+                break;
+                
+            case 1: // Molecular Species
+                if (molecular_species_global_ID.size() < (num_mole+1)) molecular_species_global_ID.resize(num_mole+1);
+                molecular_species_global_ID[num_mole] = s;
+                num_mole++;
+                break;
+                
+            case -1: // Electron
+                num_elec = s;
+                break;
+        }
+    }
+    
+    
+    if (num_mole == 0)
+    {
+       if (NER != 0)
+       {
+           std::cout << "  [! Warning !]  It does not have molecular species. Rotational Energy Nonequilibrium mode will be suppressed" << std::endl;
+           NER = 0;
+       }
+
+       if (NEV != 0)
+       {
+           std::cout << "  [! Warning !]  It does not have molecular species. Vibrational Energy Nonequilibrium mode will be suppressed" << std::endl;
+           NEV = 0;
+       }
+    }
+    
+    
+    if (num_elec == 0 && NEE != 0)
+    {
+        std::cout << "  [! Warning !]  It does not have electron. Electron Energy Nonequilibrium mode will be suppressed" << std::endl;
+        NEE = 0;
+    }
+    
+    
+    
+    
+    // Energy Mode Mapping
+    int temp_NE = 0;
+    
+    if (NER != 0) temp_NE++;
+    E_Trot = temp_NE;
+    
+    if (NEV != 0) temp_NE++;
+    E_Tvib = temp_NE;
+    
+    if (NEEL == 0)
+    {
+        E_Tele = 0;
+    }
+    else if (NEEL == 1)
+    {
+        E_Tele = E_Trot;
+    }
+    else if (NEEL == 2)
+    {
+        E_Tele = E_Tvib;
+    }
+    else if(NEEL == 3)
+    {
+        temp_NE++;
+        E_Tvib = temp_NE;
+    }
+    
+    
+    if (NEE == 0)
+    {
+        E_Te = 0;
+    }
+    else if (NEE == 1)
+    {
+        E_Te = E_Trot;
+    }
+    else if (NEE == 2)
+    {
+        E_Te = E_Tvib;
+    }
+    else if (NEE == 3)
+    {
+        E_Te = E_Tele;
+    }
+    else if (NEE == 4)
+    {
+        temp_NE++;
+        E_Te = temp_NE;
+    }
+    temp_NE++;
+    
+    
+    // Species Mapping for each fluid
+    variable_map.resize(fluidModel);
+    whereIsRho_fluidNum.resize(NS_tot);
+    whereIsRho_speciesNum.resize(NS_tot);
+    
+    NS[0] = 0;
+    NS[1] = 0;
+    NS[2] = 0;
+    
+    int f;
+    switch(fluidModel)
+    {
+        case 1:
+            // 1 st Fluid
+            f = 0;
+            
+            // Species DATA
+            for (int s = 0; s < NS_tot; s++)
+            {
+                whereIsRho_fluidNum[s] = f;
+                whereIsRho_speciesNum[s] = NS[f];
+
+                variable_map[f].rho_s.push_back(s);
+
+                species_name_to_global.insert(speciesdata[s].name, s);
+                NS[f]++;
+            }
+        
+            NE[f] = temp_NE;
+            variable_map[f].completeMapping(NS[f], ND, NE[f], E_Trot, E_Tvib, E_Tele, E_Te);
+            break;
+        
+        case 2:
+            
+            // 1 st Fluid
+            f = 0;
+            // Species DATA
+            for (int s = 0; s < NS_tot; s++)
+            {
+                if (speciesdata[s].basic.type != -1) // (Heavy species [non-electron])
+                {
+                    whereIsRho_fluidNum[s] = f;
+                    whereIsRho_speciesNum[s] = NS[f];
+                
+                    variable_map[f].rho_s.push_back(s);
+                
+                    species_name_to_global.insert(speciesdata[s].name, s);
+                    NS[f]++;
+                }
+            }
+            
+            NE[f] = temp_NE;
+            variable_map[f].completeMapping(NS[f], ND, NE[f], E_Trot, E_Tvib, E_Tele, -1);
+
+            // 2nd fluid
+            f = 1;
+            // Species DATA
+            for (int s = 0; s < NS_tot; s++)
+            {
+                if (speciesdata[s].basic.type == -1) // (Heavy species [non-electron])
+                {
+                    whereIsRho_fluidNum[s] = f;
+                    whereIsRho_speciesNum[s] = NS[f];
+                    
+                    variable_map[f].rho_s.push_back(s);
+                    
+                    species_name_to_global.insert(speciesdata[s].name, s);
+                    NS[f]++;
+                }
+            }
+            
+            NE[f] = temp_NE;
+            variable_map[f].completeMappingElectron(ND);
+
+            
+            if (NEE != 4) NE[0] = temp_NE;
+            else          NE[0] = temp_NE -1;
+            NE[1] = 1;
+            E_Te = 0;
+            NEE = 4;
+            break;
+        
+        case 3:
+            // 1st Fluid
+            f = 0;
+            // Species DATA
+            for (int s = 0; s < NS_tot; s++)
+            {
+                if (speciesdata[s].basic.type != -1 && speciesdata[s].basic.q == 0) // (Heavy species [non-electron])
+                {
+                    whereIsRho_fluidNum[s] = f;
+                    whereIsRho_speciesNum[s] = NS[f];
+                    
+                    variable_map[f].rho_s.push_back(s);
+                    
+                    species_name_to_global.insert(speciesdata[s].name, s);
+                    NS[f]++;
+                }
+            }
+            
+            NE[f] = temp_NE;
+            variable_map[f].completeMapping(NS[f], ND, NE[f], E_Trot, E_Tvib, E_Tele, -1);
+            
+        
+            // 2nd Fluid
+            f = 1;
+            // Species DATA
+            for (int s = 0; s < NS_tot; s++)
+            {
+                if (speciesdata[s].basic.type != -1 && speciesdata[s].basic.q != 0) // (Heavy species [non-electron])
+                {
+                    whereIsRho_fluidNum[s] = f;
+                    whereIsRho_speciesNum[s] = NS[f];
+                    
+                    variable_map[f].rho_s.push_back(s);
+                    
+                    species_name_to_global.insert(speciesdata[s].name, s);
+                    NS[f]++;
+                }
+            }
+            
+            NE[f] = temp_NE;
+            variable_map[f].completeMapping(NS[f], ND, NE[f], E_Trot, E_Tvib, E_Tele, -1);
+            
+            
+            // 3rd fluid
+            f = 2;
+            // Species DATA
+            for (int s = 0; s < NS_tot; s++)
+            {
+                if (speciesdata[s].basic.type == -1) // (Heavy species [non-electron])
+                {
+                    whereIsRho_fluidNum[s] = f;
+                    whereIsRho_speciesNum[s] = NS[f];
+                    
+                    variable_map[f].rho_s.push_back(s);
+                    
+                    species_name_to_global.insert(speciesdata[s].name, s);
+                    NS[f]++;
+                }
+            }
+            
+            NE[f] = temp_NE;
+            variable_map[f].completeMappingElectron(ND);
+            
+            
+            if (NEE != 4) NE[0] = temp_NE;
+            else          NE[0] = temp_NE -1;
+        
+            NE[1] = NE[0];
+            NE[2] = 1;
+            E_Te = 0;
+            NEE = 4;
+            break;
+    }
+    
+}
+ 
+*/
+
 
 
 
@@ -779,7 +1167,7 @@ void ProbICBC::read(const std::string& filename)
             
             ns = 0;
             nd = 3;
-            ne = 4;
+            ne = 5;
             
             flowCond[tempIndex].u.resize(nd);
             flowCond[tempIndex].T.resize(ne);
@@ -824,24 +1212,34 @@ void ProbICBC::read(const std::string& filename)
                 // Temperature
                 tempDouble = -1.0;
                 tempDouble = Common::read_data_from_string::read_numeric<double>(line, "T: ");
-                if (tempDouble != -1.0)	flowCond[tempIndex].T[0] = tempDouble;
+                if (tempDouble != -1.0)	flowCond[tempIndex].T[TRA] = tempDouble;
                     
                 tempDouble = -1.0;
                 tempDouble = Common::read_data_from_string::read_numeric<double>(line, "Tr: ");
-                if (tempDouble != -1.0)	flowCond[tempIndex].T[1] = tempDouble;
+                if (tempDouble != -1.0)	flowCond[tempIndex].T[ROT] = tempDouble;
                 
                 tempDouble = -1.0;
                 tempDouble = Common::read_data_from_string::read_numeric<double>(line, "Tv: ");
-                if (tempDouble != -1.0)	flowCond[tempIndex].T[2] = tempDouble;
+                if (tempDouble != -1.0)	flowCond[tempIndex].T[VIB] = tempDouble;
+                
+                tempDouble = -1.0;
+                tempDouble = Common::read_data_from_string::read_numeric<double>(line, "Tele: ");
+                if (tempDouble != -1.0)	flowCond[tempIndex].T[ELC] = tempDouble;
                 
                 tempDouble = -1.0;
                 tempDouble = Common::read_data_from_string::read_numeric<double>(line, "Te: ");
-                if (tempDouble != -1.0)	flowCond[tempIndex].T[3] = tempDouble;
+                if (tempDouble != -1.0)	flowCond[tempIndex].T[ELE] = tempDouble;
             }
         }
     }
     
     prob_file.close();
+    
+    U_inlet.resize(inletCond.size());
+    Q_inlet.resize(inletCond.size());
+    
+    U_wall.resize(wallCond.size());
+    Q_wall.resize(wallCond.size());
 }
 
 
@@ -863,7 +1261,7 @@ void ProbICBC::errorcheck_and_shows()
     if (wallCond.size() != wallMatName.size())   Common::ExceptionError(FromHere(), currentmodule + ": Wall material is not appropreately listed.", Common::ErrorCodes::ExceedLimit());
 
     
-    std::cout << "[PHYSICAL MODELS]" << std::endl;
+    std::cout << "[INITIAL AND BOUNDARY CONDITIONS]" << std::endl;
     std::cout << "===================================" << std::endl;
     std::cout << "INITIALIZATION FLOW CONDITION: " << iniMethod << std::endl;
     for (int i = 0; i < inletCond.size(); i++)
@@ -1088,6 +1486,35 @@ void ProbleSetup::read()
     computation.read(inputoutput.filename_ProblemSetup);
     inputoutput.read(inputoutput.filename_ProblemSetup);
     
+    // Processing ICs
+    for (int i = 0; i < boundaryconditions.inletCond.size(); i++)
+    {
+        boundaryconditions.U_inlet[i].resize(physicalmodel.num_fluid);
+        boundaryconditions.Q_inlet[i].resize(physicalmodel.num_fluid);
+        
+        for (int f = 0; f < physicalmodel.num_fluid; f++)
+        {
+          //  boundaryconditions.flowCond[boundaryconditions.inletCond[i]].allocateU(physicalmodel.NS[f], physicalmodel.ND, physicalmodel.E_Trot, physicalmodel.E_Tvib, physicalmodel.E_Tele, physicalmodel.E_Te, boundaryconditions.U_inlet[i][f]);
+        }
+    }
+    
+    
+    /*
+    std< std::vector<int> > energy_map(physicalmodel.fluidModel);
+    for (int f = 0; f < physicalmodel.fluidModel; f++)
+    {
+        energy_map[f].resize(physicalmodel.NE[f]);
+        
+        for (int m = 0; m < physicalmodel.NE[f]; m++)
+        {
+            
+        }
+    }
+    
+    for (int i = 0; boundaryconditions.wallCond.size(); i++) boundaryconditions.U_wall[i].resize(physicalmodel.fluidModel);
+    for (int i = 0; boundaryconditions.wallCond.size(); i++) boundaryconditions.U_wall[i].resize(physicalmodel.fluidModel);
+    */
+    
 }
 
 
@@ -1104,4 +1531,25 @@ void ProbleSetup::errorcheck_and_shows()
 
 }
 
+
+void ProbleSetup::processing(std::vector<species>& speciesdata, int ND)
+{
+    int cond;
+    physicalmodel.speciesMapping(speciesdata, ND);
+    
+    // For Inlet Conditions
+    for (int n = 0; n < boundaryconditions.U_inlet.size(); n++)
+    {
+        cond = boundaryconditions.inletCond[n];
+        boundaryconditions.U_inlet[n].resize(physicalmodel.num_fluid);
+    }
+    
+    
+    // For Wall Conditions
+    for (int n = 0; n < boundaryconditions.U_wall.size(); n++)
+    {
+        cond = boundaryconditions.wallCond[n];
+        boundaryconditions.U_wall[n].resize(physicalmodel.num_fluid);
+    }
+}
 

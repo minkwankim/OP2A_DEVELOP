@@ -297,22 +297,86 @@ void dataCFD::assignSize(unsigned int NS, unsigned int ND, unsigned int NE)
 }
 
 
-// 7. Data class for CFD1 (Imlicit)
-dataCFD2::dataCFD2()  {}
-dataCFD2::~dataCFD2() {}
-
-dataCFD2::dataCFD2(unsigned int NS, unsigned int ND, unsigned int NE)
-:dataCFD(NS, ND, NE), implicit(NS, ND, NE)
+// 7. Data class for CFD ver2
+dataCFD_ver2::dataCFD_ver2()
 {
-    
+    basic     = NULL;
+    source    = NULL;
+    transport = NULL;
+    update    = NULL;
+    implicit  = NULL;
 }
 
-void dataCFD2::assignSize(unsigned int NS, unsigned int ND, unsigned int NE)
+dataCFD_ver2::~dataCFD_ver2()
 {
-    basic.assignSize(NS, ND, NE);
-    source.assignSize(NS, ND, NE);
-    transport.assignSize(NS);
-    update.assignSize(NS, ND, NE);
-    implicit.assignSize(NS, ND, NE);
+    basic     = NULL;
+    source    = NULL;
+    transport = NULL;
+    update    = NULL;
+    implicit  = NULL;
+}
+
+dataCFD_ver2::dataCFD_ver2(unsigned int NS, unsigned int ND, unsigned int NE, bool f_implicit, int type)
+{
+    switch (type)
+    {
+        case 0: // Node
+            basic     = new dataCFDbasic(NS, ND, NE);
+            source    = NULL;
+            transport = NULL;
+            update    = NULL;
+            implicit  = NULL;
+            break;
+            
+        case 1:  //  Face
+            basic     = new dataCFDbasic(NS, ND, NE);
+            source    = NULL;
+            transport = NULL;
+            update    = NULL;
+            implicit  = NULL;
+            break;
+            
+        case 2:  // Cell
+            basic     = new dataCFDbasic(NS, ND, NE);
+            source    = new dataCFDsource(NS, ND, NE);
+            transport = new dataCFDtransport(NS);
+            update    = new dataCFDupdate(NS, ND, NE);
+            
+            if (f_implicit == true) implicit = new dataCFDimplicit(NS, ND, NE);
+            else                    implicit = NULL;
+            break;
+    }
+}
+
+void dataCFD_ver2::allocate(unsigned int NS, unsigned int ND, unsigned int NE, bool f_implicit, int type)
+{
+    switch (type)
+    {
+        case 0: // Node
+            basic     = new dataCFDbasic(NS, ND, NE);
+            source    = NULL;
+            transport = NULL;
+            update    = NULL;
+            implicit  = NULL;
+            break;
+            
+        case 1:  //  Face
+            basic     = new dataCFDbasic(NS, ND, NE);
+            source    = NULL;
+            transport = NULL;
+            update    = NULL;
+            implicit  = NULL;
+            break;
+            
+        case 2:  // Cell
+            basic     = new dataCFDbasic(NS, ND, NE);
+            source    = new dataCFDsource(NS, ND, NE);
+            transport = new dataCFDtransport(NS);
+            update    = new dataCFDupdate(NS, ND, NE);
+            
+            if (f_implicit == true) implicit = new dataCFDimplicit(NS, ND, NE);
+            else                    implicit = NULL;
+            break;
+    }
 }
 

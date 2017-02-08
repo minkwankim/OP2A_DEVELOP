@@ -32,7 +32,7 @@ void speciesBasic::read(const std::string &line)
     
     Cv[0] = 1.5*R;
     if (type == 1) Cv[1] = R;
-    else           Cv[0] = 0.0;
+    else           Cv[1] = 0.0;
     
     m_completed = true;
 }
@@ -136,3 +136,180 @@ species::~species()
 {
     
 }
+
+
+double species::Cv_tra(double T)
+{
+    if (basic.type == -1) return (0.0);
+    return (basic.Cv[0]);
+}
+
+double species::Cv_rot(double T)
+{
+    if (basic.type != 1) return (0.0);
+    return (basic.Cv[1]);
+}
+
+double species::Cv_vib(double T)
+{
+    if (basic.type != 1) return (0.0);
+    
+    double aux1 = noneq.theta_v/T;
+    double aux2 = exp(aux1);
+    
+    double temp = basic.R * (aux1*aux1*aux2) / pow((aux2 - 1), 2.0);
+    return (temp);
+}
+
+double species::Cv_elc(double T)
+{
+    double aux1 = 0.0;
+    double aux2 = 0.0;
+    double aux3 = 0.0;
+    double aux4 = 0.0;
+    double temp1;
+    double temp2;
+    
+    if (noneq.ele.lvl == 0) return (0.0);
+    
+    temp1 = noneq.ele.theta[0]/T;
+    temp2 = noneq.ele.g[0] * exp(-temp1);
+    aux1 += temp2;
+    aux2 += temp1 / T * temp2;
+    
+    
+    for (int i = 1; i < noneq.ele.lvl; i++)
+    {
+        temp1 = noneq.ele.theta[i]/T;
+        temp2 = noneq.ele.g[i] * exp(-temp1);
+        
+        aux1 += temp2;
+        aux2 += temp1/T * temp2;
+        aux3 += temp2 * pow(temp1, 2.0);
+        aux4 += temp2 * noneq.ele.theta[i];
+    }
+    
+    double aux = basic.R * (aux3/aux1 - aux4*aux2/pow(aux1, 2.0));
+    return (aux);
+
+}
+
+
+double species::Cv_ele(double T)
+{
+    if (basic.type != -1) return (0.0);
+    else                  return (basic.Cv[0]);
+}
+
+
+double species::Cv(double T, int mode)
+{
+    double aux;
+    switch (mode)
+    {
+        case 0:
+            aux = Cv_tra(T);
+            break;
+            
+        case 1:
+            aux = Cv_rot(T);
+            break;
+            
+        case 2:
+            aux = Cv_vib(T);
+            break;
+            
+        case 3:
+            aux = Cv_elc(T);
+            break;
+            
+        case 4:
+            aux = Cv_ele(T);
+            break;
+    }
+    
+    return (aux);
+}
+
+
+double species::e_tra(double T)
+{
+    return (Cv_tra(T) * T);
+}
+
+
+double species::e_rot(double T)
+{
+    return (Cv_rot(T) * T);
+}
+
+
+
+double species::e_vib(double T)
+{
+    if (basic.type != 1) return (0.0);
+    
+    double temp;
+    temp = basic.R * noneq.theta_v / (exp(noneq.theta_v/T) - 1.0);
+    
+    return (temp);
+}
+
+double species::e_elc(double T)
+{
+    double aux1 = 0.0;
+    double aux2 = 0.0;
+    double temp1;
+    double temp2;
+    
+    if (noneq.ele.lvl == 0) return (0.0);
+    
+    aux1 += noneq.ele.g[0] * exp(-noneq.ele.theta[0]/T);
+    for (int i = 1; i < noneq.ele.lvl; i++)
+    {
+        temp1 = noneq.ele.theta[i]/T;
+        temp2 = noneq.ele.g[i] * exp(-temp1);
+        
+        aux1 += temp2;
+        aux2 += noneq.ele.theta[i]*temp2;
+    }
+    
+    return (basic.R  *aux2 / aux1);
+}
+
+
+double species::e_ele(double T)
+{
+    return (Cv_ele(T) *T);
+}
+
+
+double species::e(double T, int mode)
+{
+    double aux;
+    switch (mode)
+    {
+        case 0:
+            aux = e_tra(T);
+            break;
+            
+        case 1:
+            aux = e_rot(T);
+            break;
+            
+        case 2:
+            aux = e_vib(T);
+            break;
+            
+        case 3:
+            aux = e_elc(T);
+            break;
+            
+        case 4:
+            aux = e_ele(T);
+            break;
+    }
+    
+    return (aux);
+}
+

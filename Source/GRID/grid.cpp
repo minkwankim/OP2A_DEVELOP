@@ -162,9 +162,6 @@ CellBase& GridGeo::Cell(int id)
     }
 }
 
-
-
-
 void GridGeo::readGrid(const std::string& mesh_file_name, GridBasicInfo& gridInfo)
 {
     // 1. Open file to read

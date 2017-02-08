@@ -34,6 +34,62 @@ public:
 	static bool hasSameComponentINT(const std::vector<int>& data);
 	static bool hasSameComponentINT(const std::vector<int>& data, int m);
 
+    template <class T>
+    static bool hasSameComponent(const std::vector<T>& data)
+    {
+        int m = data.size();
+        
+        for (int i1 = 0; i1 < m ; i1++)
+        {
+            for (int i2 = i1+1; i2 < m; i2++)
+            {
+                if (data[i1] == data[i2])
+                {
+                    return (true);
+                }
+            }
+        }
+        
+        return (false);
+    }
+
+    template <class T>
+    static bool hasSameComponent(const std::vector<T>& data, int m)
+    {
+        for (int i1 = 0; i1 < m ; i1++)
+        {
+            for (int i2 = i1+1; i2 < m; i2++)
+            {
+                if (data[i1] == data[i2])
+                {
+                    return (true);
+                }
+            }
+        }
+        
+        return (false);
+    }
+    
+    template <class T>
+    static bool hasSameComponent(const std::vector<T>& data, int low, int top)
+    {
+        for (int i1 = low; i1 < top ; i1++)
+        {
+            for (int i2 = i1+1; i2 < top; i2++)
+            {
+                if (data[i1] == data[i2])
+                {
+                    return (true);
+                }
+            }
+        }
+        
+        return (false);
+    }
+    
+    
+    
+    
 	/*
 	 * Check the range of vector
 	 */

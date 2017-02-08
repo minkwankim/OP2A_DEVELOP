@@ -125,6 +125,24 @@ public:
 public:
     species();
     ~species();
+    
+public:
+    double Cv(double T, int mode);
+    double Cv_tra(double T);
+    double Cv_rot(double T);
+    double Cv_vib(double T);
+    double Cv_elc(double T);
+    double Cv_ele(double T);
+    
+    double e(double T, int mode);
+    double e_tra(double T);
+    double e_rot(double T);
+    double e_vib(double T);
+    double e_elc(double T);
+    double e_ele(double T);
+    
+
+    
 };
 
 

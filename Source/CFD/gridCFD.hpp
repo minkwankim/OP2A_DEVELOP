@@ -14,156 +14,53 @@
 #include "../GRID/grid.hpp"
 
 
-/*
+
+
+
+
 namespace CFD {
     
-    // 1. Class for Node
-    class Node : public NodeNormal<dataCFDbasic>
+    typedef Elem_ver2<NodeBase, grid_index_ver2, std::vector<dataCFD_ver2> >  Node;
+    typedef Elem_ver2<FaceBase, grid_index_ver2, std::vector<dataCFD_ver2> >  Face;
+    typedef Elem_ver2<CellBase, grid_index_ver2, std::vector<dataCFD_ver2> >  Cell;
+    
+    // 1. Class for GRID
+    class Grid
     {
-        // Part A: Data section
+        // [Part A]: Section for Data
     public:
+        GridBasicInfo*             info;
+        GridMPI*                   mpi;
+        GridGeo*                   geo;
+        GridData<grid_index_ver2>* index;
+        GridDataVec<dataCFD_ver2>* data;
         
-        // Part B: Constructor and Destructor Section
+    protected:
+        std::vector<Node*>          m_nodes;
+        std::vector<Face*>          m_faces;
+        std::vector<Cell*>          m_cells;
+        std::vector<Cell*>          m_ghost;
+        
+        
+        // [Part B]: Section for Constructor/Destructor
     public:
-        Node() {};
-        ~Node() {};
+        Grid();
+        ~Grid();
         
-        // Part C: Class function section
+        // [Part C]: Functions
     public:
+        void allocateIndex();
+        void allocateData(std::vector<int>& NS, int ND, std::vector<int>& NE, int type_node, int type_face, int type_cell, bool f_implicit, int n_fluid);
+        void allocateInternalData();
+        void errorCheck();
         
+        Node* NODE(int id);
+        Face* FACE(int id);
+        Cell* CELL(int id);
     };
-    
-    
-    // 2. Class for Face
-    class Face : public FaceNormal<dataCFDbasic>
-    {
-        // Part A: Data section
-    public:
-        
-        // Part B: Constructor and Destructor Section
-    public:
-        Face() {};
-        ~Face() {};
-        
-        // Part C: Class function section
-    public:
-    };
-    
-    
-    // 3. Class for Cell
-    namespace  EXPLICIT
-    {
-        class Cell : public CellNormal<dataCFD>
-        {
-            // Part A: Data section
-        public:
-            
-            // Part B: Constructor and Destructor Section
-        public:
-            Cell() {};
-            ~Cell() {};
-            
-            // Part C: Class function section
-        public:
-        };
-    }
-    
-    namespace IMPLICIT
-    {
-        class Cell : public CellNormal<dataCFD2>
-        {
-            // Part A: Data section
-        public:
-            
-            // Part B: Constructor and Destructor Section
-        public:
-            Cell() {};
-            ~Cell() {};
-            
-            // Part C: Class function section
-        public:
-        };
-    }
 }
-*/
-
-/*
-namespace CFDCART {
-    
-    // 1. Class for Node
-    class Node : public NodeCart<dataCFDbasic>
-    {
-        // Part A: Data section
-    public:
-        
-        // Part B: Constructor and Destructor Section
-    public:
-        Node() {};
-        ~Node() {};
-        
-        // Part C: Class function section
-    public:
-        
-    };
-    
-    
-    // 2. Class for Face
-    class Face : public FaceCart<dataCFDbasic>
-    {
-        // Part A: Data section
-    public:
-        
-        // Part B: Constructor and Destructor Section
-    public:
-        Face() {};
-        ~Face() {};
-        
-        // Part C: Class function section
-    public:
-    };
-    
-    
-    // 3. Class for Cell
-    namespace  EXPLICIT
-    {
-        class Cell : public CellCart<dataCFD>
-        {
-            // Part A: Data section
-        public:
-            
-            // Part B: Constructor and Destructor Section
-        public:
-            Cell() {};
-            ~Cell() {};
-            
-            // Part C: Class function section
-        public:
-        };
-    }
-    
-    namespace IMPLICIT
-    {
-        class Cell : public CellCart<dataCFD2>
-        {
-            // Part A: Data section
-        public:
-            
-            // Part B: Constructor and Destructor Section
-        public:
-            Cell() {};
-            ~Cell() {};
-            
-            // Part C: Class function section
-        public:
-        };
-    }
-}
- 
- */
 
 
-class Node;
-int test(Node* node1, Node* node2);
 
 
 

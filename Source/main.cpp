@@ -22,7 +22,13 @@
 #include "./GRID/grid.hpp"
 
 
-//#include "./CFD/OP2ACFD.hpp"
+#include "./CFD/OP2ACFD.hpp"
+
+#include "./CFD/primitive_variables.hpp"
+#include "./CFD/temperatureFns.hpp"
+
+
+#include "./DATA/ProbPhysicalModel.hpp"
 
 
 
@@ -87,15 +93,11 @@ int main(int argc, char **argv) {
     for (int s = 0; s < problem.boundaryconditions.wallMatName.size(); s++) problem.boundaryconditions.wallMat[s] = wall_material_database.find(problem.boundaryconditions.wallMatName[s]);
     
     //       b. Species properties
-    std::vector<species>    speciesdata(problem.physicalmodel.NS);
-    for (int s = 0; s < problem.physicalmodel.NS; s++)  speciesdata[s] = species_database.find(problem.physicalmodel.speciesList[s]);
-
-    
-    // 4. Error check and show the simulation setting [Please DO NOT CHANGE THIS SECTION]
-    problem.errorcheck_and_shows();
+    std::vector<species> speciesdata(problem.physicalmodel.NS_tot);
+    for (int s = 0; s < problem.physicalmodel.NS_tot; s++) speciesdata[s] = species_database.find(problem.physicalmodel.speciesList[s]);
     
     
-    // 5. Read / Generate mesh
+    // 4. Read / Generate mesh
     //  - NOTE: Cartesian mesh generation module need to b completed
     // A. Read from the prepared mesh file
     std::string        gridfilename = "/Users/mkk1u16/Desktop/Code_Development/OP2A/grid2.op2";
@@ -108,24 +110,106 @@ int main(int argc, char **argv) {
     processingGrid(gridinfo, gridgeo);
     writeGridGeoTecplot(outfilename, gridinfo, gridgeo);
     
+    // Grid for CFD
+    CFD::Grid gridCFD;
+    gridCFD.info  = &gridinfo;
+    gridCFD.mpi   = &gridmpi;
+    gridCFD.geo   = &gridgeo;
+    
+    // Grid for DSMC
+    
+    
+    
+    // 5. Error check and show the simulation setting/Processing input data[Please DO NOT CHANGE THIS SECTION]
+    std::vector<variableMapCFD*> CFD_variables(problem.physicalmodel.num_fluid);
+    problem.processing(speciesdata, gridinfo.DIM);
+    problem.errorcheck_and_shows();
+
+    switch (problem.numericalmethod.mode)
+    {
+        case 0: // CFD-simulation
+            for (int f = 0; f < problem.physicalmodel.num_fluid; f++) CFD_variables[f] = nonequilibriumModel(problem.physicalmodel.variableSetting[1]);
+            
+            if (problem.basicinfo.cartesian_grid != 0)  gridCFD.allocateIndex();
+            std::vector<int> NS(problem.physicalmodel.num_fluid, 0);
+            std::vector<int> NE(problem.physicalmodel.num_fluid, 0);
+            
+            for (int f = 0; f < problem.physicalmodel.num_fluid; f++)
+            {
+                NS[f] = problem.physicalmodel.variableSetting[f].NS;
+                NE[f] = problem.physicalmodel.variableSetting[f].NE;
+            }
+            
+            if (problem.numericalmethod.cfd.timeIntegration == 0)   gridCFD.allocateData(NS, gridinfo.DIM, NE, 0, 1, 2, false, problem.physicalmodel.num_fluid);
+            else                                                    gridCFD.allocateData(NS, gridinfo.DIM, NE, 0, 1, 2, true,  problem.physicalmodel.num_fluid);
+            
+            gridCFD.allocateInternalData();
+            gridCFD.errorCheck();
+            break;
+            
+            /*
+        case 1: // DSMC-simulation
+            
+            break;
+            
+        case 2: // Hybrid-simulation
+            
+            break;
+             */
+    }
+    
 
     
     // TEST SECTION
-    NodeBase test_node1;
-    NodeBase test_node2;
+    std::vector<double> test_rho(8);
+    std::vector<double> test_u(3, 0.0);
+    std::vector<double> test_T(4, 0.0);
+    std::vector<double> test_U;
+    std::vector<double> test_W;
+    std::vector<double> test_Q;
     
-    test_node1.geometry.id = 1;
-    test_node2.geometry.id = 1;
+    test_rho[0] = 2.0e-4;
+    test_rho[1] = 1.0e-4;
+    test_rho[2] = 1.0e-4;
+    test_rho[3] = 1.0e-4;
+    test_rho[4] = 1.0e-4;
+    test_rho[5] = 1.0e-14;
+    test_rho[6] = 1.0e-14;
+    test_rho[7] = 1.0e-14;
+
     
-    double   test_node1_data = 0.0;
-    double   test_node2_data = 10.0;
+    test_u[0]  = 5000;
     
-   
-    //Node_ver1<NodeBase, double>  test_node1_fullset;
-    //Node_ver1<NodeBase, double>  test_node2_fullset;
-    //test_node1_fullset.assign(test_node1, test_node1_data);
-    //test_node2_fullset.assign(test_node1, test_node1_data);
-    //test_node2_fullset.geom->geometry.id = 2;
+    test_T[0] = 300;
+    test_T[1] = 3000;
+    test_T[2] = 5000;
+    test_T[3] = 7000;
+    
+    
+    
+    
+    CFD_variables[1]->constructU(test_rho, test_u, test_T, test_U);
+    for (int n = 0; n < 10000; n++)
+    {
+        CFD_variables[1]->UtoQ(test_U, speciesdata, test_Q);
+        CFD_variables[1]->UtoW(test_U, speciesdata, test_W);
+        CFD_variables[1]->QtoU(test_Q, speciesdata, test_U);
+    }
+
+    
+    
+    /*
+    std::vector<double> test_U;
+    std::vector<double> test_U1;
+    std::vector<double> test_Q;
+    
+    variableMapCFD      test_info(problem.physicalmodel.variableSetting[0]);
+    test_info.setting();
+    
+    constructU(test_info, test_rho, test_u, test_T, test_U);
+    UtoQ(test_info, test_U, speciesdata, test_Q);
+    QtoU(test_info, test_Q, speciesdata, test_U1);
+    */
     
     
     

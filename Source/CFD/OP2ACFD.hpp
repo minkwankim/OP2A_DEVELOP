@@ -13,13 +13,10 @@
 
 
 #include "../DATA/problemSetup.hpp"
+
 #include "gridCFD.hpp"
+#include "variableMapCFD.hpp"
 
-
-
-
-
-void assigningData(ProbleSetup& problem, GridBase* grid);
 
 void preProcessingPart1Version(int argc, char *argv[], double& t0);
 

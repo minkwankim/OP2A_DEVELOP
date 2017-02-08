@@ -169,22 +169,40 @@ public:
 
 
 // 7. Data class for CFD1 (Imlicit)
-class dataCFD2: public dataCFD
+class dataCFD_ver2
 {
     // [Part A]: Section for Data
 public:
-    dataCFDimplicit implicit;
+    dataCFDbasic*      basic;
+    dataCFDsource*     source;
+    dataCFDtransport*  transport;
+    dataCFDupdate*     update;
+    dataCFDimplicit*   implicit;
     
     // [Part B]: Section for Constructor/Destructor
 public:
-    dataCFD2();
-    dataCFD2(unsigned int NS, unsigned int ND, unsigned int NE);
+    dataCFD_ver2();
+    dataCFD_ver2(unsigned int NS, unsigned int ND, unsigned int NE, bool f_implicit, int type);
     
-    ~dataCFD2();
+    ~dataCFD_ver2();
     
     // [Part C]: Section for functions
-    void assignSize(unsigned int NS, unsigned int ND, unsigned int NE);
+    void allocate(unsigned int NS, unsigned int ND, unsigned int NE, bool f_implicit, int type);
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

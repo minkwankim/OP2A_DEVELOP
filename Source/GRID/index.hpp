@@ -16,14 +16,10 @@
 #define MAX_REFINE_LVL  5
 
 
-
-
+// 1. Class for Index ver1
 class grid_index {
-public:
-    grid_index();
-    ~grid_index();
-    
-    
+
+//      [Part A]: section for Data
 public:
     int i;
     int j;
@@ -32,26 +28,34 @@ public:
     unsigned int lvl;
     std::vector<unsigned int> pos;
     
-    bool hasChildren;
+//      [Part B]: Section constructor and destrutor
+public:
+    grid_index();
+    ~grid_index();
     
+//      [Part C]: Section for Funtions
+public:
+    bool hasChildren;
     void refine(unsigned int position);
+};
 
+
+// 2. Class for Index Ver 2
+class grid_index_ver2 : public grid_index
+{
+public:
+    int parent;
+    std::vector<int> children;
+    
+public:
+    grid_index_ver2();
+    ~grid_index_ver2();
 };
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
+// 3. Class for global index
 template <class T>
 class global_index {
 public:

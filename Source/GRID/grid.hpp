@@ -122,6 +122,95 @@ public:
 };
 
 
+// 5. Grid for Data
+template <class DATA>
+class GridData{
+    // [Part A]: Data section
+    
+public:
+    std::vector<DATA>   nodes;
+    std::vector<DATA>   faces;
+    std::vector<DATA>   cells;
+    std::vector<DATA>   ghost;
+    
+    // [Part B]: Constructor / Destructor section
+public:
+    GridData() { };
+    GridData(GridBasicInfo& gridInfo)
+    : nodes(gridInfo.NNM), faces(gridInfo.NFM), cells(gridInfo.NCM), ghost(gridInfo.NGM)
+    {
+        
+    };
+    
+    GridData(GridBasicInfo* gridInfo)
+    : nodes(gridInfo->NNM), faces(gridInfo->NFM), cells(gridInfo->NCM), ghost(gridInfo->NGM)
+    {
+        
+    };
+    
+    
+    
+    ~GridData() { };
+
+public:
+    // [Part C]: Functions
+    void allocate(GridBasicInfo& gridInfo)
+    {
+        nodes.resize(gridInfo.NNM);
+        faces.resize(gridInfo.NFM);
+        cells.resize(gridInfo.NCM);
+        ghost.resize(gridInfo.NGM);
+    }
+};
+
+// 6. Grid for Data Vector
+template <class DATA>
+class GridDataVec{
+    // [Part A]: Data section
+    
+public:
+    std::vector< std::vector<DATA> >   nodes;
+    std::vector< std::vector<DATA> >   faces;
+    std::vector< std::vector<DATA> >   cells;
+    std::vector< std::vector<DATA> >   ghost;
+    
+    // [Part B]: Constructor / Destructor section
+public:
+    GridDataVec() { };
+    GridDataVec(GridBasicInfo& gridInfo, int n_fluid)
+    : nodes(gridInfo.NNM, std::vector<DATA>(n_fluid)),
+      faces(gridInfo.NFM, std::vector<DATA>(n_fluid)),
+      cells(gridInfo.NCM, std::vector<DATA>(n_fluid)),
+      ghost(gridInfo.NGM, std::vector<DATA>(n_fluid))
+    {
+        
+        
+    };
+    
+    GridDataVec(GridBasicInfo* gridInfo, int n_fluid)
+    : nodes(gridInfo->NNM, std::vector<DATA>(n_fluid)),
+      faces(gridInfo->NFM, std::vector<DATA>(n_fluid)),
+      cells(gridInfo->NCM, std::vector<DATA>(n_fluid)),
+      ghost(gridInfo->NGM, std::vector<DATA>(n_fluid))
+    {
+        
+    };
+    
+    
+    
+    ~GridDataVec() { };
+    
+public:
+    // [Part C]: Functions
+    void allocate(GridBasicInfo& gridInfo, int n_fluid)
+    {
+        nodes.resize(gridInfo.NNM); for (int n = 0; n < gridInfo.NNM; n++) nodes[n].resize(n_fluid);
+        faces.resize(gridInfo.NFM); for (int f = 0; f < gridInfo.NFM; f++) faces[f].resize(n_fluid);
+        cells.resize(gridInfo.NCM); for (int c = 0; c < gridInfo.NCM; c++) cells[c].resize(n_fluid);
+        ghost.resize(gridInfo.NGM); for (int g = 0; g < gridInfo.NFM; g++) ghost[g].resize(n_fluid);
+    }
+};
+
 
 //////////////////////
 // Grid Utilities
@@ -149,7 +238,7 @@ void writeGridGeoTecplot(const  std::string& title, GridBasicInfo& gridinfo, Gri
 
 
 
-
+/*
 // 3. class for Geometry and Datastrorage
 template <class N, class F, class C>
 class GridData
@@ -188,7 +277,7 @@ public:
     C& Cell(int id);
     void readGrid(const std::string& mesh_file_name, GridBasicInfo& gridInfo);
 };
-
+*/
 
 
 

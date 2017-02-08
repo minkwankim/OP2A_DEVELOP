@@ -12,17 +12,22 @@
 #include <stdio.h>
 #include <string>
 
+#include "../COMM/map1D.hpp"
+#include "../CHEM/species.hpp"
+
 #include "flowdatabase.hpp"
 #include "wallMaterial.hpp"
+#include "ProbPhysicalModel.hpp"
 
+///////////////////////
 // 1. Basic seccion
+//////////////////////
 class ProbBasicInfo {
 public:
     std::string title;
     int axisymmetric;
     double gridfactor;
-    
-    
+    int cartesian_grid;
     
 public:
     ProbBasicInfo();
@@ -34,12 +39,14 @@ public:
 
 
 
+////////////////////////////////
 // 2. Numerical Method Session
+////////////////////////////////
 class ProbNumericalMethodCFD {
 public:
     int order;                      // Flux calculation order
-    int timeIntegration;            // Time integraion methods       (0: Explicit,  1: Point implcit,  2: Line implicit)
-    int spatialIntegration;         // Spatical integration methods (0: SW-FVS,       1: Modified SW-FVS,         2: AUSM)
+    int timeIntegration;            // Time integration methods       (0: Explicit,  1: Point implicit,  2: Line implicit)
+    int spatialIntegration;         // Spartical integration methods  (0: SW-FVS,    1: Modified SW-FVS, 2: AUSM)
     int limiter;                    // Flux limiter                  (0: NONE       1: van Leer        2: Superbee)
     int gradient;                   // Gradient calculation method
     
@@ -85,16 +92,57 @@ public:
     void errorcheck_and_shows();
 };
 
-
-
+/*
+//////////////////////////////////
 // 3. Physical Modelling Session
+//////////////////////////////////
+class variableMappingCFD
+{
+public:
+    std::vector<int>               rho_s;
+    std::vector<std::vector<int> > Ts;
+
+protected:
+    int m_NS;
+    int m_ND;
+    int m_NE;
+    std::vector<int> m_start_index;
+    std::vector<int> m_T;
+    bool m_mapped;
+    
+    
+public:
+    variableMappingCFD();
+    variableMappingCFD(int NS, int ND, int NE);
+    ~variableMappingCFD();
+    
+public:
+    void completeMapping(int NS, int ND, int NE, int Tr, int Tv, int Tel, int Te);
+    void completeMappingElectron(int ND);
+    unsigned int Q(int s, int type);
+    unsigned int T(int type);
+    unsigned int NS();
+    unsigned int ND();
+    unsigned int NE();
+    
+};
+
 class ProbPhysicalModel {
 public:
-    int NS;
-    int NR;
-    int NE;
-    int tempModel;
-    //int multiTemp;
+    std::vector<int> NS;
+    std::vector<int> NR;
+    std::vector<int> NE;
+    int NS_tot;
+    
+    int NER;        // Rotational Energy
+    int NEV;        // Vibrational Energy
+    int NEEL;       // Electronic Energy
+    int NEE;        // Elecrron Energy
+    
+    int E_Trot;
+    int E_Tvib;
+    int E_Tele;
+    int E_Te;
     
     int mixingRule;
     int viscosityModel;
@@ -103,10 +151,16 @@ public:
     double Le;
     
     std::vector<std::string> speciesList;
-    
-    
     int fluidModel;
+    std::vector<variableMappingCFD> variable_map;
+
+    std::vector<int> whereIsRho_fluidNum;   // [Global ID] ==> fluid number
+    std::vector<int> whereIsRho_speciesNum; // [Global ID] ==> local s
+    Common::Map1D<std::string, int> species_name_to_global;
     
+    std::vector<int> atomic_species_global_ID;
+    std::vector<int> molecular_species_global_ID;
+    int              electron_global_ID;
     
     
 public:
@@ -115,22 +169,29 @@ public:
     
     void read(const std::string& filename);
     void errorcheck_and_shows();
+    void speciesMapping(std::vector<species>& speciesdata, int ND);
 
 };
+*/
 
 
-
+//////////////////
 // 4. IC/Bs
+/////////////////
 class ProbICBC {
 public:
     int iniMethod;
-    std::vector<int>            inletCond;
-    std::vector<int>            wallCond;
-    std::vector<std::string>    wallMatName;
-    std::vector<wallMaterial>   wallMat;
+    std::vector<int>           inletCond;
+    std::vector<int>           wallCond;
+    std::vector<std::string>   wallMatName;
+    std::vector<wallMaterial>  wallMat;
+    std::vector<flowDataBase>  flowCond;
     
-    std::vector<flowDataBase>   flowCond;
+    std::vector< std::vector< std::vector<double> > > U_inlet;
+    std::vector< std::vector< std::vector<double> > > Q_inlet;
     
+    std::vector< std::vector< std::vector<double> > > U_wall;
+    std::vector< std::vector< std::vector<double> > > Q_wall;
     
 public:
     ProbICBC();
@@ -140,7 +201,6 @@ public:
     
     void allocateData(int NS, int ND, int NE);
     void read(const std::string& filename);
-    
     void errorcheck_and_shows();
 };
 
@@ -201,7 +261,7 @@ class ProbleSetup {
 public:
     ProbBasicInfo           basicinfo;
     ProbNumericalMethod     numericalmethod;
-    ProbPhysicalModel       physicalmodel;
+    ProbPhysicalModel_ver1  physicalmodel;
     ProbICBC                boundaryconditions;
     ProbCOMP                computation;
     ProbIO                  inputoutput;
@@ -218,6 +278,7 @@ public:
     };
     
     void read();
+    void processing(std::vector<species>& speciesdata, int ND);
     void errorcheck_and_shows();
     
 };

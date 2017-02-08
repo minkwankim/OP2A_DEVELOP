@@ -44,6 +44,23 @@
 		593FA3BE1DEC890600321A6A /* Sutherland.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 593FA3BC1DEC890600321A6A /* Sutherland.cpp */; };
 		593FA3C11DEDD87F00321A6A /* viscosity_kinetic_theory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 593FA3BF1DEDD87F00321A6A /* viscosity_kinetic_theory.cpp */; };
 		593FA3C71DF02E4200321A6A /* dataCFD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 593FA3C51DF02E4200321A6A /* dataCFD.cpp */; };
+		594E7EB71E3A232C007B105B /* variableMapCFD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 594E7EB51E3A232C007B105B /* variableMapCFD.cpp */; };
+		594E7EBD1E48C5F1007B105B /* temperatureFns.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 594E7EBB1E48C5F1007B105B /* temperatureFns.cpp */; };
+		594E7EC01E4A00DC007B105B /* primitive_variables_fluid0.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 594E7EBE1E4A00DC007B105B /* primitive_variables_fluid0.cpp */; };
+		594E7EC71E4A1DDD007B105B /* primitive_variables_fluid1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 594E7EC51E4A1DDD007B105B /* primitive_variables_fluid1.cpp */; };
+		594E7ECA1E4A2BD6007B105B /* primitive_variables_fluid3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 594E7EC81E4A2BD6007B105B /* primitive_variables_fluid3.cpp */; };
+		594E7ECD1E4A3121007B105B /* primitive_variables_fluid4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 594E7ECB1E4A3121007B105B /* primitive_variables_fluid4.cpp */; };
+		594E7ED01E4B3552007B105B /* primitive_variables_fluid5.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 594E7ECE1E4B3552007B105B /* primitive_variables_fluid5.cpp */; };
+		594E7ED31E4B5350007B105B /* primitive_variables_fluid9.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 594E7ED11E4B5350007B105B /* primitive_variables_fluid9.cpp */; };
+		594E7ED61E4B571A007B105B /* primitive_variables_fluid27.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 594E7ED41E4B571A007B105B /* primitive_variables_fluid27.cpp */; };
+		594E7ED91E4B5D56007B105B /* primitive_variables_fluid10.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 594E7ED71E4B5D56007B105B /* primitive_variables_fluid10.cpp */; };
+		594E7EDC1E4B60DD007B105B /* primitive_variables_fluid11.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 594E7EDA1E4B60DD007B105B /* primitive_variables_fluid11.cpp */; };
+		594E7EDF1E4B64F4007B105B /* primitive_variables_fluid12.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 594E7EDD1E4B64F4007B105B /* primitive_variables_fluid12.cpp */; };
+		594E7EE21E4B6723007B105B /* primitive_variables_fluid13.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 594E7EE01E4B6723007B105B /* primitive_variables_fluid13.cpp */; };
+		594E7EE51E4B6AFC007B105B /* primitive_variables_fluid14.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 594E7EE31E4B6AFC007B105B /* primitive_variables_fluid14.cpp */; };
+		594E7EE81E4B6E77007B105B /* primitive_variables_fluid15.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 594E7EE61E4B6E77007B105B /* primitive_variables_fluid15.cpp */; };
+		594E7EEB1E4B6E86007B105B /* primitive_variables_fluid16.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 594E7EE91E4B6E86007B105B /* primitive_variables_fluid16.cpp */; };
+		594E7EEE1E4B6E92007B105B /* primitive_variables_fluid17.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 594E7EEC1E4B6E92007B105B /* primitive_variables_fluid17.cpp */; };
 		594FF1401D8FDA38009A6ABB /* object.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 594FF13A1D8FDA38009A6ABB /* object.cpp */; };
 		594FF1411D8FDA38009A6ABB /* particle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 594FF13E1D8FDA38009A6ABB /* particle.cpp */; };
 		594FF14B1D8FDBBF009A6ABB /* preprocessingCFD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 594FF14A1D8FDBBF009A6ABB /* preprocessingCFD.cpp */; };
@@ -53,7 +70,11 @@
 		595BB03E1E27DB5200B3A6EF /* face.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 595BB03C1E27DB5200B3A6EF /* face.cpp */; };
 		595BB0411E29394D00B3A6EF /* cell.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 595BB03F1E29394D00B3A6EF /* cell.cpp */; };
 		595BB0441E293E0C00B3A6EF /* data.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 595BB0421E293E0C00B3A6EF /* data.cpp */; };
-		595F31F41E2548FE000CEBE8 /* assigninigData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 595F31F31E2548FE000CEBE8 /* assigninigData.cpp */; };
+		595BB0471E2E5D8D00B3A6EF /* assignIC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 595BB0461E2E5D8D00B3A6EF /* assignIC.cpp */; };
+		595BB04A1E323F3C00B3A6EF /* primitive_variables.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 595BB0481E323F3C00B3A6EF /* primitive_variables.cpp */; };
+		595BB0501E36573F00B3A6EF /* variableMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 595BB04E1E36573F00B3A6EF /* variableMap.cpp */; };
+		595BB0531E365F1100B3A6EF /* ProbPhysicalModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 595BB0511E365F1100B3A6EF /* ProbPhysicalModel.cpp */; };
+		598431B91E38AE0800EF24EB /* ProbFluidSetting.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 598431B71E38AE0800EF24EB /* ProbFluidSetting.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -151,7 +172,41 @@
 		593FA3C01DEDD87F00321A6A /* viscosity_kinetic_theory.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = viscosity_kinetic_theory.hpp; sourceTree = "<group>"; };
 		593FA3C51DF02E4200321A6A /* dataCFD.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dataCFD.cpp; sourceTree = "<group>"; };
 		593FA3C61DF02E4200321A6A /* dataCFD.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = dataCFD.hpp; sourceTree = "<group>"; };
-		594FF1391D8FDA38009A6ABB /* dataMaxDefinition.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = dataMaxDefinition.hpp; sourceTree = "<group>"; };
+		594E7EB51E3A232C007B105B /* variableMapCFD.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = variableMapCFD.cpp; sourceTree = "<group>"; };
+		594E7EB61E3A232C007B105B /* variableMapCFD.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = variableMapCFD.hpp; sourceTree = "<group>"; };
+		594E7EBB1E48C5F1007B105B /* temperatureFns.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = temperatureFns.cpp; sourceTree = "<group>"; };
+		594E7EBC1E48C5F1007B105B /* temperatureFns.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = temperatureFns.hpp; sourceTree = "<group>"; };
+		594E7EBE1E4A00DC007B105B /* primitive_variables_fluid0.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = primitive_variables_fluid0.cpp; sourceTree = "<group>"; };
+		594E7EBF1E4A00DC007B105B /* primitive_variables_fluid0.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = primitive_variables_fluid0.hpp; sourceTree = "<group>"; };
+		594E7EC51E4A1DDD007B105B /* primitive_variables_fluid1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = primitive_variables_fluid1.cpp; sourceTree = "<group>"; };
+		594E7EC61E4A1DDD007B105B /* primitive_variables_fluid1.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = primitive_variables_fluid1.hpp; sourceTree = "<group>"; };
+		594E7EC81E4A2BD6007B105B /* primitive_variables_fluid3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = primitive_variables_fluid3.cpp; sourceTree = "<group>"; };
+		594E7EC91E4A2BD6007B105B /* primitive_variables_fluid3.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = primitive_variables_fluid3.hpp; sourceTree = "<group>"; };
+		594E7ECB1E4A3121007B105B /* primitive_variables_fluid4.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = primitive_variables_fluid4.cpp; sourceTree = "<group>"; };
+		594E7ECC1E4A3121007B105B /* primitive_variables_fluid4.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = primitive_variables_fluid4.hpp; sourceTree = "<group>"; };
+		594E7ECE1E4B3552007B105B /* primitive_variables_fluid5.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = primitive_variables_fluid5.cpp; sourceTree = "<group>"; };
+		594E7ECF1E4B3552007B105B /* primitive_variables_fluid5.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = primitive_variables_fluid5.hpp; sourceTree = "<group>"; };
+		594E7ED11E4B5350007B105B /* primitive_variables_fluid9.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = primitive_variables_fluid9.cpp; sourceTree = "<group>"; };
+		594E7ED21E4B5350007B105B /* primitive_variables_fluid9.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = primitive_variables_fluid9.hpp; sourceTree = "<group>"; };
+		594E7ED41E4B571A007B105B /* primitive_variables_fluid27.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = primitive_variables_fluid27.cpp; sourceTree = "<group>"; };
+		594E7ED51E4B571A007B105B /* primitive_variables_fluid27.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = primitive_variables_fluid27.hpp; sourceTree = "<group>"; };
+		594E7ED71E4B5D56007B105B /* primitive_variables_fluid10.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = primitive_variables_fluid10.cpp; sourceTree = "<group>"; };
+		594E7ED81E4B5D56007B105B /* primitive_variables_fluid10.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = primitive_variables_fluid10.hpp; sourceTree = "<group>"; };
+		594E7EDA1E4B60DD007B105B /* primitive_variables_fluid11.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = primitive_variables_fluid11.cpp; sourceTree = "<group>"; };
+		594E7EDB1E4B60DD007B105B /* primitive_variables_fluid11.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = primitive_variables_fluid11.hpp; sourceTree = "<group>"; };
+		594E7EDD1E4B64F4007B105B /* primitive_variables_fluid12.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = primitive_variables_fluid12.cpp; sourceTree = "<group>"; };
+		594E7EDE1E4B64F4007B105B /* primitive_variables_fluid12.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = primitive_variables_fluid12.hpp; sourceTree = "<group>"; };
+		594E7EE01E4B6723007B105B /* primitive_variables_fluid13.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = primitive_variables_fluid13.cpp; sourceTree = "<group>"; };
+		594E7EE11E4B6723007B105B /* primitive_variables_fluid13.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = primitive_variables_fluid13.hpp; sourceTree = "<group>"; };
+		594E7EE31E4B6AFC007B105B /* primitive_variables_fluid14.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = primitive_variables_fluid14.cpp; sourceTree = "<group>"; };
+		594E7EE41E4B6AFC007B105B /* primitive_variables_fluid14.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = primitive_variables_fluid14.hpp; sourceTree = "<group>"; };
+		594E7EE61E4B6E77007B105B /* primitive_variables_fluid15.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = primitive_variables_fluid15.cpp; sourceTree = "<group>"; };
+		594E7EE71E4B6E77007B105B /* primitive_variables_fluid15.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = primitive_variables_fluid15.hpp; sourceTree = "<group>"; };
+		594E7EE91E4B6E86007B105B /* primitive_variables_fluid16.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = primitive_variables_fluid16.cpp; sourceTree = "<group>"; };
+		594E7EEA1E4B6E86007B105B /* primitive_variables_fluid16.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = primitive_variables_fluid16.hpp; sourceTree = "<group>"; };
+		594E7EEC1E4B6E92007B105B /* primitive_variables_fluid17.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = primitive_variables_fluid17.cpp; sourceTree = "<group>"; };
+		594E7EED1E4B6E92007B105B /* primitive_variables_fluid17.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = primitive_variables_fluid17.hpp; sourceTree = "<group>"; };
+		594FF1391D8FDA38009A6ABB /* dataDef.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = dataDef.hpp; sourceTree = "<group>"; };
 		594FF13A1D8FDA38009A6ABB /* object.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = object.cpp; sourceTree = "<group>"; };
 		594FF13B1D8FDA38009A6ABB /* object.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = object.hpp; sourceTree = "<group>"; };
 		594FF13C1D8FDA38009A6ABB /* OP2ACFD.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = OP2ACFD.hpp; sourceTree = "<group>"; };
@@ -172,7 +227,15 @@
 		595BB0421E293E0C00B3A6EF /* data.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = data.cpp; sourceTree = "<group>"; };
 		595BB0431E293E0C00B3A6EF /* data.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = data.hpp; sourceTree = "<group>"; };
 		595BB0451E2CE20500B3A6EF /* grid_def.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = grid_def.hpp; path = GRID/grid_def.hpp; sourceTree = "<group>"; };
-		595F31F31E2548FE000CEBE8 /* assigninigData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = assigninigData.cpp; sourceTree = "<group>"; };
+		595BB0461E2E5D8D00B3A6EF /* assignIC.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = assignIC.cpp; sourceTree = "<group>"; };
+		595BB0481E323F3C00B3A6EF /* primitive_variables.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = primitive_variables.cpp; sourceTree = "<group>"; };
+		595BB0491E323F3C00B3A6EF /* primitive_variables.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = primitive_variables.hpp; sourceTree = "<group>"; };
+		595BB04E1E36573F00B3A6EF /* variableMap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = variableMap.cpp; sourceTree = "<group>"; };
+		595BB04F1E36573F00B3A6EF /* variableMap.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = variableMap.hpp; sourceTree = "<group>"; };
+		595BB0511E365F1100B3A6EF /* ProbPhysicalModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ProbPhysicalModel.cpp; sourceTree = "<group>"; };
+		595BB0521E365F1100B3A6EF /* ProbPhysicalModel.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ProbPhysicalModel.hpp; sourceTree = "<group>"; };
+		598431B71E38AE0800EF24EB /* ProbFluidSetting.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ProbFluidSetting.cpp; sourceTree = "<group>"; };
+		598431B81E38AE0800EF24EB /* ProbFluidSetting.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ProbFluidSetting.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -334,7 +397,7 @@
 		594FF1381D8FD9F2009A6ABB /* DATA */ = {
 			isa = PBXGroup;
 			children = (
-				594FF1391D8FDA38009A6ABB /* dataMaxDefinition.hpp */,
+				594FF1391D8FDA38009A6ABB /* dataDef.hpp */,
 				594FF13A1D8FDA38009A6ABB /* object.cpp */,
 				594FF13B1D8FDA38009A6ABB /* object.hpp */,
 				593FA39E1DE2F8BC00321A6A /* problemSetup.cpp */,
@@ -350,6 +413,12 @@
 				595BB03A1E269AC800B3A6EF /* dataDSMC.hpp */,
 				595BB0421E293E0C00B3A6EF /* data.cpp */,
 				595BB0431E293E0C00B3A6EF /* data.hpp */,
+				595BB04E1E36573F00B3A6EF /* variableMap.cpp */,
+				595BB04F1E36573F00B3A6EF /* variableMap.hpp */,
+				595BB0511E365F1100B3A6EF /* ProbPhysicalModel.cpp */,
+				595BB0521E365F1100B3A6EF /* ProbPhysicalModel.hpp */,
+				598431B71E38AE0800EF24EB /* ProbFluidSetting.cpp */,
+				598431B81E38AE0800EF24EB /* ProbFluidSetting.hpp */,
 			);
 			path = DATA;
 			sourceTree = "<group>";
@@ -369,9 +438,45 @@
 				594FF14A1D8FDBBF009A6ABB /* preprocessingCFD.cpp */,
 				594FF13C1D8FDA38009A6ABB /* OP2ACFD.hpp */,
 				594FF13D1D8FDA38009A6ABB /* OP2ACFDversionInfo.hpp */,
-				595F31F31E2548FE000CEBE8 /* assigninigData.cpp */,
 				595BB0331E263A7000B3A6EF /* gridCFD.cpp */,
 				595BB0341E263A7000B3A6EF /* gridCFD.hpp */,
+				595BB0461E2E5D8D00B3A6EF /* assignIC.cpp */,
+				595BB0481E323F3C00B3A6EF /* primitive_variables.cpp */,
+				595BB0491E323F3C00B3A6EF /* primitive_variables.hpp */,
+				594E7EB51E3A232C007B105B /* variableMapCFD.cpp */,
+				594E7EB61E3A232C007B105B /* variableMapCFD.hpp */,
+				594E7EBB1E48C5F1007B105B /* temperatureFns.cpp */,
+				594E7EBC1E48C5F1007B105B /* temperatureFns.hpp */,
+				594E7EBE1E4A00DC007B105B /* primitive_variables_fluid0.cpp */,
+				594E7EBF1E4A00DC007B105B /* primitive_variables_fluid0.hpp */,
+				594E7EC51E4A1DDD007B105B /* primitive_variables_fluid1.cpp */,
+				594E7EC61E4A1DDD007B105B /* primitive_variables_fluid1.hpp */,
+				594E7EC81E4A2BD6007B105B /* primitive_variables_fluid3.cpp */,
+				594E7EC91E4A2BD6007B105B /* primitive_variables_fluid3.hpp */,
+				594E7ECB1E4A3121007B105B /* primitive_variables_fluid4.cpp */,
+				594E7ECC1E4A3121007B105B /* primitive_variables_fluid4.hpp */,
+				594E7ECE1E4B3552007B105B /* primitive_variables_fluid5.cpp */,
+				594E7ECF1E4B3552007B105B /* primitive_variables_fluid5.hpp */,
+				594E7ED11E4B5350007B105B /* primitive_variables_fluid9.cpp */,
+				594E7ED21E4B5350007B105B /* primitive_variables_fluid9.hpp */,
+				594E7ED71E4B5D56007B105B /* primitive_variables_fluid10.cpp */,
+				594E7ED81E4B5D56007B105B /* primitive_variables_fluid10.hpp */,
+				594E7EDA1E4B60DD007B105B /* primitive_variables_fluid11.cpp */,
+				594E7EDB1E4B60DD007B105B /* primitive_variables_fluid11.hpp */,
+				594E7EDD1E4B64F4007B105B /* primitive_variables_fluid12.cpp */,
+				594E7EDE1E4B64F4007B105B /* primitive_variables_fluid12.hpp */,
+				594E7EE01E4B6723007B105B /* primitive_variables_fluid13.cpp */,
+				594E7EE11E4B6723007B105B /* primitive_variables_fluid13.hpp */,
+				594E7EE31E4B6AFC007B105B /* primitive_variables_fluid14.cpp */,
+				594E7EE41E4B6AFC007B105B /* primitive_variables_fluid14.hpp */,
+				594E7EE61E4B6E77007B105B /* primitive_variables_fluid15.cpp */,
+				594E7EE71E4B6E77007B105B /* primitive_variables_fluid15.hpp */,
+				594E7EE91E4B6E86007B105B /* primitive_variables_fluid16.cpp */,
+				594E7EEA1E4B6E86007B105B /* primitive_variables_fluid16.hpp */,
+				594E7EEC1E4B6E92007B105B /* primitive_variables_fluid17.cpp */,
+				594E7EED1E4B6E92007B105B /* primitive_variables_fluid17.hpp */,
+				594E7ED41E4B571A007B105B /* primitive_variables_fluid27.cpp */,
+				594E7ED51E4B571A007B105B /* primitive_variables_fluid27.hpp */,
 			);
 			path = CFD;
 			sourceTree = "<group>";
@@ -434,6 +539,9 @@
 			files = (
 				5926606F1D8ACC18006298DC /* VectorCompare.cpp in Sources */,
 				592660421D8ACB3D006298DC /* main.cpp in Sources */,
+				594E7ECA1E4A2BD6007B105B /* primitive_variables_fluid3.cpp in Sources */,
+				594E7EE51E4B6AFC007B105B /* primitive_variables_fluid14.cpp in Sources */,
+				594E7EE81E4B6E77007B105B /* primitive_variables_fluid15.cpp in Sources */,
 				593FA3801DD31D5E00321A6A /* geometry.cpp in Sources */,
 				593FA3A01DE2F8BC00321A6A /* problemSetup.cpp in Sources */,
 				593FA3A41DE4723E00321A6A /* flowdatabase.cpp in Sources */,
@@ -443,15 +551,27 @@
 				593FA3AD1DE6F6E700321A6A /* electronicState.cpp in Sources */,
 				593FA3A71DE5BEB900321A6A /* wallMaterial.cpp in Sources */,
 				592660651D8ACC18006298DC /* codelocation.cpp in Sources */,
+				595BB0531E365F1100B3A6EF /* ProbPhysicalModel.cpp in Sources */,
 				5926606B1D8ACC18006298DC /* processorinfo.cpp in Sources */,
+				595BB0501E36573F00B3A6EF /* variableMap.cpp in Sources */,
+				594E7ED61E4B571A007B105B /* primitive_variables_fluid27.cpp in Sources */,
 				592660671D8ACC18006298DC /* error_codes.cpp in Sources */,
-				595F31F41E2548FE000CEBE8 /* assigninigData.cpp in Sources */,
 				593FA3B61DE7240000321A6A /* LeRc.cpp in Sources */,
+				594E7EB71E3A232C007B105B /* variableMapCFD.cpp in Sources */,
 				592660641D8ACC18006298DC /* assert_mk.cpp in Sources */,
 				594FF1401D8FDA38009A6ABB /* object.cpp in Sources */,
+				594E7ED31E4B5350007B105B /* primitive_variables_fluid9.cpp in Sources */,
+				594E7EEE1E4B6E92007B105B /* primitive_variables_fluid17.cpp in Sources */,
+				594E7ED01E4B3552007B105B /* primitive_variables_fluid5.cpp in Sources */,
 				592660681D8ACC18006298DC /* error_exception.cpp in Sources */,
+				594E7EE21E4B6723007B105B /* primitive_variables_fluid13.cpp in Sources */,
 				593FA3961DD490C400321A6A /* grid.cpp in Sources */,
+				594E7EC71E4A1DDD007B105B /* primitive_variables_fluid1.cpp in Sources */,
+				594E7EEB1E4B6E86007B105B /* primitive_variables_fluid16.cpp in Sources */,
+				594E7EDF1E4B64F4007B105B /* primitive_variables_fluid12.cpp in Sources */,
+				594E7EBD1E48C5F1007B105B /* temperatureFns.cpp in Sources */,
 				592660691D8ACC18006298DC /* fileHandle.cpp in Sources */,
+				594E7ED91E4B5D56007B105B /* primitive_variables_fluid10.cpp in Sources */,
 				5926606A1D8ACC18006298DC /* MultiVector.cpp in Sources */,
 				593FA3B01DE6F96A00321A6A /* speciesDatabase.cpp in Sources */,
 				595BB0441E293E0C00B3A6EF /* data.cpp in Sources */,
@@ -459,6 +579,7 @@
 				594FF1411D8FDA38009A6ABB /* particle.cpp in Sources */,
 				593FA3C71DF02E4200321A6A /* dataCFD.cpp in Sources */,
 				5926607C1D8ACCA4006298DC /* matrix.cpp in Sources */,
+				595BB0471E2E5D8D00B3A6EF /* assignIC.cpp in Sources */,
 				593FA3B31DE71F5600321A6A /* kev.cpp in Sources */,
 				593FA3BB1DEC86EB00321A6A /* Blottner.cpp in Sources */,
 				5926606D1D8ACC18006298DC /* StringOps.cpp in Sources */,
@@ -469,6 +590,9 @@
 				592660881D8ACD0F006298DC /* index.cpp in Sources */,
 				593FA3831DD32DFE00321A6A /* connection.cpp in Sources */,
 				593FA38B1DD35CEC00321A6A /* gridUtil.cpp in Sources */,
+				594E7ECD1E4A3121007B105B /* primitive_variables_fluid4.cpp in Sources */,
+				594E7EDC1E4B60DD007B105B /* primitive_variables_fluid11.cpp in Sources */,
+				595BB04A1E323F3C00B3A6EF /* primitive_variables.cpp in Sources */,
 				595BB0351E263A7000B3A6EF /* gridCFD.cpp in Sources */,
 				592660661D8ACC18006298DC /* error_check.cpp in Sources */,
 				593FA3BE1DEC890600321A6A /* Sutherland.cpp in Sources */,
@@ -478,6 +602,8 @@
 				5926606E1D8ACC18006298DC /* timer.cpp in Sources */,
 				594FF14B1D8FDBBF009A6ABB /* preprocessingCFD.cpp in Sources */,
 				5926607A1D8ACCA4006298DC /* cal_area.cpp in Sources */,
+				594E7EC01E4A00DC007B105B /* primitive_variables_fluid0.cpp in Sources */,
+				598431B91E38AE0800EF24EB /* ProbFluidSetting.cpp in Sources */,
 				593FA3C11DEDD87F00321A6A /* viscosity_kinetic_theory.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

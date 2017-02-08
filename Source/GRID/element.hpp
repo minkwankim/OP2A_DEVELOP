@@ -85,6 +85,102 @@ void Elem_ver1<GEO, DATA>::assign(GEO& i_geom, DATA& i_data)
 
 
 
+////////////////////////////////////////////////
+// 2. Grid  Element class for geo with data
+////////////////////////////////////////////////
+template <class GEO, class IND, class DATA>
+class Elem_ver2
+{
+    // Part A: Data Section
+public:
+    GEO*    geom;
+    IND*    inde;
+    DATA*   data;
+    
+    // Part B: Constructoir / Destructor Section
+public:
+    Elem_ver2();
+    Elem_ver2(GEO* i_geom, IND* i_inde, DATA* i_data);
+    
+    ~Elem_ver2();
+    
+public:
+    // Part C: Functions
+    void assign_ptr(GEO* i_geom, IND* i_inde, DATA* i_data);
+    void assign(GEO& i_geom, IND& i_inde, DATA& i_data);
+};
+
+//      Part B: Constructoir / Destructor Section
+template <class GEO, class IND, class DATA>
+Elem_ver2<GEO, IND, DATA>::Elem_ver2()
+{
+    geom = NULL;
+    inde = NULL;
+    data = NULL;
+}
+
+template <class GEO, class IND, class DATA>
+Elem_ver2<GEO, IND, DATA>::~Elem_ver2()
+{
+    geom = NULL;
+    inde = NULL;
+    data = NULL;
+}
+
+template <class GEO, class IND, class DATA>
+Elem_ver2<GEO, IND, DATA>::Elem_ver2(GEO* i_geom, IND* i_inde, DATA* i_data)
+: geom(i_geom), inde(i_inde), data(i_data)
+{
+
+}
+
+//      Part C: Functions
+template <class GEO, class IND, class DATA>
+void Elem_ver2<GEO, IND, DATA>::assign_ptr(GEO* i_geom, IND* i_inde, DATA* i_data)
+{
+    if (i_geom != NULL)
+    {
+        if (geom == NULL) geom = new GEO;
+        geom = i_geom;
+    }
+    else
+    {
+        geom = NULL;
+    }
+    
+    
+    if (i_inde != NULL)
+    {
+        if (inde == NULL) inde = new IND;
+        inde = i_inde;
+    }
+    else
+    {
+        inde = NULL;
+    }
+    
+    if (i_data != NULL)
+    {
+        if (data == NULL) data = new DATA;
+        data = i_data;
+    }
+    else
+    {
+        data = NULL;
+    }
+}
+
+template <class GEO, class IND, class DATA>
+void Elem_ver2<GEO, IND, DATA>::assign(GEO& i_geom, IND& i_inde, DATA& i_data)
+{
+    geom = new GEO;
+    inde = new IND;
+    data = new DATA;
+    
+    memcpy(geom, &i_geom, sizeof(GEO));
+    memcpy(inde, &i_inde, sizeof(IND));
+    memcpy(data, &i_data, sizeof(DATA));
+}
 
 
 

@@ -30,7 +30,7 @@
 #define PROB_SETUP_REX_INV              "Relaxation(Inviscid):"
 #define PROB_SETUP_REX_VIC              "Relaxation(Viscous):"
 #define PROB_SETUP_PRESSURE_SWITCH      "Pressure Switch Factor:"
-#define PROB_SETUP_SLIP_ACCOM           "Accomodation Coefficient for Slip BCs:"
+#define PROB_SETUP_SLIP_ACCOM           "Accommodation Coefficient for Slip BCs:"
 
 #define PROB_SETUP_TEMP                 "Temperature Model:"
 #define PROB_SETUP_FLU                  "Fluid Model:"

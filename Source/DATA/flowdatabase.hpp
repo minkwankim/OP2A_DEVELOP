@@ -11,10 +11,8 @@
 
 #include <stdio.h>
 #include <vector>
+#include "dataDef.hpp"
 
-
-#define FLUID_DATA_MAX_SPECIES 11
-#define FLUID_DATA_MAX_ENERGY_MODE 4
 
 
 
@@ -22,20 +20,15 @@ class flowDataBase {
 public:
     std::vector<double> rhos;   // Species Densities
     std::vector<double> u;      // Velocities
-    std::vector<double> rho_u;  // Momentum
     std::vector<double> T;      // Temperature of each energy modes
-    std::vector<double> E;      // Energy of each energy modes
-    
 
-    std::vector<double*> Q;      // Premitive variables
-    std::vector<double*> U;      // Conservative variables
     
 protected:
     bool m_assigned;
     
 public:
     flowDataBase();
-    flowDataBase(int NS, int ND, int NE);
+    flowDataBase(int NS);
     
     ~flowDataBase();
     
@@ -43,9 +36,11 @@ public:
     void assignSize(int NS, int ND, int NE);
     void reassign(int NS, int ND, int NE);
     bool check();
-
     
+    void allocateU(int NS, int ND, int E_Tr, int E_Tv, int E_Tele, int E_Te, std::vector<double>& U);
+    //void allocateU(std::vector<int>&NS, int ND, std::vector<int>&NE, int n_fluid, )
 };
+
 
 
 
