@@ -151,7 +151,7 @@ void ProbPhysicalModel_ver1::read(const std::string& filename)
                     if (speciesMap.exists(tempSpecies) == true)
                     {
                         int g = speciesMap.find(tempSpecies);
-                        variableSetting[f].setRho(g, s);
+                        variableSetting[f].setRho(s, g);
                         s++;
                     }
                     else

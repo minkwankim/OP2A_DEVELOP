@@ -71,12 +71,14 @@ int main(int argc, char **argv) {
     ver.info();
     
     
+    
     // 2. Initialize and Setup variables [Please DO NOT CHANGE THIS SECTION]
     ProbleSetup problem;
     if (std::string(argv[0]) == " ") problem.inputoutput.filename_ProblemSetup = PROBSETUPFILE;
     problem.inputoutput.filename_ProblemSetup = PROBSETUPFILE;
     problem.read();
     problem.computation.initialize(argc, argv);
+    
     
     
     // 3. Read and Assign Wall material and Species Database
@@ -93,8 +95,10 @@ int main(int argc, char **argv) {
     for (int s = 0; s < problem.boundaryconditions.wallMatName.size(); s++) problem.boundaryconditions.wallMat[s] = wall_material_database.find(problem.boundaryconditions.wallMatName[s]);
     
     //       b. Species properties
-    std::vector<species> speciesdata(problem.physicalmodel.NS_tot);
+    std::vector<species> speciesdata(problem.physicalmodel.NS_tot); // Global species data
+    std::vector< std::vector<species> > species;                    // Species data for each fluids
     for (int s = 0; s < problem.physicalmodel.NS_tot; s++) speciesdata[s] = species_database.find(problem.physicalmodel.speciesList[s]);
+    
     
     
     // 4. Read / Generate mesh
@@ -128,7 +132,14 @@ int main(int argc, char **argv) {
     switch (problem.numericalmethod.mode)
     {
         case 0: // CFD-simulation
-            for (int f = 0; f < problem.physicalmodel.num_fluid; f++) CFD_variables[f] = nonequilibriumModel(problem.physicalmodel.variableSetting[1]);
+            species.resize(problem.physicalmodel.num_fluid);
+            for (int f = 0; f < problem.physicalmodel.num_fluid; f++)
+            {
+                species[f].resize(problem.physicalmodel.variableSetting[f].NS);
+                for (int s = 0; s < problem.physicalmodel.variableSetting[f].NS; s++) species[f][s] = speciesdata[problem.physicalmodel.variableSetting[f].rho_s_ID(s)];
+                    
+                CFD_variables[f] = nonequilibriumModel(problem.physicalmodel.variableSetting[f]);
+            }
             
             if (problem.basicinfo.cartesian_grid != 0)  gridCFD.allocateIndex();
             std::vector<int> NS(problem.physicalmodel.num_fluid, 0);

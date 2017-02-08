@@ -18,6 +18,8 @@
 #include "flowdatabase.hpp"
 #include "wallMaterial.hpp"
 #include "ProbPhysicalModel.hpp"
+#include "ProbICBC.hpp"
+
 
 ///////////////////////
 // 1. Basic seccion
@@ -175,6 +177,7 @@ public:
 */
 
 
+/*
 //////////////////
 // 4. IC/Bs
 /////////////////
@@ -203,7 +206,7 @@ public:
     void read(const std::string& filename);
     void errorcheck_and_shows();
 };
-
+*/
 
 // 5. MPI Info
 class ProbCOMP {
@@ -262,7 +265,7 @@ public:
     ProbBasicInfo           basicinfo;
     ProbNumericalMethod     numericalmethod;
     ProbPhysicalModel_ver1  physicalmodel;
-    ProbICBC                boundaryconditions;
+    ProbICBC_ver1           boundaryconditions;
     ProbCOMP                computation;
     ProbIO                  inputoutput;
     

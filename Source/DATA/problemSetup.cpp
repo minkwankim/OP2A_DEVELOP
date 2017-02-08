@@ -1032,7 +1032,7 @@ void ProbPhysicalModel::speciesMapping(std::vector<species>& speciesdata, int ND
 
 
 
-
+/*
 // 4. IC/Bs
 ProbICBC::ProbICBC()
 :iniMethod(0)
@@ -1276,9 +1276,8 @@ void ProbICBC::errorcheck_and_shows()
     }
     
     std::cout << std::endl;
-    
-    
 }
+ */
 
 
 
@@ -1494,7 +1493,7 @@ void ProbleSetup::read()
         
         for (int f = 0; f < physicalmodel.num_fluid; f++)
         {
-          //  boundaryconditions.flowCond[boundaryconditions.inletCond[i]].allocateU(physicalmodel.NS[f], physicalmodel.ND, physicalmodel.E_Trot, physicalmodel.E_Tvib, physicalmodel.E_Tele, physicalmodel.E_Te, boundaryconditions.U_inlet[i][f]);
+          //boundaryconditions.flowCond[boundaryconditions.inletCond[i]].allocateU(physicalmodel.variableSetting[f].NS, physicalmodel.variableSetting[f]ND, physicalmodel.E_Trot, physicalmodel.E_Tvib, physicalmodel.E_Tele, physicalmodel.E_Te, boundaryconditions.U_inlet[i][f]);
         }
     }
     
