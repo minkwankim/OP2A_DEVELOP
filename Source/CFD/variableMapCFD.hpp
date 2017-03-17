@@ -14,9 +14,36 @@
 #include "../CHEM/species.hpp"
 
 
-
-class variableMapCFD :public variableMap
+class variableMapCFDBase :public variableMap
 {
+public:
+    std::vector<unsigned int> startIndex;
+    
+protected:
+    double m_rho;
+    
+public:
+    explicit variableMapCFDBase();
+    explicit variableMapCFDBase(variableMap input);
+    ~variableMapCFDBase();
+    
+
+    variableMapCFDBase&	operator= (variableMap input);
+    void setting(int density, int velocity, int energy);
+    void setting();
+    
+    int Qid(int s, int mode);
+    int EinQ(int mode);
+    int Pressure();
+};
+
+
+
+
+
+class variableMapCFD :public variableMapCFDBase
+{
+    /*
 public:
     std::vector<unsigned int> startIndex;
     
@@ -36,9 +63,15 @@ public:
     int Qid(int s, int mode);
     int EinQ(int mode);
     int Pressure();
+    */
     
+public:
+    explicit variableMapCFD()                  : variableMapCFDBase() {};
+    explicit variableMapCFD(variableMap input) : variableMapCFDBase(input) {};
     
-    void constructU(std::vector<double>&rho_s, std::vector<double>& u, std::vector<double>& T, std::vector<double>& U);
+    void constructU(std::vector<double>&rho_s, std::vector<double>& u, std::vector<double>& Ts, std::vector<double>& U);
+    void constructUfromGlobal(std::vector<double>&rho_s, std::vector<double>& u, std::vector<double>& Ts, std::vector<double>& U, int flag);
+
     
     void UtoQ_Common(std::vector<double>& U, std::vector<species>& speciesdata, std::vector<double>& Q);
     void UtoW_Common(std::vector<double>& U, std::vector<species>& speciesdata, std::vector<double>& W);
@@ -47,6 +80,8 @@ public:
     virtual void UtoQ(std::vector<double>& U, std::vector<species>& speciesdata, std::vector<double>& Q) = 0;
     virtual void UtoW(std::vector<double>& U, std::vector<species>& speciesdata, std::vector<double>& W) = 0;
     virtual void QtoU(std::vector<double>& Q, std::vector<species>& speciesdata, std::vector<double>& U) = 0;
+    
+    
 
 };
 

@@ -14,15 +14,13 @@
 #include "../GRID/grid.hpp"
 
 
-
-
-
-
 namespace CFD {
     
-    typedef Elem_ver2<NodeBase, grid_index_ver2, std::vector<dataCFD_ver2> >  Node;
-    typedef Elem_ver2<FaceBase, grid_index_ver2, std::vector<dataCFD_ver2> >  Face;
-    typedef Elem_ver2<CellBase, grid_index_ver2, std::vector<dataCFD_ver2> >  Cell;
+    typedef Elem_ver2<NodeBase, grid_index_ver2, std::vector<dataCFD> >  Node;
+    typedef Elem_ver2<FaceBase, grid_index_ver2, std::vector<dataCFD> >  Face;
+    typedef Elem_ver2<CellBase, grid_index_ver2, std::vector<dataCFD> >  Cell;
+    
+    
     
     // 1. Class for GRID
     class Grid
@@ -33,7 +31,7 @@ namespace CFD {
         GridMPI*                   mpi;
         GridGeo*                   geo;
         GridData<grid_index_ver2>* index;
-        GridDataVec<dataCFD_ver2>* data;
+        GridDataVec<dataCFD>*      data;
         
     protected:
         std::vector<Node*>          m_nodes;
@@ -50,7 +48,9 @@ namespace CFD {
         // [Part C]: Functions
     public:
         void allocateIndex();
-        void allocateData(std::vector<int>& NS, int ND, std::vector<int>& NE, int type_node, int type_face, int type_cell, bool f_implicit, int n_fluid);
+        void allocateData(std::vector<int>& NS, int ND, std::vector<int>& NE,
+                          int type_node, int type_face, int type_cell,
+                          bool f_implicit, int n_fluid);
         void allocateInternalData();
         void errorCheck();
         

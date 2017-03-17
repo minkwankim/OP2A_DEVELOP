@@ -402,7 +402,7 @@ void variableMap::setTemperature(int NER, int NEV, int NEC, int NEE, int fluid)
     }
 }
 
-int variableMap::T(unsigned int mode)
+int variableMap::Tid(unsigned int mode)
 {
     if (mode < TRA || mode > ELE) Common::ExceptionError(FromHere(), "Provide mode is not supported temperature mode", Common::ErrorCodes::ExceedLimit());
 

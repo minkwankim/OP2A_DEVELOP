@@ -9,6 +9,24 @@
 #ifndef problemDef_h
 #define problemDef_h
 
+// Version Setting
+#define CURRENT_VERSION_PROBBASIC   ProbBasicInfo_ver1
+#define CURRENT_VERSION_PROBNUMCOM  ProbNumericalMethodBase_ver1
+#define CURRENT_VERSION_PROBNUMCFD  ProbNumericalMethodCFD_ver1
+#define CURRENT_VERSION_PROBNUMDSMC ProbNumericalMethodDSMC_ver1
+#define CURRENT_VERSION_PROBNUMHYBR ProbNumericalMethodHybrid_ver1
+#define CURRENT_VERSION_PROBPHYS    ProbPhysicalModel_ver1
+#define CURRENT_VERSION_PROBICBC    ProbICBC_ver1
+#define CURRENT_VERSION_PROBCOMP    ProbCOMP_ver1
+#define CURRENT_VERSION_PROBID      ProbIO_ver1
+
+
+
+
+
+
+
+// Definitions
 #define PROB_SETUP_TITLE                "Title:"
 
 #define PROB_SETUP_MODE                 "Mode:"
@@ -46,6 +64,14 @@
 #define PROB_SETUP_INLET                "Inlet Condition"
 #define PROB_SETUP_WALL                 "Wall Condition"
 #define PROB_SETUP_WALL_MAT             "Wall Material"
+
+#define PROB_SETUP_NUM_FLUID            "Number of Fluids:"
+#define PROB_SETUP_MIX_RULE             "Mixing Rule:"
+#define PROB_SETUP_VISCOSITY            "Viscosity Model:"
+#define PROB_SETUP_DIFFUSITY            "Diffusivity Model:"
+#define PROB_SETUP_CONDUCTIVITY         "Conductivity Model:"
+#define PROB_SETUP_LEWIS                "Lewis number:"
+#define PROB_SETUP_SPECIES              "Species List:"
 
 #define PROB_SETUP_NTHREAD              "THREAD PER NODE:"
 

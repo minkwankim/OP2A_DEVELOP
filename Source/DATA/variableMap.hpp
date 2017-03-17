@@ -55,7 +55,7 @@ public:
     void setDimension(int nd);
 
     void setTemperature(int NER, int NEV, int NEC, int NEE, int fluid);
-    int T(unsigned int mode);
+    int Tid(unsigned int mode);
     
     void showInfo();
     void adjust();

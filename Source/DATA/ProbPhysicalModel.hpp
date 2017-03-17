@@ -14,16 +14,11 @@
 #include "../COMM/map1D.hpp"
 #include "../CHEM/species.hpp"
 #include "variableMap.hpp"
+#include "problemDef.hpp"
 
 
 
-#define PROB_SETUP_NUM_FLUID            "Number of Fluids:"
-#define PROB_SETUP_MIX_RULE             "Mixing Rule:"
-#define PROB_SETUP_VISCOSITY            "Viscosity Model:"
-#define PROB_SETUP_DIFFUSITY            "Diffusivity Model:"
-#define PROB_SETUP_CONDUCTIVITY         "Conductivity Model:"
-#define PROB_SETUP_LEWIS                "Lewis number:"
-#define PROB_SETUP_SPECIES              "Species List:"
+
 
 
 int temperatureMode(std::string& temp);
@@ -67,7 +62,12 @@ public:
 
 
 
-
+class ProbPhysicalModel: public CURRENT_VERSION_PROBPHYS
+{
+public:
+    ProbPhysicalModel() {};
+    ~ProbPhysicalModel() {};
+};
 
 
 

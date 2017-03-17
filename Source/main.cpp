@@ -14,21 +14,13 @@
 #include "./COMM/error_codes.hpp"
 
 #include "./DATA/problemSetup.hpp"
-#include "./DATA/wallMaterial.hpp"
-#include "./DATA/dataCFD.hpp"
-#include "./CHEM/speciesDataBase.hpp"
-
 #include "./MATH_MK/matrix.hpp"
 #include "./GRID/grid.hpp"
-
-
 #include "./CFD/OP2ACFD.hpp"
 
-#include "./CFD/primitive_variables.hpp"
-#include "./CFD/temperatureFns.hpp"
 
-
-#include "./DATA/ProbPhysicalModel.hpp"
+// TEST section
+#include "./CFD/reconstruct.hpp"
 
 
 
@@ -92,54 +84,89 @@ int main(int argc, char **argv) {
     //    B. Assign wall material and species data for the problem
     //       a. Wall material properties
     problem.boundaryconditions.wallMat.resize(problem.boundaryconditions.wallMatName.size());
-    for (int s = 0; s < problem.boundaryconditions.wallMatName.size(); s++) problem.boundaryconditions.wallMat[s] = wall_material_database.find(problem.boundaryconditions.wallMatName[s]);
+    for (int s = 0; s < problem.boundaryconditions.wallMatName.size(); s++)
+    {
+        problem.boundaryconditions.wallMat[s] = wall_material_database.find(problem.boundaryconditions.wallMatName[s]);
+    }
     
     //       b. Species properties
     std::vector<species> speciesdata(problem.physicalmodel.NS_tot); // Global species data
-    std::vector< std::vector<species> > species;                    // Species data for each fluids
-    for (int s = 0; s < problem.physicalmodel.NS_tot; s++) speciesdata[s] = species_database.find(problem.physicalmodel.speciesList[s]);
+    for (int s = 0; s < problem.physicalmodel.NS_tot; s++)
+    {
+        speciesdata[s] = species_database.find(problem.physicalmodel.speciesList[s]);
+    }
     
     
     
     // 4. Read / Generate mesh
     //  - NOTE: Cartesian mesh generation module need to b completed
     // A. Read from the prepared mesh file
-    std::string        gridfilename = "/Users/mkk1u16/Desktop/Code_Development/OP2A/grid2.op2";
-    std::string        outfilename  = "/Users/mkk1u16/Desktop/Code_Development/OP2A/grid2";
+    std::string gridfilename = "/Users/mkk1u16/Desktop/Code_Development/OP2A/grid2.op2";
+    std::string outfilename  = "/Users/mkk1u16/Desktop/Code_Development/OP2A/grid2";
     
     GridBasicInfo gridinfo;
     GridMPI       gridmpi;
     GridGeo       gridgeo;
     readGridFromFile(gridfilename, gridinfo, gridgeo);
     processingGrid(gridinfo, gridgeo);
-    writeGridGeoTecplot(outfilename, gridinfo, gridgeo);
-    
-    // Grid for CFD
-    CFD::Grid gridCFD;
-    gridCFD.info  = &gridinfo;
-    gridCFD.mpi   = &gridmpi;
-    gridCFD.geo   = &gridgeo;
-    
-    // Grid for DSMC
-    
+
     
     
     // 5. Error check and show the simulation setting/Processing input data[Please DO NOT CHANGE THIS SECTION]
-    std::vector<variableMapCFD*> CFD_variables(problem.physicalmodel.num_fluid);
     problem.processing(speciesdata, gridinfo.DIM);
     problem.errorcheck_and_shows();
 
+    
+    // 6. Initialize flow conditions
     switch (problem.numericalmethod.mode)
     {
-        case 0: // CFD-simulation
-            species.resize(problem.physicalmodel.num_fluid);
-            for (int f = 0; f < problem.physicalmodel.num_fluid; f++)
+        case 0: // For CFD
+            OP2A_CFD_ver1(problem, gridinfo, gridmpi, gridgeo, speciesdata, wall_material_database);
+            break;
+            
+        default:
+            std::ostringstream error_message;
+            error_message << "[Error in Numerical Method Setting]: " << problem.numericalmethod.mode << " is NOT supported mode.";
+            Common::ExceptionError(FromHere(), error_message.str(), Common::ErrorCodes::NotSupportedType());
+            break;
+    }
+    
+    // Variable for DSMC/PIC
+    
+    
+    /*
+     
+            
+            // 2. IC and BC setting
+            for (int n = 0; n < problem.boundaryconditions.U_inlet.size(); n++)
             {
-                species[f].resize(problem.physicalmodel.variableSetting[f].NS);
-                for (int s = 0; s < problem.physicalmodel.variableSetting[f].NS; s++) species[f][s] = speciesdata[problem.physicalmodel.variableSetting[f].rho_s_ID(s)];
+                int cond = problem.boundaryconditions.inletCond[n];
+                std::vector<double> U_temp;
+                
+                for (int f = 0; f < problem.physicalmodel.num_fluid; f++)
+                {
+                    CFD_variables[f]->constructUfromGlobal(problem.boundaryconditions.flowCond[cond].rhos,
+                                                          problem.boundaryconditions.flowCond[cond].u,
+                                                          problem.boundaryconditions.flowCond[cond].T,
+                                                          U_temp);
                     
-                CFD_variables[f] = nonequilibriumModel(problem.physicalmodel.variableSetting[f]);
+                    int a = 0;
+                    a =1;
+                    
+                }
+                
+            
             }
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
             
             if (problem.basicinfo.cartesian_grid != 0)  gridCFD.allocateIndex();
             std::vector<int> NS(problem.physicalmodel.num_fluid, 0);
@@ -151,7 +178,7 @@ int main(int argc, char **argv) {
                 NE[f] = problem.physicalmodel.variableSetting[f].NE;
             }
             
-            if (problem.numericalmethod.cfd.timeIntegration == 0)   gridCFD.allocateData(NS, gridinfo.DIM, NE, 0, 1, 2, false, problem.physicalmodel.num_fluid);
+            if (problem.numericalmethod.timeIntegration == 0)   gridCFD.allocateData(NS, gridinfo.DIM, NE, 0, 1, 2, false, problem.physicalmodel.num_fluid);
             else                                                    gridCFD.allocateData(NS, gridinfo.DIM, NE, 0, 1, 2, true,  problem.physicalmodel.num_fluid);
             
             gridCFD.allocateInternalData();
@@ -167,37 +194,49 @@ int main(int argc, char **argv) {
             
             break;
              */
-    }
-    
+    //}
+
 
     
     // TEST SECTION
-    std::vector<double> test_rho(8);
-    std::vector<double> test_u(3, 0.0);
-    std::vector<double> test_T(4, 0.0);
-    std::vector<double> test_U;
-    std::vector<double> test_W;
-    std::vector<double> test_Q;
-    
-    test_rho[0] = 2.0e-4;
-    test_rho[1] = 1.0e-4;
-    test_rho[2] = 1.0e-4;
-    test_rho[3] = 1.0e-4;
-    test_rho[4] = 1.0e-4;
-    test_rho[5] = 1.0e-14;
-    test_rho[6] = 1.0e-14;
-    test_rho[7] = 1.0e-14;
+    writeGridGeoTecplot(outfilename, gridinfo, gridgeo);    // For Debug
 
     
-    test_u[0]  = 5000;
     
-    test_T[0] = 300;
-    test_T[1] = 3000;
-    test_T[2] = 5000;
-    test_T[3] = 7000;
+    Reconstruct_Roe             test_Roe;
+    Reconstruct_vanLeer         test_VL;
+    Reconstruct_vanAlbada       test_VA;
+    Reconstruct_BarthJespersen  test_BJ;
+    Reconstruct_Superbee        test_SB;
+    
+    double Xm, Xf, Xp, Xpp;
+    double Qcll, Qcl, Qcr, Qcrr;
+    double QR_M = 0.0;
+    double QR_VL = 0.0;
+    double QR_VA = 0.0;
+    double QR_BJ = 0.0;
+    double QR_SB = 0.0;
+    
+    Xm  = 3.0;
+    Xf  = 2;
+    Xp  = 2.5;
+    Xpp = 3;
+    Qcll = 1.1116;
+    Qcl  = 17.5614;
+    Qcr  = 44.4141;
+    Qcrr = 93.1389;
+    
+    QR_M  = test_Roe.reconstruct(Qcrr, Qcr, Qcl, Xpp, Xp - Xf, Xp);
+    QR_VL = test_VL.reconstruct(Qcrr, Qcr, Qcl, Xpp, Xp - Xf, Xp);
+    QR_VA = test_VA.reconstruct(Qcrr, Qcr, Qcl, Xpp, Xp - Xf, Xp);
+    QR_BJ = test_BJ.reconstruct(Qcrr, Qcr, Qcl, Xpp, Xp - Xf, Xp);
+    QR_SB = test_SB.reconstruct(Qcrr, Qcr, Qcl, Xpp, Xp - Xf, Xp);
+
+
     
     
     
+    /*
     
     CFD_variables[1]->constructU(test_rho, test_u, test_T, test_U);
     for (int n = 0; n < 10000; n++)
@@ -206,7 +245,7 @@ int main(int argc, char **argv) {
         CFD_variables[1]->UtoW(test_U, speciesdata, test_W);
         CFD_variables[1]->QtoU(test_Q, speciesdata, test_U);
     }
-
+*/
     
     
     /*

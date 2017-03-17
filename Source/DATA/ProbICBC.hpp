@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include "flowdatabase.hpp"
 #include "wallMaterial.hpp"
+#include "problemDef.hpp"
 
 class ProbICBC_ver1 {
 public:
@@ -40,5 +41,14 @@ public:
 };
 
 
+
+class ProbICBC : public CURRENT_VERSION_PROBICBC
+{
+public:
+    
+public:
+    ProbICBC() { };
+    ~ProbICBC() { };
+};
 
 #endif /* ProbICBC_hpp */

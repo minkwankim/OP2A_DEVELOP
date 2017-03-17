@@ -8,14 +8,14 @@
 
 #include "variableMapCFD.hpp"
 
-
-variableMapCFD::variableMapCFD()
+// Class for Basic element
+variableMapCFDBase::variableMapCFDBase()
 :startIndex(3,0), m_rho(0.0)
 {
     
 }
 
-variableMapCFD::variableMapCFD(variableMap input)
+variableMapCFDBase::variableMapCFDBase(variableMap input)
 :startIndex(3,0), m_rho(0.0)
 {
     NS = input.NS;
@@ -35,16 +35,16 @@ variableMapCFD::variableMapCFD(variableMap input)
     for (int s = 0; s< NS; s++) m_rho_s_global_ID[s] = input.RHO_globalID(s);
     
     m_T.resize(5);
-    for (int m = 0; m < 5; m++) m_T[m] = input.T(m);
+    for (int m = 0; m < 5; m++) m_T[m] = input.Tid(m);
 }
 
-variableMapCFD::~variableMapCFD()
+variableMapCFDBase::~variableMapCFDBase()
 {
     
 }
 
 // [Part C]: Functions
-variableMapCFD&	variableMapCFD::operator= (variableMap input)
+variableMapCFDBase&	variableMapCFDBase::operator= (variableMap input)
 {
     NS = input.NS;
     ND = input.ND;
@@ -63,38 +63,38 @@ variableMapCFD&	variableMapCFD::operator= (variableMap input)
     for (int s = 0; s< NS; s++) m_rho_s_global_ID[s] = input.RHO_globalID(s);
     
     m_T.resize(5);
-    for (int m = 0; m < 5; m++) m_T[m] = input.T(m);
+    for (int m = 0; m < 5; m++) m_T[m] = input.Tid(m);
     
     startIndex.resize(3);
     return *this;
 }
 
 
-void variableMapCFD::setting(int density, int velocity, int energy)
+void variableMapCFDBase::setting(int density, int velocity, int energy)
 {
     startIndex[0] = density;
     startIndex[1] = velocity;
     startIndex[2] = energy;
 }
 
-void variableMapCFD::setting()
+void variableMapCFDBase::setting()
 {
     startIndex[0] = 0;
     startIndex[1] = NS;
     startIndex[2] = NS+ND;
 }
 
-int variableMapCFD::Qid(int s, int mode)
+int variableMapCFDBase::Qid(int s, int mode)
 {
     return (s + startIndex[mode]);
 }
 
-int variableMapCFD::EinQ(int mode)
+int variableMapCFDBase::EinQ(int mode)
 {
-    return (startIndex[2] + T(mode));
+    return (startIndex[2] + Tid(mode));
 }
 
-int variableMapCFD::Pressure()
+int variableMapCFDBase::Pressure()
 {
     return (startIndex[2]);
 }
@@ -102,14 +102,55 @@ int variableMapCFD::Pressure()
 
 
 
-void variableMapCFD::constructU(std::vector<double>&rho_s, std::vector<double>& u, std::vector<double>& T, std::vector<double>& U)
+
+
+// Class for Sub elements
+void variableMapCFD::constructU(std::vector<double>&rho_s, std::vector<double>& u, std::vector<double>& Ts, std::vector<double>& U)
 {
     U.resize(NS + ND + NE);
     
     for (int s = 0; s < NS; s++) U[Qid(s,0)] = rho_s[s];
     for (int s = 0; s < ND; s++) U[Qid(s,1)] = u[s];
-    for (int s = 0; s < NE; s++) U[Qid(s,2)] = T[s];
+    for (int s = 0; s < NE; s++) U[Qid(s,2)] = Ts[s];
 };
+
+
+void variableMapCFD::constructUfromGlobal(std::vector<double>&rho_s, std::vector<double>& u, std::vector<double>& Ts, std::vector<double>& U, int flag)
+{
+    int index;
+    U.resize(NS + ND + NE);
+    
+    // 1. Species
+    for (int s = 0; s < NS; s++)
+    {
+        index = RHO_globalID(s);
+        U[Qid(s,0)] = rho_s[index];
+    }
+    
+    // 2. Velocity
+    for (int k = 0; k < ND; k++)
+    {
+        U[Qid(k, 1)] = u[k];
+    }
+    
+    if (flag == -1)
+    {
+        U[Qid(0, 2)] = Ts[ELE];
+    }
+    else
+    {
+        std::vector<bool> flag_temp(NE, false);
+        for (int m = 0; m < 5; m++)
+        {
+            index = Tid(m);
+            if (flag_temp[index] == false)
+            {
+                U[Qid(index, 2)] = Ts[m];
+                flag_temp[index] = true;
+            }
+        }
+    }
+}
 
 
 

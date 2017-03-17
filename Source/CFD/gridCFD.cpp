@@ -33,6 +33,9 @@ namespace CFD {
         data  = NULL;
     }
 
+    
+    
+    
     // [Part C]: Functions
     void Grid::allocateIndex()
     {
@@ -47,11 +50,17 @@ namespace CFD {
     }
     
     
-    void Grid::allocateData(std::vector<int>& NS, int ND, std::vector<int>& NE, int type_node, int type_face, int type_cell, bool f_implicit, int n_fluid)
+    void Grid::allocateData(std::vector<int>& NS, int ND, std::vector<int>& NE,
+                            int type_node, int type_face, int type_cell,
+                            bool f_implicit, int n_fluid)
     {
-        if (info == NULL) Common::ExceptionError(FromHere(), "Grid Inforamtion POINTER is not allocated. You need to allocate it FIRST!", Common::ErrorCodes::NotAllocated());
+        if (info == NULL)
+        {
+            Common::ExceptionError(FromHere(), "Grid Inforamtion POINTER is not allocated. You need to allocate it FIRST!", Common::ErrorCodes::NotAllocated());
+        }
         
-        data = new GridDataVec<dataCFD_ver2>(info, n_fluid);
+        
+        data = new GridDataVec<dataCFD>(info, n_fluid);
 
         for (int n= 0; n < n_fluid; n++)
         {
@@ -70,19 +79,16 @@ namespace CFD {
     
     void Grid::allocateInternalData()
     {
-        if (info == NULL) Common::ExceptionError(FromHere(), "Grid Inforamtion POINTER is not allocated. You need to allocate it FIRST!", Common::ErrorCodes::NotAllocated());
+        if (info == NULL)
+        {
+            Common::ExceptionError(FromHere(), "Grid Inforamtion POINTER is not allocated. You need to allocate it FIRST!", Common::ErrorCodes::NotAllocated());
+        }
+        
         
         m_nodes.resize(info->NNM);
         m_faces.resize(info->NFM);
         m_cells.resize(info->NCM);
         m_ghost.resize(info->NCM);
-        
-        NodeBase*        node_geo_ptr;
-        FaceBase*        face_geo_ptr;
-        CellBase*        cell_geo_ptr;
-        grid_index_ver2* index_ptr;
-        dataCFD_ver2*    data_ptr;
-        
         
         for (int i = 0; i < m_nodes.size(); i++)    m_nodes[i] = new Node;
         for (int i = 0; i < m_faces.size(); i++)    m_faces[i] = new Face;
@@ -139,7 +145,7 @@ namespace CFD {
         }
     }
     
-    
+    // Calling functions
     Node* Grid::NODE(int id)
     {
         op_assert(id > 0);
@@ -216,9 +222,6 @@ namespace CFD {
         
         std::cout << "[DONE]" << std::endl << std::endl;
     }
-    
-    
-    
 }
 
 
