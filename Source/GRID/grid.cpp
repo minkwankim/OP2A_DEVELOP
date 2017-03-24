@@ -1247,12 +1247,93 @@ void writeGridGeoTecplot(const  std::string& title, GridBasicInfo& gridinfo, Gri
 
 
 
+// Write Solution DATA
+void writeSolutionCellTecplot(const std::string& title, GridBasicInfo& gridinfo, GridGeo& griddata,
+                              vector2D& data, std::vector<std::string>& variableNames, int N)
+{
+    // 1. Open File to write
+    std::string fileName;
+    fileName = title + "_sol.plt";
+    
+    std::ofstream grid_tecplot;
+    grid_tecplot.open(fileName.c_str());
+    
+    
+    // 2. Write Header
+    grid_tecplot << "TITLE = \"" << title << "\"" << std::endl;
+    grid_tecplot << "FILETYPE = SOLUTION" << std::endl;
+    
+    grid_tecplot << std::scientific << std::setprecision(16) << "VARIABLES = ";
+    for (int i = 0; i < N; i++) grid_tecplot << " \" " << variableNames[i] << " \" ";
+    grid_tecplot << std::scientific << std::endl;
+    
+    grid_tecplot << "ZONE T=\"" << title << " solution" << "\"" << std::endl;
+    grid_tecplot << "DATAPACKING = BLOCK" << std::endl;
+    grid_tecplot << "NODES = "    << gridinfo.NNM << std::endl;
+    grid_tecplot << "ELEMENTS = " << gridinfo.NCM << std::endl;
+    
+    if (gridinfo.DIM == 2)	    grid_tecplot << "ZONETYPE = FEQUADRILATERAL" << std::endl;
+    else if (gridinfo.DIM == 3) grid_tecplot << "ZONETYPE = FEBRICK" << std::endl;
+    
+    grid_tecplot << "VARLOCATION = ([1";
+    for (int i = 1; i < N; i++) grid_tecplot << ", " << i+1;
+    grid_tecplot << "] = CELLCENTERED)" << std::endl;
+
+    
+    // 3. Write Solution DATA
+    for (int i = 0; i < N; i++)
+    {
+        for (int c = 0; c < gridinfo.NCM; c++)
+        {
+            grid_tecplot << data[c][i] << std::endl;
+        }
+        
+        grid_tecplot << std::endl;
+    }
+    
+    grid_tecplot.close();
+}
 
 
 
 
-
-
+void writeSolutionNodeTecplot(const std::string& title, GridBasicInfo& gridinfo, GridGeo& griddata,
+                              vector2D& data, std::vector<std::string>& variableNames, int N)
+{
+    // 1. Open File to write
+    std::string fileName;
+    fileName = title + "_sol.plt";
+    
+    std::ofstream grid_tecplot;
+    grid_tecplot.open(fileName.c_str());
+    
+    
+    // 2. Write Header
+    grid_tecplot << "TITLE = \"" << title << "\"" << std::endl;
+    grid_tecplot << "FILETYPE = SOLUTION" << std::endl;
+    
+    grid_tecplot << std::scientific << std::setprecision(16) << "VARIABLES = ";
+    for (int i = 0; i < N; i++) grid_tecplot << " \" " << variableNames[i] << " \" ";
+    grid_tecplot << std::scientific << std::endl;
+    
+    grid_tecplot << "ZONE T=\"" << title << " solution" << "\"" << std::endl;
+    grid_tecplot << "DATAPACKING = POINT" << std::endl;
+    grid_tecplot << "NODES = "    << gridinfo.NNM << std::endl;
+    grid_tecplot << "ELEMENTS = " << gridinfo.NCM << std::endl;
+    
+    if (gridinfo.DIM == 2)	    grid_tecplot << "ZONETYPE = FEQUADRILATERAL" << std::endl;
+    else if (gridinfo.DIM == 3) grid_tecplot << "ZONETYPE = FEBRICK" << std::endl;
+    
+    
+    // 3. Write Solution DATA
+    for (int c = 0; c < gridinfo.NNM; c++)
+    {
+        for (int i = 0; i < N; i++) grid_tecplot << data[c][i] << " ";
+        grid_tecplot << std::endl;
+    }
+    
+    grid_tecplot.close();
+}
 
 
 

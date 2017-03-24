@@ -91,6 +91,7 @@
 		599C8E151E716CE9006AC660 /* dataCFDtransport.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 599C8E131E716CE9006AC660 /* dataCFDtransport.cpp */; };
 		599C8E181E7170F0006AC660 /* dataCFDimplicit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 599C8E161E7170F0006AC660 /* dataCFDimplicit.cpp */; };
 		599C8E1B1E71720D006AC660 /* dataCFDupdate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 599C8E191E71720D006AC660 /* dataCFDupdate.cpp */; };
+		59E6E33A1E843949002ED09E /* output.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 59E6E3381E843949002ED09E /* output.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -284,6 +285,7 @@
 		599C8E171E7170F0006AC660 /* dataCFDimplicit.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = dataCFDimplicit.hpp; sourceTree = "<group>"; };
 		599C8E191E71720D006AC660 /* dataCFDupdate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dataCFDupdate.cpp; sourceTree = "<group>"; };
 		599C8E1A1E71720D006AC660 /* dataCFDupdate.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = dataCFDupdate.hpp; sourceTree = "<group>"; };
+		59E6E3381E843949002ED09E /* output.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = output.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -557,6 +559,7 @@
 				598AE4C81E51B7D80044A3D2 /* limiters.hpp */,
 				599C8E0A1E6EB748006AC660 /* jacobian_inviscid.cpp */,
 				599C8E0B1E6EB748006AC660 /* jacobian_inviscid.hpp */,
+				59E6E3381E843949002ED09E /* output.cpp */,
 			);
 			path = CFD;
 			sourceTree = "<group>";
@@ -695,6 +698,7 @@
 				593FA3901DD3630400321A6A /* preprocessingGridFluent.cpp in Sources */,
 				5926607D1D8ACCA4006298DC /* random_number_fns.cpp in Sources */,
 				5926606E1D8ACC18006298DC /* timer.cpp in Sources */,
+				59E6E33A1E843949002ED09E /* output.cpp in Sources */,
 				599C8E0F1E702336006AC660 /* dataCFDbasic.cpp in Sources */,
 				594FF14B1D8FDBBF009A6ABB /* preprocessingCFD.cpp in Sources */,
 				5926607A1D8ACCA4006298DC /* cal_area.cpp in Sources */,

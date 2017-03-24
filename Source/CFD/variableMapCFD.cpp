@@ -36,6 +36,9 @@ variableMapCFDBase::variableMapCFDBase(variableMap input)
     
     m_T.resize(5);
     for (int m = 0; m < 5; m++) m_T[m] = input.Tid(m);
+    
+    temperatureName.resize(NE);
+    temperatureName = input.temperatureName;
 }
 
 variableMapCFDBase::~variableMapCFDBase()

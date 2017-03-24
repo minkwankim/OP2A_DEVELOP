@@ -135,9 +135,17 @@ void OP2A_CFD_ver1(ProbleSetup& problem,
     }
     
     
-    int aaa = 0;
-    aaa = 1;
+    // Test
+    std::string outfilename  = "/Users/mkk1u16/Desktop/Code_Development/OP2A/grid2_solution";
     
+    vector3D  data;
+    std::vector<std::vector <std::string> > variableName;
+    
+    outputNodeTecplot(&problem, &grid, CFD_variables, species, data, variableName);
+    writeSolutionCellTecplot(outfilename, gridinfo, gridgeo, data[0], variableName[0], variableName[0].size());
+    
+    int aaa = 0;
+    aaa = 10;
     
     
     

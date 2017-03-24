@@ -140,6 +140,9 @@ void variableMap::setTemperature(int NER, int NEV, int NEC, int NEE, int fluid)
             m_T[VIB] = 0;
             m_T[ELC] = 0;
             m_T[ELE] = 0;
+
+            temperatureName.resize(NE);
+            temperatureName[0] = "T";
             break;
             
         case 1:                     // NEE
@@ -152,6 +155,10 @@ void variableMap::setTemperature(int NER, int NEV, int NEC, int NEE, int fluid)
             m_T[VIB] = 0;
             m_T[ELC] = 0;
             m_T[ELE] = 1;
+            
+            temperatureName.resize(NE);
+            temperatureName[0] = "T";
+            temperatureName[1] = "Te";
             break;
             
         case 2:                     // NEE
@@ -164,6 +171,10 @@ void variableMap::setTemperature(int NER, int NEV, int NEC, int NEE, int fluid)
             m_T[VIB] = 0;
             m_T[ELC] = 0;
             m_T[ELE] = 1;
+            
+            temperatureName.resize(NE);
+            temperatureName[0] = "T";
+            temperatureName[1] = "Te";
             break;
             
         case 3:                     // NEE
@@ -176,6 +187,10 @@ void variableMap::setTemperature(int NER, int NEV, int NEC, int NEE, int fluid)
             m_T[VIB] = 0;
             m_T[ELC] = 1;
             m_T[ELE] = 0;
+            
+            temperatureName.resize(NE);
+            temperatureName[0] = "T";
+            temperatureName[1] = "Telc";
             break;
             
         case 4:                     // NEC-NEE
@@ -188,6 +203,10 @@ void variableMap::setTemperature(int NER, int NEV, int NEC, int NEE, int fluid)
             m_T[VIB] = 0;
             m_T[ELC] = 1;
             m_T[ELE] = 1;
+            
+            temperatureName.resize(NE);
+            temperatureName[0] = "T";
+            temperatureName[1] = "Tee";
             break;
         
         case 5:                     // NEC, NEE
@@ -200,6 +219,11 @@ void variableMap::setTemperature(int NER, int NEV, int NEC, int NEE, int fluid)
             m_T[VIB] = 0;
             m_T[ELC] = 1;
             m_T[ELE] = 2;
+            
+            temperatureName.resize(NE);
+            temperatureName[0] = "T";
+            temperatureName[1] = "Telc";
+            temperatureName[2] = "Te";
             break;
             
         case 6:                     // NEC
@@ -213,6 +237,11 @@ void variableMap::setTemperature(int NER, int NEV, int NEC, int NEE, int fluid)
             m_T[ELC] = 1;
             m_T[ELE] = 0;
             
+            temperatureName.resize(NE);
+            temperatureName[0] = "T";
+            temperatureName[1] = "Telc";
+            break;
+            
         case 7:                     // NEC-NEE
             SeparateModeElc = YES;
             SeparateModeEle = NO;
@@ -223,6 +252,10 @@ void variableMap::setTemperature(int NER, int NEV, int NEC, int NEE, int fluid)
             m_T[VIB] = 0;
             m_T[ELC] = 1;
             m_T[ELE] = 1;
+            
+            temperatureName.resize(NE);
+            temperatureName[0] = "T";
+            temperatureName[1] = "Tee";
             break;
             
         case 8:                     // NEC, NEE
@@ -235,6 +268,11 @@ void variableMap::setTemperature(int NER, int NEV, int NEC, int NEE, int fluid)
             m_T[VIB] = 0;
             m_T[ELC] = 1;
             m_T[ELE] = 2;
+            
+            temperatureName.resize(NE);
+            temperatureName[0] = "T";
+            temperatureName[1] = "Telc";
+            temperatureName[2] = "Te";
             break;
             
         case 9:                     // NEV
@@ -247,6 +285,10 @@ void variableMap::setTemperature(int NER, int NEV, int NEC, int NEE, int fluid)
             m_T[VIB] = 1;
             m_T[ELC] = 0;
             m_T[ELE] = 0;
+            
+            temperatureName.resize(NE);
+            temperatureName[0] = "T";
+            temperatureName[1] = "Tv";
             break;
             
         case 10:                     // NEV-NEE
@@ -259,6 +301,10 @@ void variableMap::setTemperature(int NER, int NEV, int NEC, int NEE, int fluid)
             m_T[VIB] = 1;
             m_T[ELC] = 0;
             m_T[ELE] = 1;
+            
+            temperatureName.resize(NE);
+            temperatureName[0] = "T";
+            temperatureName[1] = "Tve";
             break;
             
         case 11:                     // NEV, NEE
@@ -271,6 +317,11 @@ void variableMap::setTemperature(int NER, int NEV, int NEC, int NEE, int fluid)
             m_T[VIB] = 1;
             m_T[ELC] = 0;
             m_T[ELE] = 2;
+            
+            temperatureName.resize(NE);
+            temperatureName[0] = "T";
+            temperatureName[1] = "Tv";
+            temperatureName[2] = "Te";
             break;
             
         case 12:                     // NEV-NEC
@@ -283,6 +334,10 @@ void variableMap::setTemperature(int NER, int NEV, int NEC, int NEE, int fluid)
             m_T[VIB] = 1;
             m_T[ELC] = 1;
             m_T[ELE] = 0;
+            
+            temperatureName.resize(NE);
+            temperatureName[0] = "T";
+            temperatureName[1] = "Tv_elc";
             break;
             
             
@@ -296,6 +351,10 @@ void variableMap::setTemperature(int NER, int NEV, int NEC, int NEE, int fluid)
             m_T[VIB] = 1;
             m_T[ELC] = 1;
             m_T[ELE] = 1;
+            
+            temperatureName.resize(NE);
+            temperatureName[0] = "T";
+            temperatureName[1] = "Tvee";
             break;
             
         case 14:                    // MK NEE Model
@@ -308,6 +367,11 @@ void variableMap::setTemperature(int NER, int NEV, int NEC, int NEE, int fluid)
             m_T[VIB] = 1;
             m_T[ELC] = 1;
             m_T[ELE] = 2;
+            
+            temperatureName.resize(NE);
+            temperatureName[0] = "T";
+            temperatureName[1] = "Tve";
+            temperatureName[2] = "Te";
             break;
             
         case 15:
@@ -320,6 +384,11 @@ void variableMap::setTemperature(int NER, int NEV, int NEC, int NEE, int fluid)
             m_T[VIB] = 1;
             m_T[ELC] = 2;
             m_T[ELE] = 0;
+            
+            temperatureName.resize(NE);
+            temperatureName[0] = "T";
+            temperatureName[1] = "Tv";
+            temperatureName[2] = "Telc";
             break;
             
         case 16:
@@ -332,6 +401,11 @@ void variableMap::setTemperature(int NER, int NEV, int NEC, int NEE, int fluid)
             m_T[VIB] = 1;
             m_T[ELC] = 2;
             m_T[ELE] = 2;
+            
+            temperatureName.resize(NE);
+            temperatureName[0] = "T";
+            temperatureName[1] = "Tv";
+            temperatureName[2] = "Tee";
             break;
             
         case 17:
@@ -344,6 +418,12 @@ void variableMap::setTemperature(int NER, int NEV, int NEC, int NEE, int fluid)
             m_T[VIB] = 1;
             m_T[ELC] = 2;
             m_T[ELE] = 3;
+            
+            temperatureName.resize(NE);
+            temperatureName[0] = "T";
+            temperatureName[1] = "Tv";
+            temperatureName[2] = "Telc";
+            temperatureName[2] = "Te";
             break;
             
         case 27:
@@ -356,6 +436,10 @@ void variableMap::setTemperature(int NER, int NEV, int NEC, int NEE, int fluid)
             m_T[VIB] = 0;
             m_T[ELC] = 0;
             m_T[ELE] = 0;
+            
+            temperatureName.resize(NE);
+            temperatureName[0] = "T";
+            temperatureName[1] = "Tr";
             break;
             
         case 40:                    // Rotational Noneq
@@ -368,6 +452,11 @@ void variableMap::setTemperature(int NER, int NEV, int NEC, int NEE, int fluid)
             m_T[VIB] = 2;
             m_T[ELC] = 2;
             m_T[ELE] = 2;
+            
+            temperatureName.resize(NE);
+            temperatureName[0] = "T";
+            temperatureName[1] = "Tr";
+            temperatureName[2] = "Tvee";
             break;
 
         case 41:                    // Four temperaure model
@@ -380,6 +469,12 @@ void variableMap::setTemperature(int NER, int NEV, int NEC, int NEE, int fluid)
             m_T[VIB] = 2;
             m_T[ELC] = 2;
             m_T[ELE] = 3;
+            
+            temperatureName.resize(NE);
+            temperatureName[0] = "T";
+            temperatureName[1] = "Tr";
+            temperatureName[2] = "Tve";
+            temperatureName[3] = "Te";
             break;
          
         case 44:
@@ -392,6 +487,13 @@ void variableMap::setTemperature(int NER, int NEV, int NEC, int NEE, int fluid)
             m_T[VIB] = 2;
             m_T[ELC] = 3;
             m_T[ELE] = 4;
+            
+            temperatureName.resize(NE);
+            temperatureName[0] = "T";
+            temperatureName[1] = "Tr";
+            temperatureName[2] = "Tv";
+            temperatureName[3] = "Telc";
+            temperatureName[4] = "Te";
             break;
             
         default:
@@ -400,6 +502,7 @@ void variableMap::setTemperature(int NER, int NEV, int NEC, int NEE, int fluid)
             Common::ExceptionError(FromHere(), error_message.str(), Common::ErrorCodes::NotSupportedType());
             break;
     }
+    
 }
 
 int variableMap::Tid(unsigned int mode)

@@ -35,6 +35,8 @@ public:
     int HasIons;
     int HasElectron;
     
+    std::vector<std::string>    temperatureName;
+    
 protected:
     std::vector<int> m_T;     // local energy mode
     std::vector<int> m_rho_s_global_ID;   // global species ID of rho_s

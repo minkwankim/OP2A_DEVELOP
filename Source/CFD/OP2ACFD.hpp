@@ -30,6 +30,18 @@ void initizliseFlowCondition(ProbleSetup* problem,
                              std::vector<variableMapCFD*>& CFD_variables,
                              std::vector< std::vector< std::vector<double> > >& U_flow,
                              std::vector< std::vector< std::vector<double> > >& Q_flow);
+
+
+
+void outputNodeTecplot(ProbleSetup* problem,
+                       CFD::Grid* grid,
+                       std::vector<variableMapCFD*>& CFD_variables,
+                       std::vector< std::vector<species> >& species,
+                       vector3D&  data,
+                       std::vector<std::vector <std::string> >& variableName);
+
+
+
 //void preProcessingPart1Version(int argc, char *argv[], double& t0);
 
 
